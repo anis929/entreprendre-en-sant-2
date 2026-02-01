@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entreprendre en santé - Le média des professionnels de santé</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #00ff88;
+            --hover-green: #00cc6e;
+            --dark-green: #004d2e;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* NAVIGATION BAR */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1a1a1a;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .top-nav.scrolled {
+            box-shadow: 0 5px 30px rgba(0, 255, 136, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-brand:hover {
+            transform: translateX(5px);
+        }
+
+        .nav-logo {
+            font-size: 2em;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .nav-brand-text h1 {
+            font-size: 1.3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--primary-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-brand-text p {
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-item a {
+            color: #999;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-item a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item a:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-item a:hover::after {
+            width: 100%;
+        }
+
+        .nav-item a.active {
+            color: var(--primary-green);
+        }
+
+        .nav-item a.active::after {
+            width: 100%;
+        }
+
+        /* READING PROGRESS BAR */
+        .scroll-indicator {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            height: 3px;
+            background: var(--primary-green);
+            z-index: 999;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px var(--primary-green);
+        }
+
+        /* QUICK ACTIONS FLOATING MENU */
+        .quick-actions {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 900;
+        }
+
+        .quick-action-btn {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--dark-green) 0%, #001a0f 100%);
+            border: 1px solid var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5em;
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .quick-action-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+        }
+
+        .quick-action-btn.bookmark-active {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--hover-green) 100%);
+            color: #000;
+        }
+
+        /* PROGRESS TRACKER */
+        .progress-tracker {
+            position: fixed;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 900;
+            display: none;
+        }
+
+        .progress-tracker.active {
+            display: block;
+        }
+
+        .progress-step {
+            width: 12px;
+            height: 12px;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 50%;
+            margin: 20px 0;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .progress-step::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .progress-step.active::before {
+            opacity: 1;
+        }
+
+        .progress-step:hover {
+            transform: scale(1.3);
+            border-color: var(--primary-green);
+        }
+
+        .progress-step::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 20px;
+            background: #333;
+        }
+
+        .progress-step:last-child::after {
+            display: none;
+        }
+
+        /* PAGES */
+        .page {
+            display: none;
+            padding-top: 70px;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.05) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-section h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #fff 0%, var(--primary-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section .subtitle {
+            font-size: 1.3em;
+            color: #999;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section p {
+            font-size: 1.2em;
+            color: #ccc;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--dark-green) 0%, #001a0f 100%);
+            border-left: 4px solid var(--primary-green);
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            border-radius: 8px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .highlight-box p {
+            color: #e0e0e0;
+            font-size: 1.1em;
+            margin: 10px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* SECTIONS GRID */
+        .section-header {
+            text-align: center;
+            margin: 80px 0 60px;
+        }
+
+        .section-header h2 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .section-header p {
+            font-size: 1.2em;
+            color: #999;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 0 0 80px;
+        }
+
+        .section-card {
+            background: linear-gradient(135deg, #0d0d0d 0%, #000 100%);
+            border: 1px solid #1a1a1a;
+            padding: 40px;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-green);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-green);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.15);
+        }
+
+        .section-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .section-number {
+            font-size: 1em;
+            color: var(--primary-green);
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        .section-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .section-card .description {
+            color: #bbb;
+            margin-bottom: 25px;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        .section-card ul {
+            list-style: none;
+            color: #888;
+            font-size: 0.95em;
+        }
+
+        .section-card ul li {
+            padding: 12px 0 12px 25px;
+            border-bottom: 1px solid #1a1a1a;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .section-card:hover ul li {
+            color: #aaa;
+        }
+
+        .section-card ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-green);
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover ul li::before {
+            transform: translateX(5px);
+        }
+
+        .section-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .bonus-card {
+            background: linear-gradient(135deg, var(--dark-green) 0%, #001a0f 100%);
+            border: 2px solid var(--primary-green);
+        }
+
+        .bonus-card::after {
+            content: '🎬';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 8em;
+            opacity: 0.1;
+        }
+
+        .bonus-card:hover {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--hover-green) 100%);
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .bonus-card:hover h3,
+        .bonus-card:hover .description,
+        .bonus-card:hover ul li {
+            color: #000;
+        }
+
+        .bonus-card:hover .section-number {
+            color: #000;
+        }
+
+        /* PART PAGE STRUCTURE */
+        .part-hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .part-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 136, 0.05) 0%, transparent 60%);
+        }
+
+        .part-hero h2 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            position: relative;
+        }
+
+        .part-hero .subtitle-large {
+            font-size: 1.5em;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .part-hero .description {
+            font-size: 1.2em;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+
+        .content-section {
+            padding: 60px 0;
+        }
+
+        .content-card {
+            background: linear-gradient(135deg, #0d0d0d 0%, #000 100%);
+            border: 1px solid #1a1a1a;
+            padding: 50px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-green);
+        }
+
+        .content-card h3 {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+        }
+
+        .content-card h4 {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin: 30px 0 20px;
+            color: var(--primary-green);
+        }
+
+        .content-card p {
+            font-size: 1.1em;
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .content-card ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .content-card ul li {
+            padding: 15px 0 15px 30px;
+            position: relative;
+            font-size: 1.1em;
+            color: #bbb;
+            line-height: 1.7;
+        }
+
+        .content-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-green);
+            font-weight: 700;
+            font-size: 1.3em;
+        }
+
+        .content-card ul li strong {
+            color: #fff;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, var(--dark-green) 0%, #001a0f 100%);
+            border-left: 4px solid var(--primary-green);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 8px;
+        }
+
+        .tip-box h4 {
+            color: var(--primary-green) !important;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .tip-box p {
+            color: #e0e0e0;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        /* PART NAVIGATION */
+        .part-navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 60px 0;
+            gap: 20px;
+        }
+
+        .nav-part-btn {
+            flex: 1;
+            padding: 25px 40px;
+            background: linear-gradient(135deg, #0d0d0d 0%, #000 100%);
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-part-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-part-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-part-btn:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .nav-part-btn .label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .nav-part-btn .title {
+            font-size: 1.3em;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .nav-part-btn.prev .label::before {
+            content: '← ';
+        }
+
+        .nav-part-btn.next .label::after {
+            content: ' →';
+        }
+
+        /* AI SECTION */
+        .ai-section {
+            background: linear-gradient(135deg, #0a0a0a 0%, #000 100%);
+            padding: 80px 0;
+            margin: 80px 0;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .ai-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .ai-card {
+            background: #0a0a0a;
+            padding: 35px;
+            border-radius: 10px;
+            border: 1px solid #1a1a1a;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            border-radius: 50%;
+        }
+
+        .ai-card:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .ai-card:hover {
+            border-color: var(--primary-green);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+            transform: scale(1.05);
+        }
+
+        .ai-icon {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .ai-card h4 {
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ai-card p {
+            color: #999;
+            font-size: 1em;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* CTA BUTTON */
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background: var(--primary-green);
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 40px;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            background: var(--hover-green);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 16px 48px;
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--primary-green);
+            color: #000;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark-green) 0%, #001a0f 100%);
+            padding: 50px;
+            border-radius: 12px;
+            margin: 60px 0;
+            text-align: center;
+            border: 1px solid var(--primary-green);
+        }
+
+        .cta-section h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.15em;
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid #1a1a1a;
+            margin-top: 80px;
+        }
+
+        .footer-content h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .footer-content p {
+            color: #999;
+            margin: 15px 0;
+        }
+
+        .footer-tagline {
+            color: var(--primary-green);
+            font-size: 1.1em;
+            margin-top: 30px;
+        }
+
+        /* MODAL NOTES */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #0d0d0d 0%, #000 100%);
+            border: 1px solid var(--primary-green);
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+        }
+
+        .modal-content textarea {
+            width: 100%;
+            min-height: 200px;
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            padding: 15px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+        }
+
+        .modal-content textarea:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            .nav-menu {
+                gap: 20px;
+            }
+
+            .nav-item a {
+                font-size: 0.85em;
+            }
+
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                right: 15px;
+                bottom: 15px;
+            }
+
+            .progress-tracker {
+                display: none !important;
+            }
+
+            .part-navigation {
+                flex-direction: column;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+        }
+
+        /* MOBILE MENU */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-green);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 250px;
+                height: calc(100vh - 70px);
+                background: #000;
+                border-left: 1px solid #1a1a1a;
+                flex-direction: column;
+                padding: 30px;
+                transition: right 0.3s ease;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- TOP NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-brand" onclick="showPage('home')">
+                <div class="nav-logo">🩺</div>
+                <div class="nav-brand-text">
+                    <h1>Entreprendre en santé</h1>
+                    <p>Le média des professionnels de santé</p>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#" onclick="showPage('home'); return false;" class="active">Accueil</a></li>
+                <li class="nav-item"><a href="#" onclick="showPage('how'); return false;">Comment ça marche</a></li>
+                <li class="nav-item"><a href="#" onclick="showPage('aiAgents'); return false;">Agents IA</a></li>
+                <li class="nav-item"><a href="#" onclick="showPage('videos'); return false;">Vidéos Bonus</a></li>
+            </ul>
+            <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- READING PROGRESS BAR -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions">
+        <div class="quick-action-btn" onclick="toggleBookmark()" title="Marquer cette page" id="bookmarkBtn">
+            🔖
+        </div>
+        <div class="quick-action-btn" onclick="openNotes()" title="Mes notes">
+            📝
+        </div>
+        <div class="quick-action-btn" onclick="scrollToTop()" title="Retour en haut">
+            ⬆️
+        </div>
+    </div>
+
+    <!-- PROGRESS TRACKER -->
+    <div class="progress-tracker" id="progressTracker">
+        <div class="progress-step" data-section="1"></div>
+        <div class="progress-step" data-section="2"></div>
+        <div class="progress-step" data-section="3"></div>
+        <div class="progress-step" data-section="4"></div>
+        <div class="progress-step" data-section="5"></div>
+        <div class="progress-step" data-section="6"></div>
+        <div class="progress-step" data-section="7"></div>
+        <div class="progress-step" data-section="8"></div>
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="homePage" class="page active">
+        <section class="hero-section">
+            <div class="container">
+                <h1>Notre Mission</h1>
+                <p class="subtitle">Accompagner les professionnels de santé entrepreneurs</p>
+                <p>
+                    Accompagner les professionnels de santé dans leur parcours entrepreneurial, 
+                    de l'idée initiale jusqu'à la structuration durable de leur entreprise, 
+                    sans renoncer au sens du soin, à l'éthique et à la réalité du terrain médical.
+                </p>
+                <div class="highlight-box">
+                    <p>Ce n'est ni un accélérateur de startup classique, ni une incitation à quitter le soin.</p>
+                    <p>C'est un compagnon de route, pensé pour des soignants souvent surchargés, exigeants et prudents.</p>
+                </div>
+                <a href="#" onclick="showPage('how'); return false;" class="cta-button">Comment ça marche ?</a>
+            </div>
+        </section>
+
+        <div class="container" id="sections">
+            <div class="section-header">
+                <h2>Le Parcours Complet</h2>
+                <p>8 étapes pour structurer votre projet entrepreneurial en santé</p>
+            </div>
+
+            <div class="sections-grid">
+                <div class="section-card" onclick="showPage('part1')">
+                    <span class="section-number">PARTIE 1</span>
+                    <h3>De l'idée au projet</h3>
+                    <p class="description">Transformer une intuition ou une frustration terrain en projet entrepreneurial structuré et réaliste.</p>
+                    <ul>
+                        <li>Trouver une idée innovante</li>
+                        <li>Valider son idée</li>
+                        <li>Analyser la concurrence</li>
+                        <li>Définir sa proposition de valeur</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" onclick="showPage('part2')">
+                    <span class="section-number">PARTIE 2</span>
+                    <h3>Création de l'entreprise</h3>
+                    <p class="description">Comprendre et choisir une structure adaptée à un projet en santé.</p>
+                    <ul>
+                        <li>Choisir la forme juridique</li>
+                        <li>Démarches administratives</li>
+                        <li>Réglementations santé</li>
+                        <li>Propriété intellectuelle</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" onclick="showPage('part3')">
+                    <span class="section-number">PARTIE 3</span>
+                    <h3>Financement</h3>
+                    <p class="description">Identifier des solutions de financement réalistes et sécurisées.</p>
+                    <ul>
+                        <li>Autofinancement & subventions</li>
+                        <li>Investisseurs santé</li>
+                        <li>Temporalité et risque</li>
+                        <li>Stratégie de financement</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" onclick="showPage('part4')">
+                    <span class="section-number">PARTIE 4</span>
+                    <h3>Construire son équipe</h3>
+                    <p class="description">S'entourer des bonnes compétences au bon moment.</p>
+                    <ul>
+                        <li>S'associer ou recruter</li>
+                        <li>Profils clés</li>
+                        <li>Gouvernance et rôles</li>
+                        <li>Erreurs humaines fréquentes</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" onclick="showPage('part5')">
+                    <span class="section-number">PARTIE 5</span>
+                    <h3>Marketing & Commercial</h3>
+                    <p class="description">Rendre visible une solution utile, sans surpromesse.</p>
+                    <ul>
+                        <li>Marketing éthique en santé</li>
+                        <li>Positionnement</li>
+                        <li>Communication B2B / B2C</li>
+                        <li>Tunnel de valeur</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" onclick="showPage('part6')">
+                    <span class="section-number">PARTIE 6</span>
+                    <h3>Vente du produit</h3>
+                    <p class="description">Apprendre à vendre en respectant les valeurs du soin.</p>
+                    <ul>
+                        <li>Spécificités vente santé</li>
+                        <li>Cycles longs</li>
+                        <li>Décideurs multiples</li>
+                        <li>Preuve de valeur</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" onclick="showPage('part7')">
+                    <span class="section-number">PARTIE 7</span>
+                    <h3>Gestion financière</h3>
+                    <p class="description">Piloter son activité avec clarté et sérénité.</p>
+                    <ul>
+                        <li>Comprendre ses chiffres</li>
+                        <li>Indicateurs clés</li>
+                        <li>Tableaux de bord</li>
+                        <li>Erreurs fréquentes</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" onclick="showPage('part8')">
+                    <span class="section-number">PARTIE 8</span>
+                    <h3>Aspects légaux</h3>
+                    <p class="description">Sécuriser le projet et le professionnel de santé.</p>
+                    <ul>
+                        <li>Données de santé</li>
+                        <li>Responsabilités</li>
+                        <li>Éthique et conformité</li>
+                        <li>Réglementation</li>
+                    </ul>
+                </div>
+                
+                <div class="section-card bonus-card" onclick="showPage('videos')">
+                    <span class="section-number">BONUS 🎥</span>
+                    <h3>Vidéos & Coulisses</h3>
+                    <p class="description">Découvrez nos conseils en vidéo et plongez dans les coulisses.</p>
+                    <ul>
+                        <li>Accompagnement & Tips</li>
+                        <li>Astuces d'entrepreneurs</li>
+                        <li>Moments de vie</li>
+                        <li>Témoignages terrain</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section class="ai-section">
+            <div class="container">
+                <h2>Agents IA - Vos copilotes</h2>
+                <p style="text-align: center; font-size: 1.2em; color: #999; margin-bottom: 50px;">
+                    Des assistants intelligents pour vous accompagner à chaque étape
+                </p>
+                <div class="ai-cards">
+                    <div class="ai-card" onclick="showPage('aiClarificateur')">
+                        <span class="ai-icon">🧠</span>
+                        <h4>Clarificateur de projet</h4>
+                        <p>Transforme votre idée en projet structuré</p>
+                    </div>
+                    <div class="ai-card" onclick="showPage('aiGuide')">
+                        <span class="ai-icon">🏗️</span>
+                        <h4>Guide création</h4>
+                        <p>Structure juridique adaptée</p>
+                    </div>
+                    <div class="ai-card" onclick="showPage('aiStratege')">
+                        <span class="ai-icon">💡</span>
+                        <h4>Stratège financement</h4>
+                        <p>Solutions de financement réalistes</p>
+                    </div>
+                    <div class="ai-card" onclick="showPage('aiArchitecte')">
+                        <span class="ai-icon">👥</span>
+                        <h4>Architecte d'équipe</h4>
+                        <p>Profils essentiels à intégrer</p>
+                    </div>
+                    <div class="ai-card" onclick="showPage('aiMarketing')">
+                        <span class="ai-icon">📈</span>
+                        <h4>Stratège marketing</h4>
+                        <p>Marketing éthique en santé</p>
+                    </div>
+                    <div class="ai-card" onclick="showPage('aiCoach')">
+                        <span class="ai-icon">💼</span>
+                        <h4>Coach financier</h4>
+                        <p>Pilotage et clarté financière</p>
+                    </div>
+                    <div class="ai-card" onclick="showPage('aiVigie')">
+                        <span class="ai-icon">🛡️</span>
+                        <h4>Vigie légale</h4>
+                        <p>Sécurité réglementaire</p>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h3>🤖 Besoin d'aide pour configurer votre Agent IA ?</h3>
+                    <p>Notre équipe vous accompagne dans le paramétrage personnalisé de vos agents IA.</p>
+                    <div class="cta-buttons">
+                        <a href="https://www.hackyourcare.com/contact" target="_blank" class="cta-button">Prendre rendez-vous</a>
+                        <button onclick="alert('Fonctionnalité bientôt disponible')" class="cta-button secondary">Configurer mon agent</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PARTIE 1 PAGE -->
+    <div id="part1Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>🎯 PARTIE 1</h2>
+                <p class="subtitle-large">De l'idée au projet</p>
+                <p class="description">
+                    Transformer une intuition ou une frustration terrain en projet entrepreneurial structuré et réaliste.
+                </p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>🔍 Introduction</h3>
+                    <p>
+                        Vous avez une idée, une intuition, ou vous avez identifié un problème récurrent dans votre pratique médicale ? 
+                        Cette première partie va vous aider à transformer cette observation en un projet entrepreneurial concret et viable.
+                    </p>
+                    <p>
+                        <strong>L'objectif :</strong> Passer d'une idée floue à un projet clair, validé et structuré, 
+                        prêt à être développé dans les étapes suivantes.
+                    </p>
+
+                    <div class="tip-box">
+                        <h4>💡 Point de départ</h4>
+                        <p>
+                            La plupart des meilleures innovations en santé naissent d'une frustration terrain. 
+                            Votre expérience de soignant est votre plus grand atout.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>1️⃣ Trouver une idée innovante</h3>
+                    <p>
+                        Comment identifier une opportunité entrepreneuriale à partir de votre expérience médicale ?
+                    </p>
+
+                    <h4>Les sources d'idées</h4>
+                    <ul>
+                        <li><strong>Frustrations quotidiennes</strong> - Les processus inefficaces que vous rencontrez chaque jour</li>
+                        <li><strong>Besoins non satisfaits</strong> - Les problèmes de vos patients sans solution adaptée</li>
+                        <li><strong>Évolutions technologiques</strong> - Les nouvelles technologies applicables à la santé</li>
+                        <li><strong>Changements réglementaires</strong> - Les nouvelles opportunités créées par la loi</li>
+                    </ul>
+
+                    <h4>Exercice pratique</h4>
+                    <p>
+                        Listez 10 frustrations ou problèmes que vous avez rencontrés cette semaine dans votre pratique. 
+                        Pour chacun, demandez-vous : "Et si on pouvait résoudre ça ?"
+                    </p>
+
+                    <div class="tip-box">
+                        <h4>🎯 Astuce</h4>
+                        <p>
+                            Une bonne idée répond à un problème réel, fréquent et douloureux. 
+                            Si vous l'avez vécu, d'autres professionnels l'ont probablement vécu aussi.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>2️⃣ Valider son idée</h3>
+                    <p>
+                        Avoir une idée, c'est bien. S'assurer qu'elle répond à un vrai besoin, c'est indispensable.
+                    </p>
+
+                    <h4>Les étapes de validation</h4>
+                    <ul>
+                        <li><strong>Interviews exploratoires</strong> - Parlez à 20-30 professionnels concernés</li>
+                        <li><strong>Questionnaires</strong> - Quantifiez l'ampleur du problème</li>
+                        <li><strong>Prototype / MVP</strong> - Testez une version minimale de votre solution</li>
+                        <li><strong>Pilot test</strong> - Lancez une expérimentation à petite échelle</li>
+                    </ul>
+
+                    <h4>Questions clés à poser</h4>
+                    <ul>
+                        <li>Le problème est-il assez douloureux pour justifier une solution ?</li>
+                        <li>Les gens sont-ils prêts à payer pour le résoudre ?</li>
+                        <li>Votre solution est-elle meilleure que les alternatives existantes ?</li>
+                        <li>Pouvez-vous la déployer à grande échelle ?</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <h4>⚠️ Attention</h4>
+                        <p>
+                            Ne tombez pas amoureux de votre idée. Tombez amoureux du problème. 
+                            Votre première idée de solution ne sera probablement pas la bonne.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>3️⃣ Analyser la concurrence</h3>
+                    <p>
+                        Comprendre l'écosystème existant est essentiel pour se positionner efficacement.
+                    </p>
+
+                    <h4>Types de concurrents</h4>
+                    <ul>
+                        <li><strong>Directs</strong> - Ceux qui proposent une solution similaire au même problème</li>
+                        <li><strong>Indirects</strong> - Ceux qui résolvent le même problème différemment</li>
+                        <li><strong>Substituts</strong> - Les alternatives que vos clients utilisent actuellement</li>
+                    </ul>
+
+                    <h4>Ce qu'il faut analyser</h4>
+                    <ul>
+                        <li>Leur proposition de valeur</li>
+                        <li>Leur modèle économique</li>
+                        <li>Leurs forces et faiblesses</li>
+                        <li>Leurs clients et retours utilisateurs</li>
+                        <li>Leur stratégie de communication</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h3>4️⃣ Définir sa proposition de valeur</h3>
+                    <p>
+                        Votre proposition de valeur, c'est la réponse claire à la question : 
+                        "Pourquoi choisir votre solution plutôt qu'une autre ?"
+                    </p>
+
+                    <h4>Les composantes d'une bonne proposition de valeur</h4>
+                    <ul>
+                        <li><strong>Le problème résolu</strong> - Formulé du point de vue client</li>
+                        <li><strong>Votre solution</strong> - Comment vous le résolvez concrètement</li>
+                        <li><strong>Les bénéfices</strong> - Ce que le client gagne (temps, argent, qualité...)</li>
+                        <li><strong>La différenciation</strong> - Ce qui vous rend unique</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <h4>✍️ Exercice</h4>
+                        <p>
+                            Complétez cette phrase en 2 lignes maximum : 
+                            "Nous aidons [qui] à [quoi] grâce à [comment], contrairement à [alternatives]."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>📊 En résumé</h3>
+                    <p>
+                        À la fin de cette première partie, vous devriez avoir :
+                    </p>
+                    <ul>
+                        <li>✓ Une idée claire et validée</li>
+                        <li>✓ Des preuves que le problème est réel et important</li>
+                        <li>✓ Une bonne connaissance de votre marché et concurrence</li>
+                        <li>✓ Une proposition de valeur différenciante</li>
+                    </ul>
+
+                    <p style="margin-top: 30px;">
+                        <strong>Prochaine étape :</strong> Structurer juridiquement votre projet (Partie 2).
+                    </p>
+                </div>
+            </div>
+
+            <div class="part-navigation">
+                <div class="nav-part-btn" onclick="showPage('home')">
+                    <div class="label prev">Retour</div>
+                    <div class="title">Accueil</div>
+                </div>
+                <div class="nav-part-btn next" onclick="showPage('part2')">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 2 - Création</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PARTIE 2 PAGE -->
+    <div id="part2Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>🏗️ PARTIE 2</h2>
+                <p class="subtitle-large">Création de l'entreprise</p>
+                <p class="description">
+                    Comprendre et choisir une structure adaptée à un projet en santé.
+                </p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>🔍 Introduction</h3>
+                    <p>
+                        Créer une entreprise dans le secteur de la santé implique des choix structurants. 
+                        Cette partie vous guide dans les décisions juridiques et administratives essentielles.
+                    </p>
+
+                    <div class="tip-box">
+                        <h4>💡 Important</h4>
+                        <p>
+                            Le choix de la structure juridique n'est pas anodin. Il impacte votre fiscalité, 
+                            votre protection sociale, votre capacité à lever des fonds et votre responsabilité.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>1️⃣ Choisir la forme juridique</h3>
+                    <p>
+                        Plusieurs options s'offrent à vous, chacune avec ses avantages et contraintes.
+                    </p>
+
+                    <h4>Les principales structures</h4>
+                    <ul>
+                        <li><strong>SASU / SAS</strong> - Flexible, adaptée aux levées de fonds, protection du patrimoine</li>
+                        <li><strong>SARL / EURL</strong> - Cadre plus strict, charges sociales avantageuses</li>
+                        <li><strong>Association loi 1901</strong> - Pour projets à vocation sociale sans but lucratif</li>
+                        <li><strong>SEL (Société d'Exercice Libéral)</strong> - Pour exercice en groupe de la profession</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <h4>🎯 Critères de choix</h4>
+                        <p>
+                            Projet solo ou à plusieurs ? Besoin de lever des fonds ? Quel régime fiscal et social ? 
+                            Niveau de formalisme souhaité ? Ces questions orienteront votre choix.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>2️⃣ Démarches administratives</h3>
+                    <p>
+                        Les étapes pour créer officiellement votre structure.
+                    </p>
+
+                    <h4>Le parcours de création</h4>
+                    <ul>
+                        <li><strong>Rédaction des statuts</strong> - Document fondateur de votre société</li>
+                        <li><strong>Dépôt du capital social</strong> - Généralement sur un compte bloqué</li>
+                        <li><strong>Publication d'une annonce légale</strong> - Dans un journal habilité</li>
+                        <li><strong>Immatriculation</strong> - Au RCS via le guichet unique</li>
+                    </ul>
+
+                    <h4>Documents nécessaires</h4>
+                    <ul>
+                        <li>Pièce d'identité des dirigeants et associés</li>
+                        <li>Justificatif de domiciliation de l'entreprise</li>
+                        <li>Déclaration de non-condamnation</li>
+                        <li>Attestation de parution de l'annonce légale</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h3>3️⃣ Réglementations santé</h3>
+                    <p>
+                        Le secteur de la santé est fortement réglementé. Voici ce qu'il faut savoir.
+                    </p>
+
+                    <h4>Points de vigilance</h4>
+                    <ul>
+                        <li><strong>Données de santé</strong> - RGPD renforcé, certification HDS si nécessaire</li>
+                        <li><strong>Déontologie médicale</strong> - Compatibilité avec votre ordre professionnel</li>
+                        <li><strong>Dispositifs médicaux</strong> - Marquage CE si applicable</li>
+                        <li><strong>Publicité</strong> - Restrictions spécifiques au secteur santé</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <h4>⚠️ Conseil</h4>
+                        <p>
+                            Consultez votre ordre professionnel en amont. Certaines activités entrepreneuriales 
+                            nécessitent une autorisation ou ont des contraintes spécifiques.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>4️⃣ Propriété intellectuelle</h3>
+                    <p>
+                        Protégez vos innovations et votre marque dès le départ.
+                    </p>
+
+                    <h4>Ce qu'il faut protéger</h4>
+                    <ul>
+                        <li><strong>Nom et logo</strong> - Dépôt de marque à l'INPI</li>
+                        <li><strong>Innovation technologique</strong> - Brevet si applicable</li>
+                        <li><strong>Code source</strong> - Droits d'auteur automatiques, enveloppe Soleau en option</li>
+                        <li><strong>Méthodes et process</strong> - Secret des affaires ou brevet selon les cas</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <h4>💰 Budget</h4>
+                        <p>
+                            Un dépôt de marque coûte environ 200-250€. Un brevet peut coûter 5000-15000€. 
+                            Priorisez selon votre budget et vos besoins réels.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>📊 Checklist de création</h3>
+                    <ul>
+                        <li>□ Choix de la structure juridique validé</li>
+                        <li>□ Statuts rédigés (avec un avocat idéalement)</li>
+                        <li>□ Capital social déposé</li>
+                        <li>□ Annonce légale publiée</li>
+                        <li>□ Immatriculation effectuée</li>
+                        <li>□ Compte bancaire professionnel ouvert</li>
+                        <li>□ Assurances souscrites</li>
+                        <li>□ Conformité réglementaire vérifiée</li>
+                        <li>□ Propriété intellectuelle protégée</li>
+                    </ul>
+
+                    <p style="margin-top: 30px;">
+                        <strong>Prochaine étape :</strong> Financer votre projet (Partie 3).
+                    </p>
+                </div>
+            </div>
+
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" onclick="showPage('part1')">
+                    <div class="label">Précédent</div>
+                    <div class="title">Partie 1 - Idée</div>
+                </div>
+                <div class="nav-part-btn next" onclick="showPage('part3')">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 3 - Financement</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PARTIES 3-8 TEMPLATES (structure prête pour le contenu) -->
+    <div id="part3Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>💰 PARTIE 3</h2>
+                <p class="subtitle-large">Financement</p>
+                <p class="description">Identifier des solutions de financement réalistes et sécurisées.</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>🚧 Contenu à venir</h3>
+                    <p>Cette section sera bientôt disponible.</p>
+                </div>
+            </div>
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" onclick="showPage('part2')">
+                    <div class="label">Précédent</div>
+                    <div class="title">Partie 2 - Création</div>
+                </div>
+                <div class="nav-part-btn next" onclick="showPage('part4')">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 4 - Équipe</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="part4Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>👥 PARTIE 4</h2>
+                <p class="subtitle-large">Construire son équipe</p>
+                <p class="description">S'entourer des bonnes compétences au bon moment.</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>🚧 Contenu à venir</h3>
+                    <p>Cette section sera bientôt disponible.</p>
+                </div>
+            </div>
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" onclick="showPage('part3')">
+                    <div class="label">Précédent</div>
+                    <div class="title">Partie 3 - Financement</div>
+                </div>
+                <div class="nav-part-btn next" onclick="showPage('part5')">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 5 - Marketing</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="part5Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>📈 PARTIE 5</h2>
+                <p class="subtitle-large">Marketing & Commercial</p>
+                <p class="description">Rendre visible une solution utile, sans surpromesse.</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>🚧 Contenu à venir</h3>
+                    <p>Cette section sera bientôt disponible</p>
+                </div>
+            </div>
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" onclick="showPage('part4')">
+                    <div class="label">Précédent</div>
+                    <div class="title">Partie 4 - Équipe</div>
+                </div>
+                <div class="nav-part-btn next" onclick="showPage('part6')">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 6 - Vente</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="part6Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>💼 PARTIE 6</h2>
+                <p class="subtitle-large">Vente du produit</p>
+                <p class="description">Apprendre à vendre en respectant les valeurs du soin.</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>🚧 Contenu à venir</h3>
+                    <p>Cette section sera bientôt disponible</p>
+                </div>
+            </div>
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" onclick="showPage('part5')">
+                    <div class="label">Précédent</div>
+                    <div class="title">Partie 5 - Marketing</div>
+                </div>
+                <div class="nav-part-btn next" onclick="showPage('part7')">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 7 - Gestion</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="part7Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>📊 PARTIE 7</h2>
+                <p class="subtitle-large">Gestion financière</p>
+                <p class="description">Piloter son activité avec clarté et sérénité.</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>🚧 Contenu à venir</h3>
+                    <p>Cette section sera bientôt disponible</p>
+                </div>
+            </div>
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" onclick="showPage('part6')">
+                    <div class="label">Précédent</div>
+                    <div class="title">Partie 6 - Vente</div>
+                </div>
+                <div class="nav-part-btn next" onclick="showPage('part8')">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 8 - Légal</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="part8Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>⚖️ PARTIE 8</h2>
+                <p class="subtitle-large">Aspects légaux</p>
+                <p class="description">Sécuriser le projet et le professionnel de santé.</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>🚧 Contenu à venir</h3>
+                    <p>Cette section sera bientôt complétée avec votre contenu.</p>
+                </div>
+            </div>
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" onclick="showPage('part7')">
+                    <div class="label">Précédent</div>
+                    <div class="title">Partie 7 - Gestion</div>
+                </div>
+                <div class="nav-part-btn next" onclick="showPage('home')">
+                    <div class="label">Terminer</div>
+                    <div class="title">Retour accueil</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL NOTES -->
+    <div id="notesModal" class="modal">
+        <div class="modal-content">
+            <h3>📝 Mes notes</h3>
+            <textarea id="notesTextarea" placeholder="Prenez des notes personnelles..."></textarea>
+            <div class="modal-actions">
+                <button class="cta-button" onclick="saveNotes()">Sauvegarder</button>
+                <button class="cta-button secondary" onclick="closeNotes()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Entreprendre en santé</h3>
+                <p>Un levier puissant de transformation du système de santé.</p>
+                <p class="footer-tagline">L'IA est ici un copilote, jamais un décideur.</p>
+                <p style="margin-top: 40px; color: #555; font-size: 0.9em;">© 2026 - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // NAVIGATION
+        function showPage(pageName) {
+            // Update active menu item
+            document.querySelectorAll('.nav-item a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Page mapping
+            const pageMap = {
+                'home': 'homePage',
+                'how': 'howPage',
+                'aiAgents': 'aiAgents',
+                'videos': 'videosPage',
+                'part1': 'part1Page',
+                'part2': 'part2Page',
+                'part3': 'part3Page',
+                'part4': 'part4Page',
+                'part5': 'part5Page',
+                'part6': 'part6Page',
+                'part7': 'part7Page',
+                'part8': 'part8Page',
+                'aiClarificateur': 'aiClarificateur',
+                'aiGuide': 'aiGuide',
+                'aiStratege': 'aiStratege',
+                'aiArchitecte': 'aiArchitecte',
+                'aiMarketing': 'aiMarketing',
+                'aiCoach': 'aiCoach',
+                'aiVigie': 'aiVigie'
+            };
+            
+            const pageId = pageMap[pageName] || 'homePage';
+            const targetPage = document.getElementById(pageId);
+            
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Update active nav based on page
+            if (pageName === 'home' || pageName.startsWith('part')) {
+                document.querySelector('.nav-item a[onclick*="home"]').classList.add('active');
+            } else if (pageName === 'how') {
+                document.querySelector('.nav-item a[onclick*="how"]').classList.add('active');
+            } else if (pageName.startsWith('ai')) {
+                document.querySelector('.nav-item a[onclick*="aiAgents"]')?.classList.add('active');
+            } else if (pageName === 'videos') {
+                document.querySelector('.nav-item a[onclick*="videos"]').classList.add('active');
+            }
+
+            // Show/hide progress tracker for part pages
+            const tracker = document.getElementById('progressTracker');
+            if (pageName.startsWith('part')) {
+                tracker.classList.add('active');
+                updateProgressTracker(pageName);
+            } else {
+                tracker.classList.remove('active');
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Save last visited page
+            localStorage.setItem('lastPage', pageName);
+        }
+
+        // PROGRESS TRACKER
+        function updateProgressTracker(pageName) {
+            const partNumber = pageName.replace('part', '');
+            document.querySelectorAll('.progress-step').forEach((step, index) => {
+                if (index + 1 <= parseInt(partNumber)) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+        }
+
+        // SCROLL INDICATOR
+        window.addEventListener('scroll', () => {
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollIndicator.style.width = scrolled + '%';
+
+            // Add shadow to nav on scroll
+            const nav = document.querySelector('.top-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // BOOKMARKS
+        function toggleBookmark() {
+            const btn = document.getElementById('bookmarkBtn');
+            const currentPage = document.querySelector('.page.active').id;
+            
+            let bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+            
+            if (bookmarks.includes(currentPage)) {
+                bookmarks = bookmarks.filter(b => b !== currentPage);
+                btn.classList.remove('bookmark-active');
+            } else {
+                bookmarks.push(currentPage);
+                btn.classList.add('bookmark-active');
+            }
+            
+            localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+        }
+
+        // Check bookmark status on page change
+        function checkBookmark() {
+            const btn = document.getElementById('bookmarkBtn');
+            const currentPage = document.querySelector('.page.active')?.id;
+            const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+            
+            if (bookmarks.includes(currentPage)) {
+                btn.classList.add('bookmark-active');
+            } else {
+                btn.classList.remove('bookmark-active');
+            }
+        }
+
+        // NOTES SYSTEM
+        function openNotes() {
+            const modal = document.getElementById('notesModal');
+            const textarea = document.getElementById('notesTextarea');
+            const currentPage = document.querySelector('.page.active').id;
+            
+            const notes = JSON.parse(localStorage.getItem('notes') || '{}');
+            textarea.value = notes[currentPage] || '';
+            
+            modal.classList.add('active');
+        }
+
+        function closeNotes() {
+            document.getElementById('notesModal').classList.remove('active');
+        }
+
+        function saveNotes() {
+            const textarea = document.getElementById('notesTextarea');
+            const currentPage = document.querySelector('.page.active').id;
+            
+            const notes = JSON.parse(localStorage.getItem('notes') || '{}');
+            notes[currentPage] = textarea.value;
+            
+            localStorage.setItem('notes', JSON.stringify(notes));
+            
+            alert('✅ Notes sauvegardées !');
+            closeNotes();
+        }
+
+        // SCROLL TO TOP
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // MOBILE MENU
+        function toggleMobileMenu() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        }
+
+        // INIT
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load last visited page
+            const lastPage = localStorage.getItem('lastPage');
+            if (lastPage && lastPage !== 'home') {
+                showPage(lastPage);
+            }
+            
+            checkBookmark();
+            
+            // Welcome message
+            if (!localStorage.getItem('visited')) {
+                localStorage.setItem('visited', 'true');
+                setTimeout(() => {
+                    alert('👋 Bienvenue sur Entreprendre en santé !');
+                }, 1000);
+            }
+        });
+
+        // Close modal on outside click
+        document.getElementById('notesModal').addEventListener('click', (e) => {
+            if (e.target.id === 'notesModal') {
+                closeNotes();
+            }
+        });
+    </script>
+</body>
+</html>
