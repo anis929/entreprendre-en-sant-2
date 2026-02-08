@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accompagner les professionnels de sant\u00e9 dans leur parcours entrepreneurial, de l'id\u00e9e initiale jusqu'\u00e0 la structuration durable de leur entreprise.">
+    <meta name="author" content="Entreprendre en sant\u00e9">
+    <meta property="og:title" content="Entreprendre en sant\u00e9 - Le m\u00e9dia des professionnels de sant\u00e9">
+    <meta property="og:description" content="Accompagner les professionnels de sant\u00e9 dans leur parcours entrepreneurial, sans renoncer au sens du soin.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <title>Entreprendre en sant\u00e9 - Le m\u00e9dia des professionnels de sant\u00e9</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- TOP NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-brand" data-page="home">
+                <div class="nav-logo">&#x1FA7A;</div>
+                <div class="nav-brand-text">
+                    <h1>Entreprendre en sant\u00e9</h1>
+                    <p>Le m\u00e9dia des professionnels de sant\u00e9</p>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#" data-page="home" class="active">Accueil</a></li>
+                <li class="nav-item"><a href="#" data-page="how">Comment \u00e7a marche</a></li>
+                <li class="nav-item"><a href="#" data-page="aiAgents">Agents IA</a></li>
+                <li class="nav-item"><a href="#" data-page="videos">Vid\u00e9os Bonus</a></li>
+            </ul>
+            <div class="mobile-menu-btn" data-action="toggleMobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- READING PROGRESS BAR -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions">
+        <div class="quick-action-btn" data-action="toggleBookmark" title="Marquer cette page" id="bookmarkBtn">
+            &#x1F516;
+        </div>
+        <div class="quick-action-btn" data-action="openNotes" title="Mes notes">
+            &#x1F4DD;
+        </div>
+        <div class="quick-action-btn" data-action="scrollToTop" title="Retour en haut">
+            &#x2B06;&#xFE0F;
+        </div>
+    </div>
+
+    <!-- PROGRESS TRACKER -->
+    <div class="progress-tracker" id="progressTracker">
+        <div class="progress-step" data-section="1"></div>
+        <div class="progress-step" data-section="2"></div>
+        <div class="progress-step" data-section="3"></div>
+        <div class="progress-step" data-section="4"></div>
+        <div class="progress-step" data-section="5"></div>
+        <div class="progress-step" data-section="6"></div>
+        <div class="progress-step" data-section="7"></div>
+        <div class="progress-step" data-section="8"></div>
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="homePage" class="page active">
+        <section class="hero-section">
+            <div class="container">
+                <h1>Notre Mission</h1>
+                <p class="subtitle">Accompagner les professionnels de sant\u00e9 entrepreneurs</p>
+                <p>
+                    Accompagner les professionnels de sant\u00e9 dans leur parcours entrepreneurial,
+                    de l'id\u00e9e initiale jusqu'\u00e0 la structuration durable de leur entreprise,
+                    sans renoncer au sens du soin, \u00e0 l'\u00e9thique et \u00e0 la r\u00e9alit\u00e9 du terrain m\u00e9dical.
+                </p>
+                <div class="highlight-box">
+                    <p>Ce n'est ni un acc\u00e9l\u00e9rateur de startup classique, ni une incitation \u00e0 quitter le soin.</p>
+                    <p>C'est un compagnon de route, pens\u00e9 pour des soignants souvent surcharg\u00e9s, exigeants et prudents.</p>
+                </div>
+                <a href="#" data-page="how" class="cta-button">Comment \u00e7a marche ?</a>
+            </div>
+        </section>
+
+        <div class="container" id="sections">
+            <div class="section-header">
+                <h2>Le Parcours Complet</h2>
+                <p>8 \u00e9tapes pour structurer votre projet entrepreneurial en sant\u00e9</p>
+            </div>
+
+            <div class="sections-grid">
+                <div class="section-card" data-page="part1">
+                    <span class="section-number">PARTIE 1</span>
+                    <h3>De l'id\u00e9e au projet</h3>
+                    <p class="description">Transformer une intuition ou une frustration terrain en projet entrepreneurial structur\u00e9 et r\u00e9aliste.</p>
+                    <ul>
+                        <li>Trouver une id\u00e9e innovante</li>
+                        <li>Valider son id\u00e9e</li>
+                        <li>Analyser la concurrence</li>
+                        <li>D\u00e9finir sa proposition de valeur</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" data-page="part2">
+                    <span class="section-number">PARTIE 2</span>
+                    <h3>Cr\u00e9ation de l'entreprise</h3>
+                    <p class="description">Comprendre et choisir une structure adapt\u00e9e \u00e0 un projet en sant\u00e9.</p>
+                    <ul>
+                        <li>Choisir la forme juridique</li>
+                        <li>D\u00e9marches administratives</li>
+                        <li>R\u00e9glementations sant\u00e9</li>
+                        <li>Propri\u00e9t\u00e9 intellectuelle</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" data-page="part3">
+                    <span class="section-number">PARTIE 3</span>
+                    <h3>Financement</h3>
+                    <p class="description">Identifier des solutions de financement r\u00e9alistes et s\u00e9curis\u00e9es.</p>
+                    <ul>
+                        <li>Autofinancement &amp; subventions</li>
+                        <li>Investisseurs sant\u00e9</li>
+                        <li>Temporalit\u00e9 et risque</li>
+                        <li>Strat\u00e9gie de financement</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" data-page="part4">
+                    <span class="section-number">PARTIE 4</span>
+                    <h3>Construire son \u00e9quipe</h3>
+                    <p class="description">S'entourer des bonnes comp\u00e9tences au bon moment.</p>
+                    <ul>
+                        <li>S'associer ou recruter</li>
+                        <li>Profils cl\u00e9s</li>
+                        <li>Gouvernance et r\u00f4les</li>
+                        <li>Erreurs humaines fr\u00e9quentes</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" data-page="part5">
+                    <span class="section-number">PARTIE 5</span>
+                    <h3>Marketing &amp; Commercial</h3>
+                    <p class="description">Rendre visible une solution utile, sans surpromesse.</p>
+                    <ul>
+                        <li>Marketing \u00e9thique en sant\u00e9</li>
+                        <li>Positionnement</li>
+                        <li>Communication B2B / B2C</li>
+                        <li>Tunnel de valeur</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" data-page="part6">
+                    <span class="section-number">PARTIE 6</span>
+                    <h3>Vente du produit</h3>
+                    <p class="description">Apprendre \u00e0 vendre en respectant les valeurs du soin.</p>
+                    <ul>
+                        <li>Sp\u00e9cificit\u00e9s vente sant\u00e9</li>
+                        <li>Cycles longs</li>
+                        <li>D\u00e9cideurs multiples</li>
+                        <li>Preuve de valeur</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" data-page="part7">
+                    <span class="section-number">PARTIE 7</span>
+                    <h3>Gestion financi\u00e8re</h3>
+                    <p class="description">Piloter son activit\u00e9 avec clart\u00e9 et s\u00e9r\u00e9nit\u00e9.</p>
+                    <ul>
+                        <li>Comprendre ses chiffres</li>
+                        <li>Indicateurs cl\u00e9s</li>
+                        <li>Tableaux de bord</li>
+                        <li>Erreurs fr\u00e9quentes</li>
+                    </ul>
+                </div>
+
+                <div class="section-card" data-page="part8">
+                    <span class="section-number">PARTIE 8</span>
+                    <h3>Aspects l\u00e9gaux</h3>
+                    <p class="description">S\u00e9curiser le projet et le professionnel de sant\u00e9.</p>
+                    <ul>
+                        <li>Donn\u00e9es de sant\u00e9</li>
+                        <li>Responsabilit\u00e9s</li>
+                        <li>\u00c9thique et conformit\u00e9</li>
+                        <li>R\u00e9glementation</li>
+                    </ul>
+                </div>
+
+                <div class="section-card bonus-card" data-page="videos">
+                    <span class="section-number">BONUS &#x1F3A5;</span>
+                    <h3>Vid\u00e9os &amp; Coulisses</h3>
+                    <p class="description">D\u00e9couvrez nos conseils en vid\u00e9o et plongez dans les coulisses.</p>
+                    <ul>
+                        <li>Accompagnement &amp; Tips</li>
+                        <li>Astuces d'entrepreneurs</li>
+                        <li>Moments de vie</li>
+                        <li>T\u00e9moignages terrain</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section class="ai-section">
+            <div class="container">
+                <h2>Agents IA - Vos copilotes</h2>
+                <p class="ai-section-subtitle">
+                    Des assistants intelligents pour vous accompagner \u00e0 chaque \u00e9tape
+                </p>
+                <div class="ai-cards">
+                    <div class="ai-card" data-page="aiClarificateur">
+                        <span class="ai-icon">&#x1F9E0;</span>
+                        <h4>Clarificateur de projet</h4>
+                        <p>Transforme votre id\u00e9e en projet structur\u00e9</p>
+                    </div>
+                    <div class="ai-card" data-page="aiGuide">
+                        <span class="ai-icon">&#x1F3D7;&#xFE0F;</span>
+                        <h4>Guide cr\u00e9ation</h4>
+                        <p>Structure juridique adapt\u00e9e</p>
+                    </div>
+                    <div class="ai-card" data-page="aiStratege">
+                        <span class="ai-icon">&#x1F4A1;</span>
+                        <h4>Strat\u00e8ge financement</h4>
+                        <p>Solutions de financement r\u00e9alistes</p>
+                    </div>
+                    <div class="ai-card" data-page="aiArchitecte">
+                        <span class="ai-icon">&#x1F465;</span>
+                        <h4>Architecte d'\u00e9quipe</h4>
+                        <p>Profils essentiels \u00e0 int\u00e9grer</p>
+                    </div>
+                    <div class="ai-card" data-page="aiMarketing">
+                        <span class="ai-icon">&#x1F4C8;</span>
+                        <h4>Strat\u00e8ge marketing</h4>
+                        <p>Marketing \u00e9thique en sant\u00e9</p>
+                    </div>
+                    <div class="ai-card" data-page="aiCoach">
+                        <span class="ai-icon">&#x1F4BC;</span>
+                        <h4>Coach financier</h4>
+                        <p>Pilotage et clart\u00e9 financi\u00e8re</p>
+                    </div>
+                    <div class="ai-card" data-page="aiVigie">
+                        <span class="ai-icon">&#x1F6E1;&#xFE0F;</span>
+                        <h4>Vigie l\u00e9gale</h4>
+                        <p>S\u00e9curit\u00e9 r\u00e9glementaire</p>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h3>&#x1F916; Besoin d'aide pour configurer votre Agent IA ?</h3>
+                    <p>Notre \u00e9quipe vous accompagne dans le param\u00e9trage personnalis\u00e9 de vos agents IA.</p>
+                    <div class="cta-buttons">
+                        <a href="https://www.hackyourcare.com/contact" target="_blank" class="cta-button">Prendre rendez-vous</a>
+                        <button data-action="comingSoon" class="cta-button secondary">Configurer mon agent</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PARTIE 1 PAGE -->
+    <div id="part1Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>&#x1F3AF; PARTIE 1</h2>
+                <p class="subtitle-large">De l'id\u00e9e au projet</p>
+                <p class="description">
+                    Transformer une intuition ou une frustration terrain en projet entrepreneurial structur\u00e9 et r\u00e9aliste.
+                </p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>&#x1F50D; Introduction</h3>
+                    <p>
+                        Vous avez une id\u00e9e, une intuition, ou vous avez identifi\u00e9 un probl\u00e8me r\u00e9current dans votre pratique m\u00e9dicale ?
+                        Cette premi\u00e8re partie va vous aider \u00e0 transformer cette observation en un projet entrepreneurial concret et viable.
+                    </p>
+                    <p>
+                        <strong>L'objectif :</strong> Passer d'une id\u00e9e floue \u00e0 un projet clair, valid\u00e9 et structur\u00e9,
+                        pr\u00eat \u00e0 \u00eatre d\u00e9velopp\u00e9 dans les \u00e9tapes suivantes.
+                    </p>
+
+                    <div class="tip-box">
+                        <h4>&#x1F4A1; Point de d\u00e9part</h4>
+                        <p>
+                            La plupart des meilleures innovations en sant\u00e9 naissent d'une frustration terrain.
+                            Votre exp\u00e9rience de soignant est votre plus grand atout.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>1&#xFE0F;&#x20E3; Trouver une id\u00e9e innovante</h3>
+                    <p>
+                        Comment identifier une opportunit\u00e9 entrepreneuriale \u00e0 partir de votre exp\u00e9rience m\u00e9dicale ?
+                    </p>
+
+                    <h4>Les sources d'id\u00e9es</h4>
+                    <ul>
+                        <li><strong>Frustrations quotidiennes</strong> - Les processus inefficaces que vous rencontrez chaque jour</li>
+                        <li><strong>Besoins non satisfaits</strong> - Les probl\u00e8mes de vos patients sans solution adapt\u00e9e</li>
+                        <li><strong>\u00c9volutions technologiques</strong> - Les nouvelles technologies applicables \u00e0 la sant\u00e9</li>
+                        <li><strong>Changements r\u00e9glementaires</strong> - Les nouvelles opportunit\u00e9s cr\u00e9\u00e9es par la loi</li>
+                    </ul>
+
+                    <h4>Exercice pratique</h4>
+                    <p>
+                        Listez 10 frustrations ou probl\u00e8mes que vous avez rencontr\u00e9s cette semaine dans votre pratique.
+                        Pour chacun, demandez-vous : "Et si on pouvait r\u00e9soudre \u00e7a ?"
+                    </p>
+
+                    <div class="tip-box">
+                        <h4>&#x1F3AF; Astuce</h4>
+                        <p>
+                            Une bonne id\u00e9e r\u00e9pond \u00e0 un probl\u00e8me r\u00e9el, fr\u00e9quent et douloureux.
+                            Si vous l'avez v\u00e9cu, d'autres professionnels l'ont probablement v\u00e9cu aussi.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>2&#xFE0F;&#x20E3; Valider son id\u00e9e</h3>
+                    <p>
+                        Avoir une id\u00e9e, c'est bien. S'assurer qu'elle r\u00e9pond \u00e0 un vrai besoin, c'est indispensable.
+                    </p>
+
+                    <h4>Les \u00e9tapes de validation</h4>
+                    <ul>
+                        <li><strong>Interviews exploratoires</strong> - Parlez \u00e0 20-30 professionnels concern\u00e9s</li>
+                        <li><strong>Questionnaires</strong> - Quantifiez l'ampleur du probl\u00e8me</li>
+                        <li><strong>Prototype / MVP</strong> - Testez une version minimale de votre solution</li>
+                        <li><strong>Pilot test</strong> - Lancez une exp\u00e9rimentation \u00e0 petite \u00e9chelle</li>
+                    </ul>
+
+                    <h4>Questions cl\u00e9s \u00e0 poser</h4>
+                    <ul>
+                        <li>Le probl\u00e8me est-il assez douloureux pour justifier une solution ?</li>
+                        <li>Les gens sont-ils pr\u00eats \u00e0 payer pour le r\u00e9soudre ?</li>
+                        <li>Votre solution est-elle meilleure que les alternatives existantes ?</li>
+                        <li>Pouvez-vous la d\u00e9ployer \u00e0 grande \u00e9chelle ?</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <h4>&#x26A0;&#xFE0F; Attention</h4>
+                        <p>
+                            Ne tombez pas amoureux de votre id\u00e9e. Tombez amoureux du probl\u00e8me.
+                            Votre premi\u00e8re id\u00e9e de solution ne sera probablement pas la bonne.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>3&#xFE0F;&#x20E3; Analyser la concurrence</h3>
+                    <p>
+                        Comprendre l'\u00e9cosyst\u00e8me existant est essentiel pour se positionner efficacement.
+                    </p>
+
+                    <h4>Types de concurrents</h4>
+                    <ul>
+                        <li><strong>Directs</strong> - Ceux qui proposent une solution similaire au m\u00eame probl\u00e8me</li>
+                        <li><strong>Indirects</strong> - Ceux qui r\u00e9solvent le m\u00eame probl\u00e8me diff\u00e9remment</li>
+                        <li><strong>Substituts</strong> - Les alternatives que vos clients utilisent actuellement</li>
+                    </ul>
+
+                    <h4>Ce qu'il faut analyser</h4>
+                    <ul>
+                        <li>Leur proposition de valeur</li>
+                        <li>Leur mod\u00e8le \u00e9conomique</li>
+                        <li>Leurs forces et faiblesses</li>
+                        <li>Leurs clients et retours utilisateurs</li>
+                        <li>Leur strat\u00e9gie de communication</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h3>4&#xFE0F;&#x20E3; D\u00e9finir sa proposition de valeur</h3>
+                    <p>
+                        Votre proposition de valeur, c'est la r\u00e9ponse claire \u00e0 la question :
+                        "Pourquoi choisir votre solution plut\u00f4t qu'une autre ?"
+                    </p>
+
+                    <h4>Les composantes d'une bonne proposition de valeur</h4>
+                    <ul>
+                        <li><strong>Le probl\u00e8me r\u00e9solu</strong> - Formul\u00e9 du point de vue client</li>
+                        <li><strong>Votre solution</strong> - Comment vous le r\u00e9solvez concr\u00e8tement</li>
+                        <li><strong>Les b\u00e9n\u00e9fices</strong> - Ce que le client gagne (temps, argent, qualit\u00e9...)</li>
+                        <li><strong>La diff\u00e9renciation</strong> - Ce qui vous rend unique</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <h4>&#x270D;&#xFE0F; Exercice</h4>
+                        <p>
+                            Compl\u00e9tez cette phrase en 2 lignes maximum :
+                            "Nous aidons [qui] \u00e0 [quoi] gr\u00e2ce \u00e0 [comment], contrairement \u00e0 [alternatives]."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>&#x1F4CA; En r\u00e9sum\u00e9</h3>
+                    <p>
+                        \u00c0 la fin de cette premi\u00e8re partie, vous devriez avoir :
+                    </p>
+                    <ul>
+                        <li>&#x2713; Une id\u00e9e claire et valid\u00e9e</li>
+                        <li>&#x2713; Des preuves que le probl\u00e8me est r\u00e9el et important</li>
+                        <li>&#x2713; Une bonne connaissance de votre march\u00e9 et concurrence</li>
+                        <li>&#x2713; Une proposition de valeur diff\u00e9renciante</li>
+                    </ul>
+
+                    <p class="next-step-text">
+                        <strong>Prochaine \u00e9tape :</strong> Structurer juridiquement votre projet (Partie 2).
+                    </p>
+                </div>
+            </div>
+
+            <div class="part-navigation">
+                <div class="nav-part-btn" data-page="home">
+                    <div class="label prev">Retour</div>
+                    <div class="title">Accueil</div>
+                </div>
+                <div class="nav-part-btn next" data-page="part2">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 2 - Cr\u00e9ation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PARTIE 2 PAGE -->
+    <div id="part2Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>&#x1F3D7;&#xFE0F; PARTIE 2</h2>
+                <p class="subtitle-large">Cr\u00e9ation de l'entreprise</p>
+                <p class="description">
+                    Comprendre et choisir une structure adapt\u00e9e \u00e0 un projet en sant\u00e9.
+                </p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>&#x1F50D; Introduction</h3>
+                    <p>
+                        Cr\u00e9er une entreprise dans le secteur de la sant\u00e9 implique des choix structurants.
+                        Cette partie vous guide dans les d\u00e9cisions juridiques et administratives essentielles.
+                    </p>
+
+                    <div class="tip-box">
+                        <h4>&#x1F4A1; Important</h4>
+                        <p>
+                            Le choix de la structure juridique n'est pas anodin. Il impacte votre fiscalit\u00e9,
+                            votre protection sociale, votre capacit\u00e9 \u00e0 lever des fonds et votre responsabilit\u00e9.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>1&#xFE0F;&#x20E3; Choisir la forme juridique</h3>
+                    <p>
+                        Plusieurs options s'offrent \u00e0 vous, chacune avec ses avantages et contraintes.
+                    </p>
+
+                    <h4>Les principales structures</h4>
+                    <ul>
+                        <li><strong>SASU / SAS</strong> - Flexible, adapt\u00e9e aux lev\u00e9es de fonds, protection du patrimoine</li>
+                        <li><strong>SARL / EURL</strong> - Cadre plus strict, charges sociales avantageuses</li>
+                        <li><strong>Association loi 1901</strong> - Pour projets \u00e0 vocation sociale sans but lucratif</li>
+                        <li><strong>SEL (Soci\u00e9t\u00e9 d'Exercice Lib\u00e9ral)</strong> - Pour exercice en groupe de la profession</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <h4>&#x1F3AF; Crit\u00e8res de choix</h4>
+                        <p>
+                            Projet solo ou \u00e0 plusieurs ? Besoin de lever des fonds ? Quel r\u00e9gime fiscal et social ?
+                            Niveau de formalisme souhait\u00e9 ? Ces questions orienteront votre choix.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>2&#xFE0F;&#x20E3; D\u00e9marches administratives</h3>
+                    <p>
+                        Les \u00e9tapes pour cr\u00e9er officiellement votre structure.
+                    </p>
+
+                    <h4>Le parcours de cr\u00e9ation</h4>
+                    <ul>
+                        <li><strong>R\u00e9daction des statuts</strong> - Document fondateur de votre soci\u00e9t\u00e9</li>
+                        <li><strong>D\u00e9p\u00f4t du capital social</strong> - G\u00e9n\u00e9ralement sur un compte bloqu\u00e9</li>
+                        <li><strong>Publication d'une annonce l\u00e9gale</strong> - Dans un journal habilit\u00e9</li>
+                        <li><strong>Immatriculation</strong> - Au RCS via le guichet unique</li>
+                    </ul>
+
+                    <h4>Documents n\u00e9cessaires</h4>
+                    <ul>
+                        <li>Pi\u00e8ce d'identit\u00e9 des dirigeants et associ\u00e9s</li>
+                        <li>Justificatif de domiciliation de l'entreprise</li>
+                        <li>D\u00e9claration de non-condamnation</li>
+                        <li>Attestation de parution de l'annonce l\u00e9gale</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h3>3&#xFE0F;&#x20E3; R\u00e9glementations sant\u00e9</h3>
+                    <p>
+                        Le secteur de la sant\u00e9 est fortement r\u00e9glement\u00e9. Voici ce qu'il faut savoir.
+                    </p>
+
+                    <h4>Points de vigilance</h4>
+                    <ul>
+                        <li><strong>Donn\u00e9es de sant\u00e9</strong> - RGPD renforc\u00e9, certification HDS si n\u00e9cessaire</li>
+                        <li><strong>D\u00e9ontologie m\u00e9dicale</strong> - Compatibilit\u00e9 avec votre ordre professionnel</li>
+                        <li><strong>Dispositifs m\u00e9dicaux</strong> - Marquage CE si applicable</li>
+                        <li><strong>Publicit\u00e9</strong> - Restrictions sp\u00e9cifiques au secteur sant\u00e9</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <h4>&#x26A0;&#xFE0F; Conseil</h4>
+                        <p>
+                            Consultez votre ordre professionnel en amont. Certaines activit\u00e9s entrepreneuriales
+                            n\u00e9cessitent une autorisation ou ont des contraintes sp\u00e9cifiques.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>4&#xFE0F;&#x20E3; Propri\u00e9t\u00e9 intellectuelle</h3>
+                    <p>
+                        Prot\u00e9gez vos innovations et votre marque d\u00e8s le d\u00e9part.
+                    </p>
+
+                    <h4>Ce qu'il faut prot\u00e9ger</h4>
+                    <ul>
+                        <li><strong>Nom et logo</strong> - D\u00e9p\u00f4t de marque \u00e0 l'INPI</li>
+                        <li><strong>Innovation technologique</strong> - Brevet si applicable</li>
+                        <li><strong>Code source</strong> - Droits d'auteur automatiques, enveloppe Soleau en option</li>
+                        <li><strong>M\u00e9thodes et process</strong> - Secret des affaires ou brevet selon les cas</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <h4>&#x1F4B0; Budget</h4>
+                        <p>
+                            Un d\u00e9p\u00f4t de marque co\u00fbte environ 200-250\u20ac. Un brevet peut co\u00fbter 5000-15000\u20ac.
+                            Priorisez selon votre budget et vos besoins r\u00e9els.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>&#x1F4CA; Checklist de cr\u00e9ation</h3>
+                    <ul>
+                        <li>&#x25A1; Choix de la structure juridique valid\u00e9</li>
+                        <li>&#x25A1; Statuts r\u00e9dig\u00e9s (avec un avocat id\u00e9alement)</li>
+                        <li>&#x25A1; Capital social d\u00e9pos\u00e9</li>
+                        <li>&#x25A1; Annonce l\u00e9gale publi\u00e9e</li>
+                        <li>&#x25A1; Immatriculation effectu\u00e9e</li>
+                        <li>&#x25A1; Compte bancaire professionnel ouvert</li>
+                        <li>&#x25A1; Assurances souscrites</li>
+                        <li>&#x25A1; Conformit\u00e9 r\u00e9glementaire v\u00e9rifi\u00e9e</li>
+                        <li>&#x25A1; Propri\u00e9t\u00e9 intellectuelle prot\u00e9g\u00e9e</li>
+                    </ul>
+
+                    <p class="next-step-text">
+                        <strong>Prochaine \u00e9tape :</strong> Financer votre projet (Partie 3).
+                    </p>
+                </div>
+            </div>
+
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" data-page="part1">
+                    <div class="label">Pr\u00e9c\u00e9dent</div>
+                    <div class="title">Partie 1 - Id\u00e9e</div>
+                </div>
+                <div class="nav-part-btn next" data-page="part3">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 3 - Financement</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PARTIES 3-8 (structure pr\u00eate pour le contenu) -->
+    <div id="part3Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>&#x1F4B0; PARTIE 3</h2>
+                <p class="subtitle-large">Financement</p>
+                <p class="description">Identifier des solutions de financement r\u00e9alistes et s\u00e9curis\u00e9es.</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>&#x1F6A7; Contenu \u00e0 venir</h3>
+                    <p>Cette section sera bient\u00f4t disponible.</p>
+                </div>
+            </div>
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" data-page="part2">
+                    <div class="label">Pr\u00e9c\u00e9dent</div>
+                    <div class="title">Partie 2 - Cr\u00e9ation</div>
+                </div>
+                <div class="nav-part-btn next" data-page="part4">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 4 - \u00c9quipe</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="part4Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>&#x1F465; PARTIE 4</h2>
+                <p class="subtitle-large">Construire son \u00e9quipe</p>
+                <p class="description">S'entourer des bonnes comp\u00e9tences au bon moment.</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>&#x1F6A7; Contenu \u00e0 venir</h3>
+                    <p>Cette section sera bient\u00f4t disponible.</p>
+                </div>
+            </div>
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" data-page="part3">
+                    <div class="label">Pr\u00e9c\u00e9dent</div>
+                    <div class="title">Partie 3 - Financement</div>
+                </div>
+                <div class="nav-part-btn next" data-page="part5">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 5 - Marketing</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="part5Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>&#x1F4C8; PARTIE 5</h2>
+                <p class="subtitle-large">Marketing &amp; Commercial</p>
+                <p class="description">Rendre visible une solution utile, sans surpromesse.</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>&#x1F6A7; Contenu \u00e0 venir</h3>
+                    <p>Cette section sera bient\u00f4t disponible.</p>
+                </div>
+            </div>
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" data-page="part4">
+                    <div class="label">Pr\u00e9c\u00e9dent</div>
+                    <div class="title">Partie 4 - \u00c9quipe</div>
+                </div>
+                <div class="nav-part-btn next" data-page="part6">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 6 - Vente</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="part6Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>&#x1F4BC; PARTIE 6</h2>
+                <p class="subtitle-large">Vente du produit</p>
+                <p class="description">Apprendre \u00e0 vendre en respectant les valeurs du soin.</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>&#x1F6A7; Contenu \u00e0 venir</h3>
+                    <p>Cette section sera bient\u00f4t disponible.</p>
+                </div>
+            </div>
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" data-page="part5">
+                    <div class="label">Pr\u00e9c\u00e9dent</div>
+                    <div class="title">Partie 5 - Marketing</div>
+                </div>
+                <div class="nav-part-btn next" data-page="part7">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 7 - Gestion</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="part7Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>&#x1F4CA; PARTIE 7</h2>
+                <p class="subtitle-large">Gestion financi\u00e8re</p>
+                <p class="description">Piloter son activit\u00e9 avec clart\u00e9 et s\u00e9r\u00e9nit\u00e9.</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>&#x1F6A7; Contenu \u00e0 venir</h3>
+                    <p>Cette section sera bient\u00f4t disponible.</p>
+                </div>
+            </div>
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" data-page="part6">
+                    <div class="label">Pr\u00e9c\u00e9dent</div>
+                    <div class="title">Partie 6 - Vente</div>
+                </div>
+                <div class="nav-part-btn next" data-page="part8">
+                    <div class="label">Suivant</div>
+                    <div class="title">Partie 8 - L\u00e9gal</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="part8Page" class="page">
+        <section class="part-hero">
+            <div class="container">
+                <h2>&#x2696;&#xFE0F; PARTIE 8</h2>
+                <p class="subtitle-large">Aspects l\u00e9gaux</p>
+                <p class="description">S\u00e9curiser le projet et le professionnel de sant\u00e9.</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card">
+                    <h3>&#x1F6A7; Contenu \u00e0 venir</h3>
+                    <p>Cette section sera bient\u00f4t compl\u00e9t\u00e9e avec votre contenu.</p>
+                </div>
+            </div>
+            <div class="part-navigation">
+                <div class="nav-part-btn prev" data-page="part7">
+                    <div class="label">Pr\u00e9c\u00e9dent</div>
+                    <div class="title">Partie 7 - Gestion</div>
+                </div>
+                <div class="nav-part-btn next" data-page="home">
+                    <div class="label">Terminer</div>
+                    <div class="title">Retour accueil</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL NOTES -->
+    <div id="notesModal" class="modal">
+        <div class="modal-content">
+            <h3>&#x1F4DD; Mes notes</h3>
+            <textarea id="notesTextarea" placeholder="Prenez des notes personnelles..."></textarea>
+            <div class="modal-actions">
+                <button class="cta-button" data-action="saveNotes">Sauvegarder</button>
+                <button class="cta-button secondary" data-action="closeNotes">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Entreprendre en sant\u00e9</h3>
+                <p>Un levier puissant de transformation du syst\u00e8me de sant\u00e9.</p>
+                <p class="footer-tagline">L'IA est ici un copilote, jamais un d\u00e9cideur.</p>
+                <p class="footer-copyright">\u00a9 2026 - Tous droits r\u00e9serv\u00e9s</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
