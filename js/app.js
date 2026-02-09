@@ -81,6 +81,7 @@
         'videos': 'videosPage',
         'ideaFinder': 'ideaFinderPage',
         'marketStudy': 'marketStudyPage',
+        'competitionAnalysis': 'competitionAnalysisPage',
         'part1': 'part1Page',
         'part2': 'part2Page',
         'part3': 'part3Page',
