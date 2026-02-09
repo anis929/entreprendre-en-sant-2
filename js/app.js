@@ -80,6 +80,7 @@
         'aiAgents': 'aiAgents',
         'videos': 'videosPage',
         'ideaFinder': 'ideaFinderPage',
+        'marketStudy': 'marketStudyPage',
         'part1': 'part1Page',
         'part2': 'part2Page',
         'part3': 'part3Page',
