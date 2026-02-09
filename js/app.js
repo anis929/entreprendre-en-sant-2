@@ -1,5 +1,5 @@
 /* ========================================
-   Entreprendre en Sant\u00e9 - Application
+   Entreprendre en Santé - Application
    ======================================== */
 (function () {
     'use strict';
@@ -203,11 +203,11 @@
         if (index !== -1) {
             bookmarks.splice(index, 1);
             btn.classList.remove('bookmark-active');
-            showToast('Marque-page retir\u00e9');
+            showToast('Marque-page retiré');
         } else {
             bookmarks.push(currentPage);
             btn.classList.add('bookmark-active');
-            showToast('Page ajout\u00e9e aux marque-pages');
+            showToast('Page ajoutée aux marque-pages');
         }
 
         Storage.set('bookmarks', bookmarks);
@@ -258,7 +258,7 @@
         notes[currentPage] = textarea.value;
 
         if (Storage.set('notes', notes)) {
-            showToast('Notes sauvegard\u00e9es !');
+            showToast('Notes sauvegardées !');
         } else {
             showToast('Erreur : impossible de sauvegarder');
         }
@@ -290,7 +290,7 @@
         scrollToTop: scrollToTop,
         toggleMobileMenu: toggleMobileMenu,
         comingSoon: function () {
-            showToast('Fonctionnalit\u00e9 bient\u00f4t disponible');
+            showToast('Fonctionnalité bientôt disponible');
         }
     };
 
@@ -337,7 +337,7 @@
         if (!Storage.getRaw('visited')) {
             Storage.setRaw('visited', 'true');
             setTimeout(function () {
-                showToast('Bienvenue sur Entreprendre en sant\u00e9 !', 5000);
+                showToast('Bienvenue sur Entreprendre en santé !', 5000);
             }, 1000);
         }
     });
