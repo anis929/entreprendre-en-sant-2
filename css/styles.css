@@ -1008,6 +1008,311 @@ footer {
 }
 
 /* ========================================
+   HOW PAGE - PROFILE CARDS
+   ======================================== */
+.how-profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 0 0 60px;
+}
+
+.how-profile-card {
+    background: linear-gradient(135deg, #0d0d0d 0%, #000 100%);
+    border: 1px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.how-profile-card:hover {
+    border-color: var(--primary-green);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
+}
+
+.how-profile-icon {
+    font-size: 2.5em;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.how-profile-card h4 {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.how-profile-card p {
+    color: #999;
+    font-size: 1em;
+    line-height: 1.7;
+}
+
+/* ========================================
+   HOW PAGE - STEPS
+   ======================================== */
+.how-steps {
+    padding: 0 0 60px;
+}
+
+.how-step-card {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #0d0d0d 0%, #000 100%);
+    border: 1px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 50px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.how-step-card:hover {
+    border-color: var(--primary-green);
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
+}
+
+.how-step-number {
+    font-size: 4em;
+    font-weight: 800;
+    color: var(--primary-green);
+    line-height: 1;
+    min-width: 80px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.how-step-content h3 {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+.how-step-content p {
+    font-size: 1.1em;
+    color: #ccc;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.how-step-content ul {
+    list-style: none;
+    margin: 15px 0;
+}
+
+.how-step-content ul li {
+    padding: 10px 0 10px 30px;
+    position: relative;
+    font-size: 1.05em;
+    color: #bbb;
+    line-height: 1.6;
+}
+
+.how-step-content ul li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--primary-green);
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+/* ========================================
+   PRICING PAGE
+   ======================================== */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    padding: 60px 0;
+}
+
+.pricing-card {
+    background: linear-gradient(135deg, #0d0d0d 0%, #000 100%);
+    border: 1px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 45px 35px;
+    text-align: center;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 255, 136, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 255, 136, 0.1);
+}
+
+.pricing-card.featured {
+    border: 2px solid var(--primary-green);
+    background: linear-gradient(135deg, #0a1a0f 0%, #000 100%);
+    transform: scale(1.03);
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.03) translateY(-8px);
+}
+
+.pricing-popular {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-green);
+    color: #000;
+    font-weight: 700;
+    font-size: 0.85em;
+    padding: 6px 20px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+.pricing-badge {
+    font-size: 1em;
+    color: var(--primary-green);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.pricing-price {
+    font-size: 3.5em;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 5px;
+    letter-spacing: -2px;
+}
+
+.pricing-price span {
+    font-size: 0.35em;
+    font-weight: 500;
+    color: #888;
+    letter-spacing: 0;
+}
+
+.pricing-period {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.pricing-description {
+    font-size: 1em;
+    color: #999;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.pricing-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.pricing-features li {
+    padding: 12px 0 12px 30px;
+    position: relative;
+    font-size: 0.95em;
+    color: #bbb;
+    border-bottom: 1px solid #111;
+}
+
+.pricing-features li:last-child {
+    border-bottom: none;
+}
+
+.pricing-features li.included::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--primary-green);
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.pricing-features li.not-included {
+    color: #444;
+}
+
+.pricing-features li.not-included::before {
+    content: '\2717';
+    position: absolute;
+    left: 0;
+    color: #444;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.pricing-card .cta-button {
+    width: 100%;
+    text-align: center;
+}
+
+/* ========================================
+   FAQ
+   ======================================== */
+.faq-list {
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+.faq-item {
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #ddd;
+}
+
+.faq-question:hover {
+    color: var(--primary-green);
+}
+
+.faq-toggle {
+    font-size: 1.5em;
+    color: var(--primary-green);
+    font-weight: 300;
+    transition: transform 0.3s ease;
+    min-width: 30px;
+    text-align: center;
+}
+
+.faq-item.open .faq-toggle {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.faq-item.open .faq-answer {
+    max-height: 300px;
+    padding-bottom: 25px;
+}
+
+.faq-answer p {
+    color: #999;
+    font-size: 1em;
+    line-height: 1.8;
+}
+
+/* ========================================
    UTILITY CLASSES (remplacent les styles inline)
    ======================================== */
 .next-step-text {
@@ -1059,6 +1364,34 @@ footer {
 
     .toast {
         max-width: 100%;
+    }
+
+    .how-profiles-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .how-step-card {
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px;
+    }
+
+    .how-step-number {
+        font-size: 2.5em;
+        min-width: auto;
+        text-align: left;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-card.featured {
+        transform: none;
+    }
+
+    .pricing-card.featured:hover {
+        transform: translateY(-8px);
     }
 }
 
