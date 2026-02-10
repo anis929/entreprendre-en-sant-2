@@ -82,6 +82,7 @@
         'ideaFinder': 'ideaFinderPage',
         'marketStudy': 'marketStudyPage',
         'competitionAnalysis': 'competitionAnalysisPage',
+        'valueProposition': 'valuePropositionPage',
         'part1': 'part1Page',
         'part2': 'part2Page',
         'part3': 'part3Page',
