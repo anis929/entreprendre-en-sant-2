@@ -77,6 +77,7 @@
     var PAGE_MAP = {
         'home': 'homePage',
         'how': 'howPage',
+        'pricing': 'pricingPage',
         'aiAgents': 'aiAgents',
         'videos': 'videosPage',
         'ideaFinder': 'ideaFinderPage',
@@ -124,10 +125,12 @@
 
         // Update active nav link
         var navSelector = null;
-        if (pageName === 'home' || pageName.indexOf('part') === 0) {
+        if (pageName === 'home' || pageName.indexOf('part') === 0 || pageName === 'ideaFinder' || pageName === 'marketStudy' || pageName === 'competitionAnalysis' || pageName === 'valueProposition') {
             navSelector = '[data-page="home"]';
         } else if (pageName === 'how') {
             navSelector = '[data-page="how"]';
+        } else if (pageName === 'pricing') {
+            navSelector = '[data-page="pricing"]';
         } else if (pageName.indexOf('ai') === 0) {
             navSelector = '[data-page="aiAgents"]';
         } else if (pageName === 'videos') {
@@ -294,6 +297,12 @@
         toggleMobileMenu: toggleMobileMenu,
         comingSoon: function () {
             showToast('Fonctionnalité bientôt disponible');
+        },
+        toggleFaq: function (e) {
+            var faqItem = e.closest('.faq-item');
+            if (faqItem) {
+                faqItem.classList.toggle('open');
+            }
         }
     };
 
@@ -312,7 +321,7 @@
             e.preventDefault();
             var actionName = actionTarget.dataset.action;
             if (actions[actionName]) {
-                actions[actionName]();
+                actions[actionName](actionTarget);
             }
         }
     });
