@@ -856,6 +856,236 @@ body {
 }
 
 /* ========================================
+   AGENTS PAGE - DETAIL CARDS
+   ======================================== */
+.agent-detail-card {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #0d0d0d 0%, #000 100%);
+    border: 1px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 50px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.agent-detail-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary-green);
+}
+
+.agent-detail-card:hover {
+    border-color: var(--primary-green);
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
+    transform: translateY(-4px);
+}
+
+.agent-detail-icon {
+    font-size: 4em;
+    min-width: 80px;
+    text-align: center;
+    line-height: 1;
+}
+
+.agent-detail-content {
+    flex: 1;
+}
+
+.agent-detail-content h3 {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.agent-detail-content h4 {
+    font-size: 1.4em;
+    font-weight: 700;
+    margin: 25px 0 15px;
+    color: var(--primary-green);
+}
+
+.agent-mission,
+.agent-problem {
+    font-size: 1.1em;
+    color: #ccc;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.agent-mission strong,
+.agent-problem strong {
+    color: var(--primary-green);
+}
+
+.agent-detail-content ul {
+    list-style: none;
+    margin: 15px 0;
+}
+
+.agent-detail-content ul li {
+    padding: 10px 0 10px 30px;
+    position: relative;
+    font-size: 1.05em;
+    color: #bbb;
+    line-height: 1.6;
+}
+
+.agent-detail-content ul li::before {
+    content: '\2192';
+    position: absolute;
+    left: 0;
+    color: var(--primary-green);
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.agent-benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.benefit-tag {
+    background: linear-gradient(135deg, var(--dark-green) 0%, #001a0f 100%);
+    border: 1px solid var(--primary-green);
+    color: var(--primary-green);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+/* ========================================
+   AGENTS PAGE - PRICING GRID
+   ======================================== */
+.agents-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 60px 0;
+}
+
+.agents-pricing-card {
+    background: linear-gradient(135deg, #0d0d0d 0%, #000 100%);
+    border: 1px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 45px 35px;
+    text-align: center;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.agents-pricing-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 255, 136, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 255, 136, 0.1);
+}
+
+.agents-pricing-card.featured {
+    border: 2px solid var(--primary-green);
+    background: linear-gradient(135deg, #0a1a0f 0%, #000 100%);
+    transform: scale(1.03);
+}
+
+.agents-pricing-card.featured:hover {
+    transform: scale(1.03) translateY(-8px);
+}
+
+.agents-pricing-badge {
+    font-size: 1em;
+    color: var(--primary-green);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.agents-pricing-price {
+    font-size: 3.5em;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 5px;
+    letter-spacing: -2px;
+}
+
+.agents-pricing-period {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.agents-pricing-description {
+    font-size: 1em;
+    color: #999;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.agents-pricing-card .cta-button {
+    width: 100%;
+    text-align: center;
+}
+
+/* ========================================
+   AGENTS PAGE - COMPARISON TABLE
+   ======================================== */
+.comparison-table {
+    margin: 30px 0;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.comparison-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.comparison-row:last-child {
+    border-bottom: none;
+}
+
+.comparison-row.comparison-header {
+    background: #0a0a0a;
+}
+
+.comparison-row.comparison-header .comparison-cell {
+    font-weight: 700;
+    color: #fff;
+    font-size: 1em;
+}
+
+.comparison-cell {
+    padding: 18px 20px;
+    font-size: 0.95em;
+    color: #888;
+    display: flex;
+    align-items: center;
+}
+
+.comparison-cell.label {
+    font-weight: 600;
+    color: #ccc;
+}
+
+.comparison-cell.highlight {
+    color: var(--primary-green);
+    font-weight: 600;
+    background: rgba(0, 255, 136, 0.03);
+}
+
+/* ========================================
    CTA BUTTON
    ======================================== */
 .cta-button {
@@ -1453,6 +1683,56 @@ footer {
 
     .pricing-card.featured:hover {
         transform: translateY(-8px);
+    }
+
+    .agent-detail-card {
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px;
+    }
+
+    .agent-detail-icon {
+        font-size: 3em;
+        min-width: auto;
+        text-align: left;
+    }
+
+    .agent-detail-content h3 {
+        font-size: 1.6em;
+    }
+
+    .agents-pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .agents-pricing-card.featured {
+        transform: none;
+    }
+
+    .agents-pricing-card.featured:hover {
+        transform: translateY(-8px);
+    }
+
+    .comparison-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .comparison-row.comparison-header {
+        display: none;
+    }
+
+    .comparison-cell {
+        padding: 12px 20px;
+    }
+
+    .comparison-cell.label {
+        background: #0a0a0a;
+        padding-bottom: 5px;
+    }
+
+    .comparison-cell.highlight {
+        border-bottom: 1px solid #1a1a1a;
     }
 }
 
