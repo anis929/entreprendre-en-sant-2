@@ -652,6 +652,16 @@ body {
     line-height: 1.7;
 }
 
+/* Tip-box with white text */
+.tip-box[style*="color: white"] h4,
+.tip-box[style*="color: white"] p {
+    color: white !important;
+}
+
+.tip-box[style*="color: white"] strong {
+    color: white;
+}
+
 /* ========================================
    PART NAVIGATION
    ======================================== */
