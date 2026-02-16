@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculators Financement - Startup Santé</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .calculator {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            overflow: hidden;
+        }
+
+        .calculator h2 {
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .input-help {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .slider-container {
+            margin-bottom: 20px;
+        }
+
+        .slider-container input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e0e0e0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+
+        .slider-container input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-value {
+            text-align: center;
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-top: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .results {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .result-label {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            color: #667eea;
+            font-size: 1.6em;
+            font-weight: bold;
+        }
+
+        .result-status {
+            font-size: 0.9em;
+            margin-top: 5px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .status-good {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .chart-container {
+            margin-top: 25px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .chart-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .chart-bar {
+            margin-bottom: 12px;
+        }
+
+        .chart-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bar {
+            height: 25px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .pie-chart {
+            display: flex;
+            height: 200px;
+            margin: 20px 0;
+            gap: 2px;
+        }
+
+        .pie-slice {
+            flex: 1;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85em;
+            text-align: center;
+        }
+
+        .pie-legend {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+
+        .reset-btn {
+            background: #e0e0e0;
+            color: #333;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 0.9em;
+        }
+
+        .reset-btn:hover {
+            background: #d0d0d0;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        .tab-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .pie-legend {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .formula-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 12px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #333;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧮 Calculators Financement</h1>
+        <p>Outils interactifs pour structurer votre levée de fonds</p>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 30px;">
+        <div class="tab-selector">
+            <button class="tab-btn active" onclick="switchTab('burn-rate')">🔥 Burn Rate</button>
+            <button class="tab-btn" onclick="switchTab('cap-table')">📊 Cap Table</button>
+            <button class="tab-btn" onclick="switchTab('valuation')">💰 Valuation</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- BURN RATE CALCULATOR -->
+        <div id="burn-rate" class="tab-content active">
+            <div class="calculator">
+                <h2>🔥 Calculateur Burn Rate</h2>
+
+                <div class="form-group">
+                    <label>Salaires mensuels (équipe)</label>
+                    <input type="number" id="salaries" value="30000" min="0" step="1000">
+                    <div class="input-help">Total salaires charges comprises</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Infrastructure & Outils (cloud, SaaS, etc.)</label>
+                    <input type="number" id="infrastructure" value="5000" min="0" step="500">
+                    <div class="input-help">Serveurs, logiciels, services externes</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Marketing & Acquisition</label>
+                    <input type="number" id="marketing" value="3000" min="0" step="500">
+                    <div class="input-help">Publicités, événements, communications</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Frais généraux (bureau, assurances, légal)</label>
+                    <input type="number" id="overhead" value="2000" min="0" step="500">
+                    <div class="input-help">Bureau, assurances, comptabilité, frais de banque</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Revenus mensuels actuels (MRR)</label>
+                    <input type="number" id="revenue" value="0" min="0" step="1000">
+                    <div class="input-help">Si vous avez déjà des revenus</div>
+                </div>
+
+                <button onclick="calculateBurnRate()">📊 Calculer</button>
+
+                <div id="burnResults" class="results" style="display: none;">
+                    <div class="result-item">
+                        <div class="result-label">Dépenses mensuelles totales (Burn)</div>
+                        <div class="result-value" id="totalBurn">€ 0</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">Burn net mensuel (après revenus)</div>
+                        <div class="result-value" id="netBurn">€ 0</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">Levée recommandée (18 mois + 20% sécurité)</div>
+                        <div class="result-value" id="recommendedRaising">€ 0</div>
+                        <div class="result-status status-good">✓ Montant réaliste pour Seed</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">Runway actuel (avec trésorerie de...)</div>
+                        <div>
+                            <input type="number" id="currentCash" value="10000" min="0" step="5000" style="width: 100%; margin-top: 10px;">
+                            <button class="reset-btn" onclick="calculateRunway()">Calculer Runway</button>
+                        </div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label" id="runwayLabel"></div>
+                        <div class="result-value" id="runwayMonths">-- mois</div>
+                        <div class="result-status" id="runwayStatus"></div>
+                    </div>
+                </div>
+
+                <div class="chart-container" id="burnChart" style="display: none;">
+                    <div class="chart-title">📊 Ventilation des dépenses</div>
+                    <div id="burnChartContent"></div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Conseil :</strong> Levez montant = burn × 18 mois × 1,2 (sécurité). Pas "aussi peu que possible" ni "aussi beaucoup que possible". Juste ce qu'il faut pour atteindre PMF.
+                </div>
+            </div>
+        </div>
+
+        <!-- CAP TABLE CALCULATOR -->
+        <div id="cap-table" class="tab-content">
+            <div class="calculator">
+                <h2>📊 Simulateur Cap Table</h2>
+
+                <div class="form-group">
+                    <label>Nombre de fondateurs</label>
+                    <input type="number" id="founders" value="1" min="1" max="10">
+                </div>
+
+                <div class="form-group">
+                    <label>Répartition égale ? ✓</label>
+                    <input type="checkbox" id="equalDistribution" checked style="width: auto;">
+                </div>
+
+                <div id="founderInputs"></div>
+
+                <div class="form-group">
+                    <label>Réserve d'options (pool) - en %</label>
+                    <div class="slider-container">
+                        <input type="range" id="optionsPool" min="5" max="20" value="10" onchange="updatePoolLabel()">
+                        <div class="slider-value" id="poolLabel">10%</div>
+                    </div>
+                    <div class="input-help">Typiquement 10-15% pour recruter talent (CTO, VP Comm)</div>
+                </div>
+
+                <h3 style="margin-top: 30px; margin-bottom: 15px; color: #667eea;">Levées successives</h3>
+
+                <div class="form-group">
+                    <label>Montant Seed levé (€)</label>
+                    <input type="number" id="seedAmount" value="250000" min="0" step="50000">
+                </div>
+
+                <div class="form-group">
+                    <label>Valorisation pré-Seed (€)</label>
+                    <input type="number" id="seedPreMoney" value="1000000" min="0" step="250000">
+                    <div class="input-help">Valeur avant levée Seed</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Montant Series A (€) - optionnel</label>
+                    <input type="number" id="seriesAAmount" value="0" min="0" step="100000">
+                </div>
+
+                <div class="form-group">
+                    <label>Valorisation pré-Series A (€)</label>
+                    <input type="number" id="seriesAPreMoney" value="3000000" min="0" step="500000">
+                </div>
+
+                <button onclick="calculateCapTable()">📊 Simuler</button>
+
+                <div id="capTableResults" class="results" style="display: none;">
+                    <div class="result-item">
+                        <div class="result-label">Votre dilution post-Seed</div>
+                        <div class="result-value" id="founderDilutionSeed">-- %</div>
+                        <div class="result-status status-good" id="dilutionStatusSeed"></div>
+                    </div>
+
+                    <div class="result-item" id="seriesADilutionDiv" style="display: none;">
+                        <div class="result-label">Votre dilution post-Series A</div>
+                        <div class="result-value" id="founderDilutionSeriesA">-- %</div>
+                        <div class="result-status status-good" id="dilutionStatusSeriesA"></div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">Prix par action (Seed)</div>
+                        <div class="result-value" id="seedPrice">-- €</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">Dilution investisseurs Seed</div>
+                        <div class="result-value" id="seedDilution">-- %</div>
+                    </div>
+                </div>
+
+                <div class="chart-container" id="capTableChart" style="display: none;">
+                    <div class="chart-title">Répartition du capital</div>
+                    <div class="pie-chart" id="capTablePie"></div>
+                    <div class="pie-legend" id="capTableLegend"></div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Conseil :</strong> Post-Seed 60-80% vous = bon. Post-Series A 40-60% = normal. Post-Series B 20-40% = acceptable. Dilution progressive = signe de croissance.
+                </div>
+            </div>
+        </div>
+
+        <!-- VALUATION CALCULATOR -->
+        <div id="valuation" class="tab-content">
+            <div class="calculator">
+                <h2>💰 Calculateur Valuation</h2>
+
+                <h3 style="margin-bottom: 20px; color: #667eea; font-size: 1.2em;">Méthode 1 : Multiple d'ARR</h3>
+
+                <div class="form-group">
+                    <label>ARR annuel (revenus récurrents) - €</label>
+                    <input type="number" id="arr" value="500000" min="0" step="50000">
+                    <div class="input-help">Revenus SaaS annuels (MRR × 12)</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Type de produit santé</label>
+                    <select id="productType" onchange="updateMultipleRange()">
+                        <option value="saas">SaaS Santé (8-15x ARR)</option>
+                        <option value="software">Logiciel Médical (6-12x ARR)</option>
+                        <option value="services">Services Santé (3-6x EBITDA)</option>
+                        <option value="data">Données Santé (10-20x ARR si propriétaire)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Multiple appliqué</label>
+                    <div class="slider-container">
+                        <input type="range" id="multiple" min="3" max="20" value="10" onchange="updateMultipleLabel()">
+                        <div class="slider-value" id="multipleLabel">10x</div>
+                    </div>
+                    <div class="input-help" id="multipleRange">Plage recommandée</div>
+                </div>
+
+                <button onclick="calculateValuation()">💰 Calculer</button>
+
+                <div id="valuationResults" class="results" style="display: none;">
+                    <div class="result-item">
+                        <div class="result-label">Valuation entreprise (Méthode Multiple)</div>
+                        <div class="result-value" id="companyValuation">€ 0</div>
+                        <div class="result-status status-good">✓ Valuation réaliste</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">Votre part (à X% du capital)</div>
+                        <div>
+                            <input type="number" id="yourOwnership" value="70" min="0" max="100" style="width: 100%; margin-top: 10px;"> %
+                        </div>
+                        <button class="reset-btn" onclick="calculateYourValue()">Recalculer</button>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">Votre part en valeur (€)</div>
+                        <div class="result-value" id="yourValue">€ 0</div>
+                    </div>
+                </div>
+
+                <h3 style="margin: 30px 0 20px 0; color: #667eea; font-size: 1.2em; padding-top: 20px; border-top: 2px solid #e0e0e0;">Méthode 2 : Comparable (Comparable Companies)</h3>
+
+                <div class="form-group">
+                    <label>Stade de développement</label>
+                    <select id="stage">
+                        <option value="pre-seed">Pré-Seed (idée validée)</option>
+                        <option value="seed">Seed (PMF validé, premiers revenus)</option>
+                        <option value="series-a">Series A (100K+ MRR, croissance claire)</option>
+                        <option value="series-b">Series B (croissance exponentielle, 1M+ MRR)</option>
+                    </select>
+                </div>
+
+                <button onclick="calculateComparable()">📊 Valuation par comparable</button>
+
+                <div id="comparableResults" class="results" style="display: none;">
+                    <div class="result-item">
+                        <div class="result-label">Valuation typique à ce stade</div>
+                        <div class="result-value" id="typicalValuation">€ 0 - € 0</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">Moyenne du range</div>
+                        <div class="result-value" id="averageValuation">€ 0</div>
+                        <div class="result-status status-good">✓ À négocier</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">Votre dilution si levée 300K€ (exemple)</div>
+                        <div id="dilutionExample"></div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Conseil :</strong> Ne focalisez pas sur valuation. Focalisez sur momentum (revenue, users, traction). Valuation suit traction. Une startup "surévaluée" = problème futur (pression de croissance impossible à tenir).
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============= BURN RATE CALCULATOR =============
+        function calculateBurnRate() {
+            const salaries = parseFloat(document.getElementById('salaries').value) || 0;
+            const infrastructure = parseFloat(document.getElementById('infrastructure').value) || 0;
+            const marketing = parseFloat(document.getElementById('marketing').value) || 0;
+            const overhead = parseFloat(document.getElementById('overhead').value) || 0;
+            const revenue = parseFloat(document.getElementById('revenue').value) || 0;
+
+            const totalBurn = salaries + infrastructure + marketing + overhead;
+            const netBurn = totalBurn - revenue;
+            const recommendedRaising = netBurn * 18 * 1.2;
+
+            document.getElementById('totalBurn').textContent = `€ ${totalBurn.toLocaleString('fr-FR')}`;
+            document.getElementById('netBurn').textContent = `€ ${netBurn.toLocaleString('fr-FR')}`;
+            document.getElementById('recommendedRaising').textContent = `€ ${Math.round(recommendedRaising).toLocaleString('fr-FR')}`;
+            document.getElementById('burnResults').style.display = 'block';
+
+            // Chart
+            const chartHTML = `
+                <div class="chart-bar">
+                    <div class="chart-label">
+                        <span>Salaires</span>
+                        <span>${(salaries / totalBurn * 100).toFixed(0)}%</span>
+                    </div>
+                    <div class="bar" style="width: ${salaries / totalBurn * 100}%;">
+                        € ${(salaries / 1000).toFixed(1)}K
+                    </div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">
+                        <span>Infrastructure</span>
+                        <span>${(infrastructure / totalBurn * 100).toFixed(0)}%</span>
+                    </div>
+                    <div class="bar" style="width: ${infrastructure / totalBurn * 100}%; background: linear-gradient(90deg, #ff6b6b 0%, #ff8c8c 100%);"></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">
+                        <span>Marketing</span>
+                        <span>${(marketing / totalBurn * 100).toFixed(0)}%</span>
+                    </div>
+                    <div class="bar" style="width: ${marketing / totalBurn * 100}%; background: linear-gradient(90deg, #ffd43b 0%, #ffe066 100%);"></div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">
+                        <span>Frais généraux</span>
+                        <span>${(overhead / totalBurn * 100).toFixed(0)}%</span>
+                    </div>
+                    <div class="bar" style="width: ${overhead / totalBurn * 100}%; background: linear-gradient(90deg, #51cf66 0%, #69db7c 100%);"></div>
+                </div>
+            `;
+            document.getElementById('burnChartContent').innerHTML = chartHTML;
+            document.getElementById('burnChart').style.display = 'block';
+        }
+
+        function calculateRunway() {
+            const currentCash = parseFloat(document.getElementById('currentCash').value) || 0;
+            const netBurn = parseFloat(document.getElementById('netBurn').textContent.replace('€ ', '').replace(/\s/g, '')) || 0;
+
+            if (netBurn === 0) {
+                document.getElementById('runwayLabel').textContent = "Vous êtes à break-even ! 🎉";
+                document.getElementById('runwayMonths').textContent = "∞ mois";
+                document.getElementById('runwayStatus').className = "result-status status-good";
+                document.getElementById('runwayStatus').textContent = "✓ Pas de cash burn";
+                return;
+            }
+
+            const months = Math.floor(currentCash / netBurn);
+            document.getElementById('runwayLabel').textContent = `Runway avec € ${currentCash.toLocaleString('fr-FR')}`;
+            document.getElementById('runwayMonths').textContent = `${months} mois`;
+
+            if (months > 12) {
+                document.getElementById('runwayStatus').className = "result-status status-good";
+                document.getElementById('runwayStatus').textContent = "✓ Bon - Temps pour valider PMF";
+            } else if (months > 6) {
+                document.getElementById('runwayStatus').className = "result-status status-warning";
+                document.getElementById('runwayStatus').textContent = "⚠️ Modéré - Commencer levée bientôt";
+            } else {
+                document.getElementById('runwayStatus').className = "result-status status-danger";
+                document.getElementById('runwayStatus').textContent = "🚨 Urgent - Levée immédiate";
+            }
+        }
+
+        // ============= CAP TABLE CALCULATOR =============
+        function calculateCapTable() {
+            const founders = parseInt(document.getElementById('founders').value) || 1;
+            const optionsPool = parseInt(document.getElementById('optionsPool').value) || 10;
+            const seedAmount = parseFloat(document.getElementById('seedAmount').value) || 0;
+            const seedPreMoney = parseFloat(document.getElementById('seedPreMoney').value) || 1;
+            const seriesAAmount = parseFloat(document.getElementById('seriesAAmount').value) || 0;
+            const seriesAPreMoney = parseFloat(document.getElementById('seriesAPreMoney').value) || 1;
+
+            // Post-Seed dilution
+            const seedPostMoney = seedPreMoney + seedAmount;
+            const seedDilution = (seedAmount / seedPostMoney) * 100;
+            const founderDilutionSeed = 100 - optionsPool - seedDilution;
+
+            document.getElementById('founderDilutionSeed').textContent = `${founderDilutionSeed.toFixed(1)}%`;
+            document.getElementById('dilutionStatusSeed').textContent = founderDilutionSeed > 60 ? "✓ Bon équilibre" : "⚠️ Dilution importante";
+            document.getElementById('seedPrice').textContent = `€ ${(seedPreMoney / 1000000).toFixed(2)}`;
+            document.getElementById('seedDilution').textContent = `${seedDilution.toFixed(1)}%`;
+
+            // Post-Series A dilution (if applicable)
+            if (seriesAAmount > 0) {
+                const seriesAPostMoney = seriesAPreMoney + seriesAAmount;
+                const seriesADilution = (seriesAAmount / seriesAPostMoney) * 100;
+                const founderDilutionSeriesA = founderDilutionSeed * (seriesAPreMoney / seriesAPostMoney);
+
+                document.getElementById('seriesADilutionDiv').style.display = 'block';
+                document.getElementById('founderDilutionSeriesA').textContent = `${founderDilutionSeriesA.toFixed(1)}%`;
+                document.getElementById('dilutionStatusSeriesA').textContent = founderDilutionSeriesA > 40 ? "✓ Acceptable" : "⚠️ Dilution avancée";
+            } else {
+                document.getElementById('seriesADilutionDiv').style.display = 'none';
+            }
+
+            document.getElementById('capTableResults').style.display = 'block';
+
+            // Pie chart
+            const colors = ['#667eea', '#764ba2', '#ff6b6b', '#ffd43b', '#51cf66'];
+            let pieHTML = '';
+            let pieWidth = 0;
+
+            const founderSlice = {name: `Fondateurs (${founderDilutionSeed.toFixed(1)}%)`, value: founderDilutionSeed, color: colors[0]};
+            const optionsSlice = {name: `Pool options (${optionsPool}%)`, value: optionsPool, color: colors[1]};
+            const seedSlice = {name: `Investisseurs Seed (${seedDilution.toFixed(1)}%)`, value: seedDilution, color: colors[2]};
+
+            [founderSlice, optionsSlice, seedSlice].forEach(item => {
+                pieHTML += `<div class="pie-slice" style="background: ${item.color}; flex: ${item.value};">${item.value.toFixed(0)}%</div>`;
+            });
+
+            document.getElementById('capTablePie').innerHTML = pieHTML;
+            document.getElementById('capTableLegend').innerHTML = `
+                <div class="legend-item">
+                    <div class="legend-color" style="background: ${colors[0]};"></div>
+                    <span>Fondateurs</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: ${colors[1]};"></div>
+                    <span>Options</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: ${colors[2]};"></div>
+                    <span>Seed Investors</span>
+                </div>
+            `;
+            document.getElementById('capTableChart').style.display = 'block';
+        }
+
+        function updatePoolLabel() {
+            const value = document.getElementById('optionsPool').value;
+            document.getElementById('poolLabel').textContent = value + '%';
+        }
+
+        // ============= VALUATION CALCULATOR =============
+        function calculateValuation() {
+            const arr = parseFloat(document.getElementById('arr').value) || 0;
+            const multiple = parseInt(document.getElementById('multiple').value) || 10;
+            const companyValuation = arr * multiple;
+            const yourOwnership = parseInt(document.getElementById('yourOwnership').value) || 70;
+            const yourValue = (companyValuation * yourOwnership) / 100;
+
+            document.getElementById('companyValuation').textContent = `€ ${companyValuation.toLocaleString('fr-FR')}`;
+            document.getElementById('yourValue').textContent = `€ ${Math.round(yourValue).toLocaleString('fr-FR')}`;
+            document.getElementById('valuationResults').style.display = 'block';
+        }
+
+        function calculateYourValue() {
+            calculateValuation();
+        }
+
+        function updateMultipleLabel() {
+            const value = document.getElementById('multiple').value;
+            document.getElementById('multipleLabel').textContent = value + 'x';
+        }
+
+        function updateMultipleRange() {
+            const ranges = {
+                'saas': 'SaaS Santé : 8-15x (vous en êtes à quel stade ?)',
+                'software': 'Logiciel Médical : 6-12x',
+                'services': 'Services Santé : 3-6x',
+                'data': 'Données Santé : 10-20x (si propriétaire et sécurisé)'
+            };
+            const type = document.getElementById('productType').value;
+            document.getElementById('multipleRange').textContent = ranges[type];
+        }
+
+        function calculateComparable() {
+            const stages = {
+                'pre-seed': {min: 500000, max: 2000000, label: 'Pré-Seed : 500K - 2M'},
+                'seed': {min: 2000000, max: 5000000, label: 'Seed : 2M - 5M'},
+                'series-a': {min: 5000000, max: 15000000, label: 'Series A : 5M - 15M'},
+                'series-b': {min: 15000000, max: 50000000, label: 'Series B : 15M - 50M'}
+            };
+
+            const stage = document.getElementById('stage').value;
+            const {min, max, label} = stages[stage];
+            const average = (min + max) / 2;
+            const seedAmount = 300000;
+            const dilution = (seedAmount / (average + seedAmount)) * 100;
+
+            document.getElementById('typicalValuation').textContent = `${label}`;
+            document.getElementById('averageValuation').textContent = `€ ${average.toLocaleString('fr-FR')}`;
+            document.getElementById('dilutionExample').innerHTML = `
+                <div>Si vous levez €300K à cette valuation :</div>
+                <div style="margin-top: 10px;">
+                    <div class="result-label">Dilution</div>
+                    <div class="result-value" style="color: #ff6b6b;">${dilution.toFixed(1)}%</div>
+                </div>
+            `;
+            document.getElementById('comparableResults').style.display = 'block';
+        }
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateMultipleRange();
+        });
+    </script>
+</body>
+</html>
