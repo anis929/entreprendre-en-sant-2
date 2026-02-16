@@ -662,6 +662,46 @@ body {
     color: white;
 }
 
+/* Tables in white text tip-box */
+.tip-box[style*="color: white"] table {
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.tip-box[style*="color: white"] table th,
+.tip-box[style*="color: white"] table td {
+    color: #333 !important;
+    background: white !important;
+}
+
+.tip-box[style*="color: white"] table tr[style*="background"] {
+    background: #f0f0f0 !important;
+}
+
+.tip-box[style*="color: white"] table strong {
+    color: #333 !important;
+}
+
+/* Lists in white text tip-box */
+.tip-box[style*="color: white"] ul,
+.tip-box[style*="color: white"] ol {
+    color: white;
+}
+
+.tip-box[style*="color: white"] li {
+    color: white;
+}
+
+/* Background boxes inside white text tip-box */
+.tip-box[style*="color: white"] div[style*="background: white"] {
+    color: #333 !important;
+}
+
+.tip-box[style*="color: white"] div[style*="background: white"] strong {
+    color: #333 !important;
+}
+
 /* ========================================
    PART NAVIGATION
    ======================================== */
