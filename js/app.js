@@ -92,13 +92,13 @@
         'part6': 'part6Page',
         'part7': 'part7Page',
         'part8': 'part8Page',
-        'aiClarificateur': 'aiClarificateur',
-        'aiGuide': 'aiGuide',
-        'aiStratege': 'aiStratege',
-        'aiArchitecte': 'aiArchitecte',
-        'aiMarketing': 'aiMarketing',
-        'aiCoach': 'aiCoach',
-        'aiVigie': 'aiVigie'
+        'aiClarificateur': 'aiAgents',
+        'aiGuide': 'aiAgents',
+        'aiStratege': 'aiAgents',
+        'aiArchitecte': 'aiAgents',
+        'aiMarketing': 'aiAgents',
+        'aiCoach': 'aiAgents',
+        'aiVigie': 'aiAgents'
     };
 
     // ========================================
