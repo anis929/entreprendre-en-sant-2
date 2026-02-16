@@ -652,53 +652,53 @@ body {
     line-height: 1.7;
 }
 
-/* Tip-box with white text */
-.tip-box[style*="color: white"] h4,
-.tip-box[style*="color: white"] p {
-    color: white !important;
+/* Tip-box with dark text (333) */
+.tip-box[style*="color: #333"] h4,
+.tip-box[style*="color: #333"] p {
+    color: #e0e0e0 !important;
 }
 
-.tip-box[style*="color: white"] strong {
-    color: white;
+.tip-box[style*="color: #333"] strong {
+    color: #e0e0e0;
 }
 
-/* Tables in white text tip-box */
-.tip-box[style*="color: white"] table {
+/* Tables in dark text tip-box */
+.tip-box[style*="color: #333"] table {
     background: white;
     border-radius: 4px;
     overflow: hidden;
 }
 
-.tip-box[style*="color: white"] table th,
-.tip-box[style*="color: white"] table td {
+.tip-box[style*="color: #333"] table th,
+.tip-box[style*="color: #333"] table td {
     color: #333 !important;
     background: white !important;
 }
 
-.tip-box[style*="color: white"] table tr[style*="background"] {
+.tip-box[style*="color: #333"] table tr[style*="background"] {
     background: #f0f0f0 !important;
 }
 
-.tip-box[style*="color: white"] table strong {
+.tip-box[style*="color: #333"] table strong {
     color: #333 !important;
 }
 
-/* Lists in white text tip-box */
-.tip-box[style*="color: white"] ul,
-.tip-box[style*="color: white"] ol {
-    color: white;
+/* Lists in dark text tip-box */
+.tip-box[style*="color: #333"] ul,
+.tip-box[style*="color: #333"] ol {
+    color: #e0e0e0;
 }
 
-.tip-box[style*="color: white"] li {
-    color: white;
+.tip-box[style*="color: #333"] li {
+    color: #e0e0e0;
 }
 
-/* Background boxes inside white text tip-box */
-.tip-box[style*="color: white"] div[style*="background: white"] {
+/* Background boxes inside dark text tip-box */
+.tip-box[style*="color: #333"] div[style*="background: white"] {
     color: #333 !important;
 }
 
-.tip-box[style*="color: white"] div[style*="background: white"] strong {
+.tip-box[style*="color: #333"] div[style*="background: white"] strong {
     color: #333 !important;
 }
 
