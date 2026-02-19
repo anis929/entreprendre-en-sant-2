@@ -30,6 +30,9 @@
                 <li class="nav-item"><a href="#" data-page="aiAgents">Agents IA</a></li>
                 <li class="nav-item"><a href="#" data-page="videos">Vidéos Bonus</a></li>
             </ul>
+            <button class="search-nav-btn" data-action="openSearch" title="Rechercher" aria-label="Rechercher dans le contenu">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
             <div class="mobile-menu-btn" data-action="toggleMobileMenu">
                 <span></span>
                 <span></span>
@@ -2860,6 +2863,38 @@
                         <strong>Prochaine étape :</strong> Financer votre projet (Partie 3) — Lever des fonds,
                         obtenir des subventions et structurer votre plan de financement.
                     </p>
+                </div>
+
+                <!-- CALCULATEUR RUNWAY -->
+                <div class="inline-calculator" id="calcRunway">
+                    <div class="calc-header">
+                        <div class="calc-icon">🛬</div>
+                        <div>
+                            <p class="calc-title">Calculateur de Runway</p>
+                            <p class="calc-subtitle">Combien de mois vous reste-t-il avant de manquer de cash ?</p>
+                        </div>
+                    </div>
+                    <div class="calc-fields">
+                        <div class="calc-field">
+                            <label for="cr_cash">Trésorerie disponible (€)</label>
+                            <input type="number" id="cr_cash" placeholder="ex. 150000" min="0" />
+                        </div>
+                        <div class="calc-field">
+                            <label for="cr_burn">Dépenses mensuelles — Burn Rate (€)</label>
+                            <input type="number" id="cr_burn" placeholder="ex. 18000" min="1" />
+                        </div>
+                        <div class="calc-field">
+                            <label for="cr_revenue">Revenus mensuels récurrents (€, si existants)</label>
+                            <input type="number" id="cr_revenue" placeholder="ex. 3000" min="0" value="0" />
+                        </div>
+                    </div>
+                    <button class="calc-btn" onclick="calcRunway()">Calculer mon Runway</button>
+                    <div class="calc-result" id="cr_result">
+                        <div class="calc-result-main" id="cr_main"></div>
+                        <div class="calc-result-label" id="cr_label"></div>
+                        <div class="calc-result-detail" id="cr_detail"></div>
+                        <div id="cr_alert"></div>
+                    </div>
                 </div>
 
             </div>
@@ -7317,6 +7352,44 @@
             </div>
         </div>
 
+        <!-- CALCULATEUR BUDGET MARKETING -->
+        <div class="container">
+            <div class="inline-calculator" id="calcMarketing">
+                <div class="calc-header">
+                    <div class="calc-icon">📣</div>
+                    <div>
+                        <p class="calc-title">Calculateur Budget Marketing Santé</p>
+                        <p class="calc-subtitle">Estimez votre budget marketing optimal et votre coût d'acquisition client (CAC)</p>
+                    </div>
+                </div>
+                <div class="calc-fields">
+                    <div class="calc-field">
+                        <label for="mkt_revenue">Objectif CA annuel (€)</label>
+                        <input type="number" id="mkt_revenue" placeholder="ex. 300000" min="1" />
+                    </div>
+                    <div class="calc-field">
+                        <label for="mkt_arpu">Valeur annuelle d'un client (€/an)</label>
+                        <input type="number" id="mkt_arpu" placeholder="ex. 15000" min="1" />
+                    </div>
+                    <div class="calc-field">
+                        <label for="mkt_ltv_months">Durée de vie client estimée (mois)</label>
+                        <input type="number" id="mkt_ltv_months" placeholder="ex. 36" min="1" />
+                    </div>
+                    <div class="calc-field">
+                        <label for="mkt_margin">Marge brute (%)</label>
+                        <input type="number" id="mkt_margin" placeholder="ex. 70" min="1" max="100" />
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcMarketing()">Calculer mon budget</button>
+                <div class="calc-result" id="mkt_result">
+                    <div class="calc-result-main" id="mkt_main"></div>
+                    <div class="calc-result-label" id="mkt_label"></div>
+                    <div class="calc-result-detail" id="mkt_detail"></div>
+                    <div id="mkt_alert"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="part-navigation">
             <div class="nav-part-btn prev" data-page="part4">
                 <div class="label">Précédent</div>
@@ -8026,6 +8099,42 @@
                 </div>
 
             </div>
+            <!-- CALCULATEUR ROI E-SANTÉ -->
+            <div class="inline-calculator" id="calcROI">
+                <div class="calc-header">
+                    <div class="calc-icon">📈</div>
+                    <div>
+                        <p class="calc-title">Calculateur ROI e-Santé</p>
+                        <p class="calc-subtitle">Estimez le retour sur investissement de votre solution pour un établissement de santé</p>
+                    </div>
+                </div>
+                <div class="calc-fields">
+                    <div class="calc-field">
+                        <label for="roi_users">Nombre de soignants utilisateurs</label>
+                        <input type="number" id="roi_users" placeholder="ex. 50" min="1" />
+                    </div>
+                    <div class="calc-field">
+                        <label for="roi_time">Temps économisé par soignant/jour (minutes)</label>
+                        <input type="number" id="roi_time" placeholder="ex. 20" min="1" />
+                    </div>
+                    <div class="calc-field">
+                        <label for="roi_cost">Coût horaire moyen d'un soignant (€/h)</label>
+                        <input type="number" id="roi_cost" placeholder="ex. 45" min="1" />
+                    </div>
+                    <div class="calc-field">
+                        <label for="roi_price">Prix annuel de votre solution (€/an)</label>
+                        <input type="number" id="roi_price" placeholder="ex. 30000" min="1" />
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcROI()">Calculer le ROI</button>
+                <div class="calc-result" id="roi_result">
+                    <div class="calc-result-main" id="roi_main"></div>
+                    <div class="calc-result-label" id="roi_label"></div>
+                    <div class="calc-result-detail" id="roi_detail"></div>
+                    <div id="roi_alert"></div>
+                </div>
+            </div>
+
             <div class="part-navigation">
                 <div class="nav-part-btn prev" data-page="part5">
                     <div class="label">Précédent</div>
@@ -9902,6 +10011,75 @@
             </div>
         </div>
 
+        <!-- CALCULATEUR CONFORMITÉ RÉGLEMENTAIRE -->
+        <div class="container">
+            <div class="inline-calculator" id="calcConformite">
+                <div class="calc-header">
+                    <div class="calc-icon">⚖️</div>
+                    <div>
+                        <p class="calc-title">Score de Conformité Réglementaire</p>
+                        <p class="calc-subtitle">Évaluez votre niveau de conformité réglementaire e-santé en moins de 2 minutes</p>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
+                    <div class="calc-field">
+                        <label for="conf_dm">Votre solution est-elle un dispositif médical (DM) ou un logiciel d'aide à la décision clinique ?</label>
+                        <select id="conf_dm">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="3">Non — outil de gestion/admin sans vocation clinique</option>
+                            <option value="2">Incertain — contient des fonctions d'aide clinique</option>
+                            <option value="1">Oui — avec qualification DM et marquage CE en cours</option>
+                            <option value="0">Oui — sans démarche de qualification engagée</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label for="conf_hds">Votre hébergeur de données de santé est-il certifié HDS ?</label>
+                        <select id="conf_hds">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="3">Oui — hébergeur certifié HDS (OVH, Microsoft Azure Health, AWS Healthcare…)</option>
+                            <option value="2">En cours de mise en conformité</option>
+                            <option value="0">Non — ou pas de données de santé stockées</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label for="conf_rgpd">Avez-vous réalisé une Analyse d'Impact (AIPD/PIA) pour vos traitements de données personnelles ?</label>
+                        <select id="conf_rgpd">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="3">Oui — AIPD documentée et à jour</option>
+                            <option value="2">En cours de réalisation</option>
+                            <option value="1">Non — pas encore entamée</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label for="conf_cgu">Vos CGU/CGV et politique de confidentialité sont-elles rédigées et accessibles ?</label>
+                        <select id="conf_cgu">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="3">Oui — revues par un avocat, accessibles en 1 clic</option>
+                            <option value="2">Oui — rédigées en interne, non encore validées</option>
+                            <option value="1">Non — pas encore rédigées</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label for="conf_anticadeaux">Vos conventions avec des professionnels de santé sont-elles déclarées (Loi anti-cadeaux / Sunshine Act) ?</label>
+                        <select id="conf_anticadeaux">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="3">Oui — toutes déclarées sur Transparence Santé</option>
+                            <option value="2">En cours — conventions en cours de déclaration</option>
+                            <option value="1">Non — pas encore initié</option>
+                            <option value="3">Non applicable — pas de conventions avec des PS</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcConformite()">Évaluer ma conformité</button>
+                <div class="calc-result" id="conf_result">
+                    <div class="calc-result-main" id="conf_main"></div>
+                    <div class="calc-result-label" id="conf_label"></div>
+                    <div class="calc-result-detail" id="conf_detail"></div>
+                    <div id="conf_alert"></div>
+                </div>
+            </div>
+        </div>
+
         <!-- NAVIGATION -->
         <div class="container">
             <div class="part-navigation">
@@ -10065,8 +10243,8 @@
                 <h1>Nos tarifs</h1>
                 <p class="subtitle">Un accompagnement adapté à chaque étape de votre projet</p>
                 <p>
-                    Choisissez la formule qui correspond à vos besoins. Toutes incluent l'accès au parcours complet
-                    et à nos ressources pédagogiques.
+                    Choisissez la formule qui correspond à vos besoins. <strong>Paiement unique, accès à vie</strong> — pas d'abonnement, pas de frais cachés.
+                    Toutes les formules incluent l'accès complet au parcours et aux ressources pédagogiques.
                 </p>
             </div>
         </section>
@@ -10094,8 +10272,8 @@
                 <div class="pricing-card featured">
                     <div class="pricing-popular">Le plus populaire</div>
                     <div class="pricing-badge">Accompagné</div>
-                    <div class="pricing-price">49€<span>/mois</span></div>
-                    <div class="pricing-period">Sans engagement</div>
+                    <div class="pricing-price">49€</div>
+                    <div class="pricing-period">Paiement unique</div>
                     <p class="pricing-description">Pour ceux qui veulent avancer efficacement avec l'aide de l'IA et de la communauté.</p>
                     <ul class="pricing-features">
                         <li class="included">Tout le contenu Découverte</li>
@@ -10111,8 +10289,8 @@
 
                 <div class="pricing-card">
                     <div class="pricing-badge">Premium</div>
-                    <div class="pricing-price">199€<span>/mois</span></div>
-                    <div class="pricing-period">Engagement 3 mois</div>
+                    <div class="pricing-price">199€</div>
+                    <div class="pricing-period">Paiement unique</div>
                     <p class="pricing-description">Un accompagnement sur-mesure pour concrétiser votre projet avec un expert dédié.</p>
                     <ul class="pricing-features">
                         <li class="included">Tout le contenu Accompagné</li>
@@ -10140,7 +10318,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Oui, vous pouvez passer d'une formule à l'autre à tout moment. La mise à niveau est immédiate, et en cas de rétrogradation, elle prend effet à la fin de votre période de facturation en cours.</p>
+                        <p>Oui, vous pouvez choisir la formule qui vous convient à tout moment. Chaque formule est un paiement unique — il n'y a pas d'abonnement ni de facturation récurrente. Vous payez une fois et bénéficiez de l'accès sans limite de durée.</p>
                     </div>
                 </div>
 
@@ -10180,7 +10358,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Oui. Si vous n'êtes pas satisfait, vous pouvez demander un remboursement complet dans les 14 jours suivant votre souscription, sans condition.</p>
+                        <p>Oui. Si vous n'êtes pas satisfait, vous pouvez demander un remboursement complet dans les 14 jours suivant votre achat, sans condition.</p>
                     </div>
                 </div>
             </div>
@@ -10568,6 +10746,18 @@
                     <a href="https://www.hackyourcare.com/contact" target="_blank" class="cta-button secondary">Cr&eacute;er un agent personnalis&eacute;</a>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL RECHERCHE -->
+    <div id="searchModal" class="search-modal" role="dialog" aria-modal="true" aria-label="Recherche">
+        <div class="search-modal-inner">
+            <div class="search-input-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon" width="20" height="20"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="searchInput" placeholder="Rechercher dans le contenu…" autocomplete="off" />
+                <button class="search-close-btn" data-action="closeSearch" aria-label="Fermer la recherche">&#x2715;</button>
+            </div>
+            <div id="searchResults" class="search-results" aria-live="polite"></div>
         </div>
     </div>
 
