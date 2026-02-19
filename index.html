@@ -30,6 +30,9 @@
                 <li class="nav-item"><a href="#" data-page="aiAgents">Agents IA</a></li>
                 <li class="nav-item"><a href="#" data-page="videos">Vidéos Bonus</a></li>
             </ul>
+            <button class="search-nav-btn" data-action="openSearch" title="Rechercher" aria-label="Rechercher dans le contenu">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
             <div class="mobile-menu-btn" data-action="toggleMobileMenu">
                 <span></span>
                 <span></span>
@@ -2860,6 +2863,38 @@
                         <strong>Prochaine étape :</strong> Financer votre projet (Partie 3) — Lever des fonds,
                         obtenir des subventions et structurer votre plan de financement.
                     </p>
+                </div>
+
+                <!-- CALCULATEUR RUNWAY -->
+                <div class="inline-calculator" id="calcRunway">
+                    <div class="calc-header">
+                        <div class="calc-icon">🛬</div>
+                        <div>
+                            <p class="calc-title">Calculateur de Runway</p>
+                            <p class="calc-subtitle">Combien de mois vous reste-t-il avant de manquer de cash ?</p>
+                        </div>
+                    </div>
+                    <div class="calc-fields">
+                        <div class="calc-field">
+                            <label for="cr_cash">Trésorerie disponible (€)</label>
+                            <input type="number" id="cr_cash" placeholder="ex. 150000" min="0" />
+                        </div>
+                        <div class="calc-field">
+                            <label for="cr_burn">Dépenses mensuelles — Burn Rate (€)</label>
+                            <input type="number" id="cr_burn" placeholder="ex. 18000" min="1" />
+                        </div>
+                        <div class="calc-field">
+                            <label for="cr_revenue">Revenus mensuels récurrents (€, si existants)</label>
+                            <input type="number" id="cr_revenue" placeholder="ex. 3000" min="0" value="0" />
+                        </div>
+                    </div>
+                    <button class="calc-btn" onclick="calcRunway()">Calculer mon Runway</button>
+                    <div class="calc-result" id="cr_result">
+                        <div class="calc-result-main" id="cr_main"></div>
+                        <div class="calc-result-label" id="cr_label"></div>
+                        <div class="calc-result-detail" id="cr_detail"></div>
+                        <div id="cr_alert"></div>
+                    </div>
                 </div>
 
             </div>
@@ -7317,6 +7352,44 @@
             </div>
         </div>
 
+        <!-- CALCULATEUR BUDGET MARKETING -->
+        <div class="container">
+            <div class="inline-calculator" id="calcMarketing">
+                <div class="calc-header">
+                    <div class="calc-icon">📣</div>
+                    <div>
+                        <p class="calc-title">Calculateur Budget Marketing Santé</p>
+                        <p class="calc-subtitle">Estimez votre budget marketing optimal et votre coût d'acquisition client (CAC)</p>
+                    </div>
+                </div>
+                <div class="calc-fields">
+                    <div class="calc-field">
+                        <label for="mkt_revenue">Objectif CA annuel (€)</label>
+                        <input type="number" id="mkt_revenue" placeholder="ex. 300000" min="1" />
+                    </div>
+                    <div class="calc-field">
+                        <label for="mkt_arpu">Valeur annuelle d'un client (€/an)</label>
+                        <input type="number" id="mkt_arpu" placeholder="ex. 15000" min="1" />
+                    </div>
+                    <div class="calc-field">
+                        <label for="mkt_ltv_months">Durée de vie client estimée (mois)</label>
+                        <input type="number" id="mkt_ltv_months" placeholder="ex. 36" min="1" />
+                    </div>
+                    <div class="calc-field">
+                        <label for="mkt_margin">Marge brute (%)</label>
+                        <input type="number" id="mkt_margin" placeholder="ex. 70" min="1" max="100" />
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcMarketing()">Calculer mon budget</button>
+                <div class="calc-result" id="mkt_result">
+                    <div class="calc-result-main" id="mkt_main"></div>
+                    <div class="calc-result-label" id="mkt_label"></div>
+                    <div class="calc-result-detail" id="mkt_detail"></div>
+                    <div id="mkt_alert"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="part-navigation">
             <div class="nav-part-btn prev" data-page="part4">
                 <div class="label">Précédent</div>
@@ -7354,15 +7427,18 @@
             <div class="content-section">
                 <div class="content-card" style="background: linear-gradient(135deg, #004d2e 0%, #001a0f 100%); border-left: 4px solid #00ff88;">
                     <h4 style="margin-top: 0; color: #00ff88;">1&#xFE0F;&#x20E3; La vente en santé est une vente de confiance, pas de performance commerciale</h4>
-                    <p style="color: #ffffff;">[CONTENU À COMPLÉTER] — Expliquer que la relation prime sur la transaction : un professionnel de santé n'achète pas à un commercial, il adopte une solution recommandée par un pair ou validée par des preuves. La pression commerciale classique est contre-productive. La confiance se construit dans la durée.</p>
+                    <p style="color: #ffffff;">Un médecin n'achète pas parce qu'un commercial a bien pitché. Il adopte une solution parce qu'un confrère lui a dit "j'utilise ça, c'est top" ou parce qu'il a vu les données dans une revue médicale. Les soignants ont été conditionnés depuis 30 ans à se méfier des visiteurs médicaux — ils ont développé une résistance naturelle aux arguments purement commerciaux.</p>
+                    <p style="color: #ffffff; margin-top: 10px;"><strong style="color: #00ff88;">Cas réel :</strong> Deux startups concurrentes de suivi de l'HbA1c se lancent au même trimestre. La première recrute 5 commerciaux avec un script de vente classique et prospecte 200 diabétologues par mois. Résultat à 6 mois : 3 contrats. La seconde a investi ses 6 premiers mois à faire valider sa solution par le Pr. Morin (diabétologue de référence du CHU de Bordeaux), l'a invité à présenter les données au congrès SFD, et a co-écrit un article dans <em>Diabetologia</em>. Résultat : 40 demandes de démos en 3 jours post-congrès, sans aucun commercial. <strong style="color: #00ff88;">La preuve et la recommandation par les pairs valent 100 commerciaux.</strong></p>
                 </div>
                 <div class="content-card" style="background: linear-gradient(135deg, #004d2e 0%, #001a0f 100%); border-left: 4px solid #00ff88;">
                     <h4 style="margin-top: 0; color: #00ff88;">2&#xFE0F;&#x20E3; La décision d'achat est collective : il n'y a jamais un seul décideur</h4>
-                    <p style="color: #ffffff;">[CONTENU À COMPLÉTER] — Illustrer la complexité des achats en santé : le médecin valide l'usage clinique, le DSI valide la technique, le directeur valide le budget, la commission médicale valide le déploiement. Vendre à une seule personne, c'est perdre son temps. Il faut cartographier et adresser chaque décideur.</p>
+                    <p style="color: #ffffff;">Dans un hôpital, une décision d'achat d'un logiciel de santé implique en moyenne 5 à 8 personnes : le chef de service valide l'usage clinique, le DSI valide la sécurité et l'interopérabilité, le DAF valide le budget, la Commission Médicale d'Établissement (CME) valide l'impact sur les pratiques, la direction générale signe le bon de commande, et les ingénieurs biomédicaux valident les DM physiques. Vendre à une seule de ces personnes sans adresser les autres, c'est perdre des mois de travail.</p>
+                    <p style="color: #ffffff; margin-top: 10px;"><strong style="color: #00ff88;">Cas réel :</strong> MedSuivi SaaS a passé 8 mois à convaincre le Dr. Lambert, chef de service de cardiologie, qui est devenu un champion enthousiaste. En octobre, la direction générale consulte le DSI pour la première fois. Le DSI découvre que la solution n'est pas certifiée HDS et que son intégration avec le SIH (Hopital Manager) n'est pas documentée. Il bloque. MedSuivi repart de zéro — 8 mois perdus. <strong style="color: #00ff88;">Règle d'or : identifiez le DSI dès le premier contact et traitez-le en partenaire, pas en obstacle.</strong></p>
                 </div>
                 <div class="content-card" style="background: linear-gradient(135deg, #004d2e 0%, #001a0f 100%); border-left: 4px solid #00ff88;">
                     <h4 style="margin-top: 0; color: #00ff88;">3&#xFE0F;&#x20E3; Le cycle de vente long est une réalité à apprivoiser, pas un obstacle à contourner</h4>
-                    <p style="color: #ffffff;">[CONTENU À COMPLÉTER] — 6 à 18 mois pour signer un contrat hospitalier, c'est normal. Chercher à accélérer à tout prix est souvent contre-productif. Il faut planifier sa trésorerie en conséquence, entretenir la relation sur la durée, et avancer plusieurs opportunités en parallèle.</p>
+                    <p style="color: #ffffff;">En B2B santé publique, 6 à 18 mois entre le premier contact et la signature, c'est la norme — pas l'exception. Pour un CHU avec un déploiement transversal, les délais atteignent 24 à 36 mois. Ce n'est pas un dysfonctionnement : c'est la conséquence de la bureaucratie hospitalière, des enjeux réglementaires, et du principe de précaution appliqué à la santé des patients. Chercher à forcer la signature en quelques semaines nuit toujours à la relation et rarement à la décision.</p>
+                    <p style="color: #ffffff; margin-top: 10px;"><strong style="color: #00ff88;">Conséquences pratiques :</strong> (1) Ne mettez jamais plus de 30% de votre espoir commercial sur une seule opportunité, même très avancée. (2) Alimentez en permanence le haut de votre funnel — quand vous signez avec le CHU de Lyon, votre futur pipeline doit déjà être en cours de construction. (3) Planifiez votre trésorerie sur 18 mois de cycle moyen : la trésorerie qui casse une startup santé prometteuse, c'est le décalage entre la date où vous pensez signer (M+6) et la date où vous signez réellement (M+14).</p>
                 </div>
             </div>
         </div>
@@ -7381,42 +7457,122 @@
                     </p>
 
                     <h4>1.1 — Pourquoi vendre en santé est fondamentalement différent</h4>
-                    <p>[CONTENU À COMPLÉTER] — Les 5 spécificités qui changent tout par rapport à une vente SaaS classique :</p>
+                    <p>Cinq réalités qui changent tout par rapport à une vente SaaS classique — et qui surprennent la plupart des fondateurs issus d'autres secteurs :</p>
                     <ul>
-                        <li><strong>La réglementation encadre ce que vous pouvez promettre</strong> — [à développer]</li>
-                        <li><strong>Les décideurs sont multiples et les processus sont lents</strong> — [à développer]</li>
-                        <li><strong>La preuve clinique prime sur l'argument commercial</strong> — [à développer]</li>
-                        <li><strong>Le bouche-à-oreille entre pairs est le canal n°1</strong> — [à développer]</li>
-                        <li><strong>La concurrence n'est pas toujours qui vous croyez</strong> — [à développer : l'inaction et le statu quo sont vos vrais concurrents]</li>
+                        <li><strong>La réglementation encadre ce que vous pouvez promettre.</strong> Vous ne pouvez pas affirmer "notre app améliore les résultats cliniques" sans une étude publiée pour l'étayer. Toute allégation d'efficacité médicale non documentée expose votre startup à une mise en demeure de l'ANSM ou de la DGCCRF. Votre script de vente doit donc s'appuyer sur des données — pas des promesses. C'est une contrainte, mais aussi un avantage : vos concurrents non-santé font des promesses que vous, vous pouvez prouver.</li>
+                        <li><strong>Les décideurs sont multiples et les processus sont lents.</strong> En B2B tech classique : 1 décideur, 2 à 4 semaines. En santé institutionnelle : 5 à 8 parties prenantes, 3 à 18 mois. La vitesse dépend du type d'acheteur — un médecin libéral peut décider en une semaine, un CHU peut prendre 24 mois. Cartographier ces décideurs dès le premier contact est non négociable.</li>
+                        <li><strong>La preuve clinique prime sur l'argument commercial.</strong> Les médecins évaluent votre solution avec le même esprit critique qu'un article scientifique. Ils demandent : quel est le niveau de preuve ? Quelle est la population étudiée ? Y a-t-il des biais ? Une publication dans une revue peer-reviewed — même avec N=50 — vaut 10 fois plus qu'un deck de présentation soigné.</li>
+                        <li><strong>Le bouche-à-oreille entre pairs est le canal n°1.</strong> La recommandation d'un confrère que le médecin respecte est le signal d'achat le plus puissant en santé. C'est pourquoi investir dans 3 à 5 KOLs (Key Opinion Leaders) convaincus vaut plus qu'une équipe commerciale de 10 personnes dans les 24 premiers mois.</li>
+                        <li><strong>Votre vraie concurrence, c'est le statu quo.</strong> En santé, votre concurrent n°1 n'est pas une autre startup — c'est "on fait comme ça depuis 20 ans". Les soignants ont une charge de travail écrasante. Tout changement de pratique est d'abord perçu comme un fardeau supplémentaire avant d'être perçu comme un gain. Votre premier objectif commercial est de convaincre que le changement vaut l'effort — avant même de parler de votre produit.</li>
                     </ul>
 
-                    <h4>1.2 — Anatomie d'un cycle de vente en santé (de 6 à 18 mois)</h4>
-                    <p>[CONTENU À COMPLÉTER] — Décrire les étapes typiques d'un cycle de vente B2B santé :</p>
-                    <ol>
-                        <li>Premier contact et identification du besoin</li>
-                        <li>Qualification et cartographie des décideurs</li>
-                        <li>Démonstration et pilote</li>
-                        <li>Évaluation interne et passage en commission</li>
-                        <li>Négociation contractuelle et achat</li>
-                        <li>Déploiement et formation</li>
-                    </ol>
-                    <p>[Ajouter un schéma ou tableau illustrant les délais typiques à chaque étape]</p>
+                    <h4>1.2 — Anatomie d'un cycle de vente en santé : étapes et délais réels</h4>
+                    <p>Voici les étapes d'un cycle de vente B2B santé institutionnel, avec les délais observés sur le terrain. Attendez-vous à vivre chacune d'elles :</p>
+
+                    <div style="overflow-x: auto; margin: 16px 0;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                            <thead>
+                                <tr style="background: #00ff88; color: #001a0f;">
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #333;">Étape</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #333;">Description</th>
+                                    <th style="padding: 10px; text-align: center; border: 1px solid #333;">Délai CHU/CH</th>
+                                    <th style="padding: 10px; text-align: center; border: 1px solid #333;">Délai Libéral</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: #f8f9fa;">
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>1. Premier contact</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">Identification du besoin, prise de RDV</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">J0 à J30</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">J0 à J7</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>2. Qualification</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">Cartographie décideurs, évaluation budget, identification champion</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">J30 à J60</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">J7 à J14</td>
+                                </tr>
+                                <tr style="background: #f8f9fa;">
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>3. Démonstration</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">Démo produit, présentation à l'équipe, réponses aux objections techniques</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">J60 à J90</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">J14 à J30</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>4. Pilote</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">Test sur 1 unité / 20-50 patients, mesure des KPI</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">J90 à J210</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">Optionnel</td>
+                                </tr>
+                                <tr style="background: #f8f9fa;">
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>5. Commission / CME</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">Présentation aux décideurs, validation clinique et technique</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">J210 à J270</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">—</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>6. Circuit administratif</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">Appel d'offres ou bon de commande, validation juridique</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">J270 à J365</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">J30 à J60</td>
+                                </tr>
+                                <tr style="background: #e8f5e9;">
+                                    <td style="padding: 8px; border: 1px solid #ddd;"><strong>7. Signature</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">Contrat signé, premier paiement</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2e7d32;"><strong>6 à 18 mois</strong></td>
+                                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2e7d32;"><strong>1 à 3 mois</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div class="tip-box" style="background: #ffebee; border-left: 4px solid #f44336;">
                         <h4>&#x26A0;&#xFE0F; Piège fréquent — Confondre intérêt et engagement</h4>
-                        <p>[CONTENU À COMPLÉTER] — Un médecin qui dit "c'est intéressant" n'est pas un client. Un directeur d'établissement qui demande une démonstration n'a pas signé. Définir précisément ce qui constitue un "vrai" prospect engagé vs. un contact curieux.</p>
+                        <p>En santé, les formules de politesse peuvent coûter des mois de pipeline fictif. Apprenez à décoder ce que disent vraiment vos prospects :</p>
+                        <ul>
+                            <li><em>"C'est très intéressant"</em> → Curiosité. Probabilité de conversion : 5%. Ne mettez pas ce prospect dans votre pipeline actif.</li>
+                            <li><em>"Envoyez-moi une documentation"</em> → Intérêt superficiel. Probabilité : 10%. Notez dans votre CRM, relancez dans 1 mois.</li>
+                            <li><em>"Pouvez-vous faire une démo à mon équipe ?"</em> → Prospect chaud. Probabilité : 30%. Planifiez immédiatement, cartographiez les décideurs présents.</li>
+                            <li><em>"On voudrait tester sur 3 mois"</em> → Pilote = très fort signal d'achat. Probabilité : 60-70%. Formalisez un protocole de pilote avec critères de succès écrits.</li>
+                            <li><em>"Envoyez une proposition commerciale"</em> → Intention d'achat. Probabilité : 75-85%. Répondez dans les 48h, proposez un appel de validation avant d'envoyer.</li>
+                            <li>Bon de commande signé → Client. 100%. Déclenchez immédiatement le plan d'onboarding.</li>
+                        </ul>
                     </div>
 
-                    <h4>1.3 — Cartographier les décideurs : qui achète vraiment ?</h4>
-                    <p>[CONTENU À COMPLÉTER] — Présenter le modèle MEDDIC adapté à la santé :</p>
+                    <h4>1.3 — Cartographier les décideurs : le modèle MEDDIC adapté à la santé</h4>
+                    <p>MEDDIC est une méthode de vente B2B complexe adaptée ici aux spécificités du secteur santé. Pour chaque opportunité, répondez à ces 6 questions avant d'investir plus de 2 heures de travail commercial :</p>
                     <ul>
-                        <li><strong>Le champion interne</strong> — le professionnel convaincu qui porte le projet en interne</li>
-                        <li><strong>L'acheteur économique</strong> — celui qui signe le bon de commande (directeur, DAF)</li>
-                        <li><strong>L'utilisateur final</strong> — le soignant qui utilisera au quotidien</li>
-                        <li><strong>Le validateur technique</strong> — DSI, ingénieur biomédical, RSSI</li>
-                        <li><strong>Le bloqueur potentiel</strong> — celui qui peut dire non à la dernière minute</li>
+                        <li><strong>M — Metrics (Métriques) :</strong> Quels indicateurs mesurables votre solution améliore-t-elle pour ce client spécifique ? Durée moyenne de séjour, taux de réadmission à 30 jours, temps infirmier par patient, NPS patients, taux d'observance. Si vous ne pouvez pas quantifier le bénéfice pour LEUR contexte, vous ne pouvez pas construire un business case convaincant.</li>
+                        <li><strong>E — Economic Buyer (Acheteur économique) :</strong> Qui signe le bon de commande et valide le budget ? En hôpital public : le directeur général ou le DAF selon les montants. En clinique privée : le directeur médical ou le PDG. Ne jamais conclure une négociation sans avoir rencontré l'acheteur économique au moins une fois.</li>
+                        <li><strong>D — Decision Criteria (Critères de décision) :</strong> Sur quels critères la décision sera-t-elle prise ? Preuve clinique (niveau de preuve Oxford), conformité HDS/RGPD, interopérabilité avec le SIH existant, prix total de possession, facilité de déploiement, support. Demandez explicitement : "Si vous deviez noter les 3 critères les plus importants pour ce projet, quels seraient-ils ?"</li>
+                        <li><strong>D — Decision Process (Processus de décision) :</strong> Quelles sont les étapes que votre prospect doit franchir en interne pour décider ? Qui doit approuver ? Dans quel ordre ? Quel est le calendrier budgétaire ? Les hôpitaux ont souvent des cycles budgétaires annuels (N+1) — si vous ratez la fenêtre d'octobre-novembre, vous attendez 12 mois.</li>
+                        <li><strong>I — Identify Pain (Problème identifié) :</strong> Quel est LE problème précis et douloureux que vous résolvez pour ce client ? Pas un problème générique ("améliorer la qualité des soins") — un problème spécifique et chiffré : "notre taux de réadmission à 30j en cardiologie est à 18% contre 12% recommandés, et ça génère des pénalités T2A".</li>
+                        <li><strong>C — Champion (Champion interne) :</strong> Qui est la personne interne qui croit vraiment en votre solution et se battra pour elle lors des réunions auxquelles vous ne participez pas ? Le champion est votre atout le plus précieux. Formez-le à présenter votre solution, donnez-lui les arguments pour répondre aux objections, et maintenez-le motivé tout au long du cycle.</li>
                     </ul>
-                    <p>[Ajouter un tableau de cartographie des décideurs à remplir pour chaque prospect]</p>
+
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin-top: 16px;">
+                        <p style="margin: 0 0 10px 0; font-weight: 600;">&#x1F4CB; Tableau de cartographie des décideurs (à remplir pour chaque compte)</p>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                                <thead>
+                                    <tr style="background: #667eea; color: white;">
+                                        <th style="padding: 8px; text-align: left; border: 1px solid #ccc;">Rôle</th>
+                                        <th style="padding: 8px; text-align: left; border: 1px solid #ccc;">Nom</th>
+                                        <th style="padding: 8px; text-align: left; border: 1px solid #ccc;">Influence (1-5)</th>
+                                        <th style="padding: 8px; text-align: left; border: 1px solid #ccc;">Soutien (Bloqueur / Neutre / Champion)</th>
+                                        <th style="padding: 8px; text-align: left; border: 1px solid #ccc;">Prochaine action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td style="padding: 7px; border: 1px solid #ddd;">Chef de service</td><td style="padding: 7px; border: 1px solid #ddd;"></td><td style="padding: 7px; border: 1px solid #ddd;">4</td><td style="padding: 7px; border: 1px solid #ddd;">Champion</td><td style="padding: 7px; border: 1px solid #ddd;">Préparer sa présentation CME</td></tr>
+                                    <tr style="background:#fafafa"><td style="padding: 7px; border: 1px solid #ddd;">DSI</td><td style="padding: 7px; border: 1px solid #ddd;"></td><td style="padding: 7px; border: 1px solid #ddd;">5</td><td style="padding: 7px; border: 1px solid #ddd;">Neutre → à convaincre</td><td style="padding: 7px; border: 1px solid #ddd;">Envoyer dossier sécurité HDS</td></tr>
+                                    <tr><td style="padding: 7px; border: 1px solid #ddd;">DAF</td><td style="padding: 7px; border: 1px solid #ddd;"></td><td style="padding: 7px; border: 1px solid #ddd;">5</td><td style="padding: 7px; border: 1px solid #ddd;">Neutre</td><td style="padding: 7px; border: 1px solid #ddd;">Présenter business case chiffré</td></tr>
+                                    <tr style="background:#fafafa"><td style="padding: 7px; border: 1px solid #ddd;">Ing. biomédical</td><td style="padding: 7px; border: 1px solid #ddd;"></td><td style="padding: 7px; border: 1px solid #ddd;">3</td><td style="padding: 7px; border: 1px solid #ddd;">Neutre</td><td style="padding: 7px; border: 1px solid #ddd;">Réunion technique dédiée</td></tr>
+                                    <tr><td style="padding: 7px; border: 1px solid #ddd;">Directeur général</td><td style="padding: 7px; border: 1px solid #ddd;"></td><td style="padding: 7px; border: 1px solid #ddd;">5</td><td style="padding: 7px; border: 1px solid #ddd;">Inconnu</td><td style="padding: 7px; border: 1px solid #ddd;">Demander présentation via champion</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- ============================================================ -->
@@ -7430,38 +7586,81 @@
                     </p>
 
                     <h4>2.1 — Définir sa cible commerciale prioritaire</h4>
-                    <p>[CONTENU À COMPLÉTER] — Comment identifier et prioriser ses segments de clients :</p>
+                    <p>La plus grande erreur des startups santé early-stage : vouloir vendre à tout le monde. "Notre solution est utile à tous les hôpitaux de France" est une stratégie sans ressource. Commencez par définir votre ICP (Ideal Customer Profile) avec précision chirurgicale.</p>
+
+                    <p><strong>Construire son ICP santé — 5 dimensions :</strong></p>
                     <ul>
-                        <li>Segmentation par taille d'établissement (CHU, CH, clinique, libéral)</li>
-                        <li>Segmentation par spécialité médicale</li>
-                        <li>Segmentation géographique (pilote local avant déploiement national)</li>
-                        <li>L'ICP (Ideal Customer Profile) adapté à la santé — [à développer]</li>
-                        <li>Critères de qualification d'un prospect "chaud" vs "froid"</li>
+                        <li><strong>Type d'établissement :</strong> CHU / CHR (référence, cycle long, vitrine nationale), CH (100-999 lits, bon équilibre impact/cycle), clinique privée MCO (décision plus rapide, budget autonome), cabinet libéral (décision individuelle, budget limité), MSP/CPTS (décision collective, budget ARS), mutuelle/assureur (cycle très long, ROI central).</li>
+                        <li><strong>Spécialité médicale :</strong> Concentrez-vous sur 1 à 2 spécialités dans les 18 premiers mois. Maîtriser les codes, le vocabulaire et les KOL d'une spécialité est ce qui vous rend crédible. S'éparpiller sur 6 spécialités, c'est n'être expert nulle part.</li>
+                        <li><strong>Géographie :</strong> Démarrez dans votre région ou dans le réseau où vous avez des contacts. L'accès à un premier rendez-vous est plus facile quand vous pouvez vous rendre sur place. Les premières ventes se font par la confiance — la confiance se construit en face-à-face.</li>
+                        <li><strong>Maturité digitale :</strong> Un établissement avec un DSI proactif et un SI moderne (DPI récent, projets HL7 en cours) adoptera votre solution 3 fois plus vite qu'un établissement avec un SI vieillissant et un DSI défensif.</li>
+                        <li><strong>Budget et timing :</strong> Ciblez les établissements qui ont un budget IT/innovation documenté (plans stratégiques publiés, historique d'achats tech, appels à projets récents) ou qui viennent de vivre un événement déclencheur (fusion, accréditation HAS difficile, incident de sécurité).</li>
                     </ul>
 
                     <div class="tip-box" style="background: linear-gradient(135deg, #004d2e 0%, #001a0f 100%); border-left: 4px solid #00ff88; color: #333;">
-                        <h4>&#x1F6E0;&#xFE0F; Outil pratique — Matrice de priorisation des clients</h4>
-                        <p style="color: #ffffff;">[CONTENU À COMPLÉTER] — Template d'une matrice impact/effort pour prioriser ses prospects : qui contacter en premier, qui peut être un client-vitrine, qui peut générer du bouche-à-oreille, qui a un budget disponible.</p>
+                        <h4>&#x1F6E0;&#xFE0F; Outil pratique — Matrice de priorisation des prospects (Impact / Effort)</h4>
+                        <div style="overflow-x: auto; margin-top: 10px;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; color: #f0f0f0;">
+                                <thead>
+                                    <tr style="background: #00ff88; color: #001a0f;">
+                                        <th style="padding: 8px; border: 1px solid #004d2e;">Quadrant</th>
+                                        <th style="padding: 8px; border: 1px solid #004d2e;">Type de prospect</th>
+                                        <th style="padding: 8px; border: 1px solid #004d2e;">Stratégie</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background: rgba(0,255,136,0.1);">
+                                        <td style="padding: 8px; border: 1px solid #004d2e;"><strong style="color: #00ff88;">Victoires rapides</strong><br><small>(Impact élevé, effort faible)</small></td>
+                                        <td style="padding: 8px; border: 1px solid #004d2e;">Cliniques privées de votre réseau, médecins libéraux anciens confrères, MSP avec budget ARS disponible</td>
+                                        <td style="padding: 8px; border: 1px solid #004d2e;">Priorité absolue. Contactez dans la semaine. Premier revenu + première référence client.</td>
+                                    </tr>
+                                    <tr style="background: rgba(102,126,234,0.1);">
+                                        <td style="padding: 8px; border: 1px solid #004d2e;"><strong style="color: #667eea;">Paris stratégiques</strong><br><small>(Impact élevé, effort élevé)</small></td>
+                                        <td style="padding: 8px; border: 1px solid #004d2e;">CHU de référence nationale, groupements hospitaliers territoriaux (GHT), mutuelles nationales</td>
+                                        <td style="padding: 8px; border: 1px solid #004d2e;">Investissez du temps (6-18 mois). Une fois acquis, c'est une vitrine qui ouvre toutes les portes.</td>
+                                    </tr>
+                                    <tr style="background: rgba(255,183,0,0.05);">
+                                        <td style="padding: 8px; border: 1px solid #004d2e;"><strong>Fill-ins</strong><br><small>(Impact faible, effort faible)</small></td>
+                                        <td style="padding: 8px; border: 1px solid #004d2e;">CH en zone rurale, cabinets isolés, structures sans projet digital identifié</td>
+                                        <td style="padding: 8px; border: 1px solid #004d2e;">Nurturing léger (newsletter, événements). Peu de temps commercial actif.</td>
+                                    </tr>
+                                    <tr style="background: rgba(244,67,54,0.05);">
+                                        <td style="padding: 8px; border: 1px solid #004d2e;"><strong style="color: #f44336;">À éviter</strong><br><small>(Impact faible, effort élevé)</small></td>
+                                        <td style="padding: 8px; border: 1px solid #004d2e;">Établissements avec DSI bloquant connu, budgets gelés, en restructuration, hors spécialité cible</td>
+                                        <td style="padding: 8px; border: 1px solid #004d2e;">Ne pas investir de ressources commerciales. Revisiter dans 12-18 mois.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <h4>2.2 — Construire son argumentaire de vente en santé</h4>
-                    <p>[CONTENU À COMPLÉTER] — La différence entre pitch clinique (pour les soignants) et pitch commercial (pour les directeurs) :</p>
-                    <ul>
-                        <li><strong>Pour le soignant</strong> : preuve clinique, gain de temps, amélioration de la qualité des soins</li>
-                        <li><strong>Pour le directeur</strong> : ROI, réduction des coûts, conformité réglementaire, indicateurs de performance</li>
-                        <li><strong>Pour le DSI</strong> : interopérabilité, sécurité, intégration dans le SI existant, conformité RGPD/HDS</li>
-                        <li><strong>Pour le patient</strong> : facilité d'usage, bénéfice concret, protection des données</li>
-                    </ul>
-                    <p>[Ajouter un template de pitch adapté à chaque interlocuteur]</p>
+                    <h4>2.2 — Les 4 pitchs que vous devez maîtriser</h4>
+                    <p>En santé, il n'y a pas un pitch universel. Il y a autant de pitchs que d'interlocuteurs. Utiliser le pitch "soignant" avec le DAF, c'est perdre la vente.</p>
+
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 12px 0;">
+                        <p style="font-weight: 600; color: #1a1a2e; margin-bottom: 10px;">&#x1FA7A; Pitch Soignant (3 minutes, en salle de staff ou couloir)</p>
+                        <p style="font-size: 0.9rem; margin: 0; color: #444;"><em>"Vous passez actuellement [X minutes] par patient à [tâche pénible — ex: coordonner les résultats de biologie entre services]. Avec notre solution, vous récupérez [Y minutes] par consultation, soit [Z patients supplémentaires par semaine] ou simplement un retour chez vous à l'heure. Le Dr. Dupont, cardiologue à Strasbourg, l'utilise depuis 6 mois — je vous mets en contact si vous souhaitez son retour direct."</em></p>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 12px 0;">
+                        <p style="font-weight: 600; color: #1a1a2e; margin-bottom: 10px;">&#x1F4B0; Pitch Directeur / DAF (5 minutes, avec un slide de business case)</p>
+                        <p style="font-size: 0.9rem; margin: 0; color: #444;"><em>"Votre taux de réadmission à 30 jours en cardiologie est aujourd'hui à [X%], ce qui génère [Y k€] de pénalités T2A annuellement. Notre solution réduit ce taux de [Z%] dans des établissements comparables — avec un ROI positif en [N mois]. À [prix/an], le retour sur investissement est [N] mois. Je peux vous montrer le calcul détaillé adapté à votre volume de patients."</em></p>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 12px 0;">
+                        <p style="font-weight: 600; color: #1a1a2e; margin-bottom: 10px;">&#x1F5A5;&#xFE0F; Pitch DSI (10 minutes + documentation technique)</p>
+                        <p style="font-size: 0.9rem; margin: 0; color: #444;"><em>"Notre solution est certifiée HDS et conforme RGPD. Elle s'intègre avec [votre SIH] via API REST et HL7 FHIR R4, avec un temps de déploiement technique de [X semaines]. Notre SLA garantit 99,5% de disponibilité. Je vous envoie notre dossier de sécurité complet (politique ISO 27001, résultats de pentest, PIA CNIL) avant notre prochaine réunion pour que vous puissiez l'examiner."</em></p>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 12px 0;">
+                        <p style="font-weight: 600; color: #1a1a2e; margin-bottom: 10px;">&#x1F9D1; Pitch Patient B2C (30 secondes, dans une app store ou une page web)</p>
+                        <p style="font-size: 0.9rem; margin: 0; color: #444;"><em>"En 5 minutes par jour, suivez votre [pathologie], partagez vos données avec votre médecin et recevez des conseils personnalisés. Recommandée par [nom de l'association de patients ou KOL]. Téléchargement gratuit, votre médecin peut consulter votre suivi en temps réel."</em></p>
+                    </div>
 
                     <h4>2.3 — Les outils indispensables du commercial santé</h4>
-                    <p>[CONTENU À COMPLÉTER] — Quels outils mettre en place avant de prospecter :</p>
                     <ul>
-                        <li><strong>CRM adapté</strong> — Gestion des cycles longs, suivi des décideurs multiples [recommandations d'outils]</li>
-                        <li><strong>Deck de présentation</strong> — Structure type d'une présentation efficace en santé</li>
-                        <li><strong>One-pager / executive summary</strong> — Le document laissé après une réunion</li>
-                        <li><strong>Étude de cas / cas client</strong> — Le document qui convainc le champion interne</li>
-                        <li><strong>Contrat-type et conditions générales</strong> — Anticiper la négociation</li>
+                        <li><strong>CRM adapté aux cycles longs :</strong> HubSpot CRM (gratuit jusqu'à 1 000 contacts — parfait pour le démarrage), Pipedrive (interface simple, bon pour les cycles longs), Salesforce Health Cloud (pour les structures avec >5 commerciaux et >500 comptes). L'essentiel : pouvoir gérer plusieurs contacts par compte, visualiser chaque étape du funnel, et programmer les relances automatiquement. Un prospect en santé qui n'est pas relancé à J+30 est un prospect perdu.</li>
+                        <li><strong>Deck de présentation :</strong> 6 slides maximum pour un clinicien (leur temps est compté). Structure : (1) Le problème chiffré — (2) La solution en une phrase — (3) La preuve clinique — (4) Qui l'utilise déjà (référence + témoignage) — (5) Comment ça s'intègre dans leur workflow — (6) Les prochaines étapes concrètes. Pas de slide "notre équipe" ni "notre vision" — les soignants s'en moquent lors d'un premier contact.</li>
+                        <li><strong>One-pager (laissé en sortie de réunion) :</strong> 1 page recto A4 : logo, problème en 1 phrase percutante, solution en 1 phrase, 3 bénéfices mesurés, 1 citation d'un médecin utilisateur, QR code vers la démo en ligne, vos coordonnées. Ce document doit pouvoir être envoyé par votre champion interne à ses collègues et à sa direction sans que vous ayez besoin d'être là pour l'expliquer.</li>
+                        <li><strong>Étude de cas client (le document qui convainc) :</strong> Problème initial (chiffré) → déploiement (durée, périmètre) → résultats avant/après (KPI cliniques ET opérationnels) → citation du médecin référent → ROI calculé. Une bonne étude de cas vaut 10 démos.</li>
+                        <li><strong>Dossier technique DSI :</strong> Politique de sécurité, certification HDS, PIA CNIL, architecture technique, API documentation, SLA, plan de sauvegarde et reprise d'activité. Préparez-le une fois, envoyez-le à chaque DSI. Les DSI qui ne reçoivent pas ce dossier en réunion initiale bloquent systématiquement.</li>
                     </ul>
                 </div>
 
@@ -7477,61 +7676,123 @@
                     </p>
 
                     <h4>3.1 — La prospection : générer des opportunités qualifiées</h4>
-                    <p>[CONTENU À COMPLÉTER] — Les canaux de prospection efficaces en santé :</p>
+                    <p>En santé, la prospection froide (cold call, cold email de masse) est quasi-inefficace. Les canaux qui fonctionnent sont ceux qui créent de la confiance avant le premier contact commercial.</p>
+
+                    <p><strong>Les congrès médicaux — le canal le plus puissant en B2B santé</strong></p>
+                    <p>Les principaux congrès par spécialité où votre présence peut transformer votre pipeline :</p>
                     <ul>
-                        <li><strong>Les congrès médicaux</strong> — Comment y présenter, quoi dire, comment suivre [liste des principaux congrès par spécialité]</li>
-                        <li><strong>LinkedIn santé</strong> — Stratégie de contenu expert, connexion avec les KOL, approche en message direct</li>
-                        <li><strong>Le réseau des pairs</strong> — Activer ses contacts soignants comme introducteurs</li>
-                        <li><strong>Les appels entrants (inbound)</strong> — Générer des leads via contenu, webinaires, publications</li>
-                        <li><strong>Les partenaires distributeurs</strong> — Grossistes, éditeurs de logiciels médicaux, plateformes</li>
+                        <li><strong>Cardiologie :</strong> JESFC (janvier, Paris, 4 000 cardiologues), Congrès ESC (août-sept, européen)</li>
+                        <li><strong>Diabétologie :</strong> Congrès SFD (mars, 3 000 diabétologues), EASD (européen)</li>
+                        <li><strong>Oncologie :</strong> ESMO (européen), AFSOS (soins de support), SFPO (pharmaciens oncologues)</li>
+                        <li><strong>Urgences :</strong> Congrès SFMU (mai), Urgences Paris (juin)</li>
+                        <li><strong>Gériatrie :</strong> JASFGG (novembre, 2 000 participants)</li>
+                        <li><strong>Pharmaciens hospitaliers :</strong> Congrès SFPC</li>
                     </ul>
+                    <p><strong>Comment être présent sans budget illimité :</strong></p>
+                    <ul>
+                        <li><em>Avec des données :</em> Soumettez un abstract (délai : 4 à 6 mois avant). Une affiche ou communication orale vous confère une crédibilité scientifique qu'aucun budget marketing ne peut acheter.</li>
+                        <li><em>Sans données encore :</em> Les "villages innovation" et "espaces startup" de certains congrès (JESFC, SFD, SFMU) permettent d'exposer pour 800 à 3 000 euros — contre 10 000 à 30 000 euros pour un stand classique. Postulez-y.</li>
+                        <li><em>Sans stand ni abstract :</em> Participez comme professionnel. En pause café, engagez des conversations sur le problème clinique que vous adressez — pas sur votre produit. Le pitch vient naturellement quand la conversation est sincère.</li>
+                    </ul>
+                    <p><strong>Le suivi post-congrès (crucial et négligé) :</strong> Dans les 48h, envoyez un email personnalisé à chaque contact avec une référence précise à votre échange. Après 5 jours, le médecin a oublié votre conversation.</p>
+
+                    <p><strong>LinkedIn santé — le canal d'inbound qui travaille pendant que vous dormez</strong></p>
+                    <ul>
+                        <li><strong>Contenu expert :</strong> 2 à 3 posts par semaine alternant données cliniques commentées, coulisses de votre startup, et questions ouvertes à la communauté médicale. Le fondateur soignant ("médecin urgentiste qui a créé [solution] parce que j'en avais assez de [problème]") génère 3 à 5 fois plus d'engagement qu'un profil "CEO de startup e-santé".</li>
+                        <li><strong>Approche des KOLs :</strong> Ne demandez rien lors des 3 premiers contacts. Commentez avec du fond, partagez leur travail. Puis : "Bonjour Dr. X, j'ai suivi vos travaux sur [sujet]. Nous collectons des données sur ce même problème — 15 minutes d'échange pour confronter nos observations ?"</li>
+                    </ul>
+
+                    <p><strong>Le réseau des pairs — la source la plus chaude de prospects</strong></p>
+                    <p>Vos anciens co-internes, chefs de service, confrères d'association professionnelle : ce sont vos premiers utilisateurs, vos premiers témoins et vos premiers apporteurs d'affaires. Un médecin qui recommande votre solution à un confrère génère une conversion 5 fois plus rapide qu'un email de prospection. Demandez explicitement à chaque client satisfait de vous présenter à 2 ou 3 confrères confrontés au même problème.</p>
 
                     <div class="tip-box" style="background: #ffebee; border-left: 4px solid #f44336;">
                         <h4>&#x26A0;&#xFE0F; À éviter — Le cold emailing massif</h4>
-                        <p>[CONTENU À COMPLÉTER] — Pourquoi le cold emailing de masse est contre-productif en santé : risque déontologique, taux de réponse nul, image de marque dégradée. Privilégier la qualité à la quantité : 10 contacts chaleureux valent mieux que 500 emails froids.</p>
+                        <p>Un médecin reçoit en moyenne 30 à 50 emails commerciaux par semaine. Taux d'ouverture d'une startup e-santé non ciblée : 3 à 5%. Taux de réponse : inférieur à 0,5%. Pour 1 000 emails : 0 à 1 rendez-vous qualifié. Résultat nul, image dégradée.</p>
+                        <p style="margin-top: 8px;">En santé, un email de prospection non sollicité peut même être perçu comme assimilable au démarchage médical. <strong>Investissez ce temps dans 5 appels chaleureux à des personnes de votre réseau : résultat garanti 20 fois supérieur.</strong></p>
                     </div>
 
                     <h4>3.2 — La qualification : investir son temps au bon endroit</h4>
-                    <p>[CONTENU À COMPLÉTER] — Comment qualifier rapidement si une opportunité vaut le temps investi :</p>
-                    <ul>
-                        <li>Le prospect a-t-il un problème réel que votre solution résout ?</li>
-                        <li>A-t-il le budget ou peut-il en débloquer un ?</li>
-                        <li>Y a-t-il une décision à prendre dans les 6-12 prochains mois ?</li>
-                        <li>Avez-vous accès au vrai décideur ou seulement à un intermédiaire ?</li>
-                        <li>La réglementation en vigueur permet-elle l'achat dans ce contexte ?</li>
-                    </ul>
-                    <p>[Ajouter un scorecard de qualification prospect]</p>
+                    <p>Un prospect non qualifié vous fait perdre du temps, de l'énergie et de la crédibilité. Appliquez ce scorecard dès le premier échange :</p>
+
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin: 12px 0; overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                            <thead>
+                                <tr style="background: #667eea; color: white;">
+                                    <th style="padding: 8px; border: 1px solid #ccc; text-align: left;">Critère</th>
+                                    <th style="padding: 8px; border: 1px solid #ccc; text-align: center;">0 — Disqualifiant</th>
+                                    <th style="padding: 8px; border: 1px solid #ccc; text-align: center;">1 — Incertain</th>
+                                    <th style="padding: 8px; border: 1px solid #ccc; text-align: center;">2 — Favorable</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="padding: 7px; border: 1px solid #ddd;"><strong>Problème</strong></td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Vague, non ressenti</td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Identifié mais non urgent</td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Documenté, coûteux, urgent</td></tr>
+                                <tr style="background:#fafafa"><td style="padding: 7px; border: 1px solid #ddd;"><strong>Budget</strong></td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Aucun, aucune intention</td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">À valider, incertain</td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Identifié ou déblocable</td></tr>
+                                <tr><td style="padding: 7px; border: 1px solid #ddd;"><strong>Décideur</strong></td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Sans influence</td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Influenceur, pas décideur</td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Champion + accès décideur</td></tr>
+                                <tr style="background:#fafafa"><td style="padding: 7px; border: 1px solid #ddd;"><strong>Timing</strong></td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Aucun projet défini</td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Projet à 12-18 mois</td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Projet à 6 mois ou moins</td></tr>
+                                <tr><td style="padding: 7px; border: 1px solid #ddd;"><strong>Réglementation</strong></td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Blocage majeur</td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Points à clarifier</td><td style="padding: 7px; border: 1px solid #ddd; text-align: center;">Aucun obstacle identifié</td></tr>
+                            </tbody>
+                        </table>
+                        <p style="margin: 10px 0 0 0; font-size: 0.85rem;"><strong>Score 8-10 :</strong> Priorité — investissement commercial intensif. <strong>Score 5-7 :</strong> Nurturing — contact trimestriel, newsletter. <strong>Score 0-4 :</strong> Veille — revisitez dans 12 mois.</p>
+                    </div>
 
                     <h4>3.3 — La démonstration et la preuve de valeur</h4>
-                    <p>[CONTENU À COMPLÉTER] — Comment mener une démonstration convaincante en santé :</p>
+                    <p><strong>La démo centrée sur le cas d'usage réel — pas sur les fonctionnalités</strong></p>
+                    <p>L'erreur classique : la "visite guidée" qui montre toutes les fonctionnalités dans l'ordre. Le soignant décroche après 4 minutes. La bonne méthode :</p>
+                    <ol>
+                        <li>Avant la démo : <em>"Décrivez-moi un cas concret de cette semaine où vous avez ressenti le problème."</em></li>
+                        <li>Pendant la démo : rejouez exactement ce cas. <em>"Voilà comment notre solution aurait traité le cas de Mme X."</em></li>
+                        <li>Faites essayer le prospect lui-même — l'action vaut 10 fois l'observation.</li>
+                        <li>Terminez par : <em>"Sur 10, dans quelle mesure ce que vous venez de voir répond-il au problème décrit ?"</em> S'il répond 8+, proposez le pilote. Moins de 7 : demandez ce qui manque.</li>
+                    </ol>
+
+                    <p><strong>Structurer le pilote clinique pour en faire un outil de vente</strong></p>
                     <ul>
-                        <li>La démo centrée sur le cas d'usage réel, pas sur les fonctionnalités</li>
-                        <li>Le pilote clinique : comment le structurer, le mesurer et le valoriser</li>
-                        <li>Les indicateurs à suivre pendant le pilote (KPI cliniques + KPI business)</li>
-                        <li>Transformer les résultats du pilote en étude de cas réutilisable</li>
+                        <li><strong>Durée :</strong> 8 à 16 semaines. Assez long pour observer des effets réels, assez court pour maintenir la motivation.</li>
+                        <li><strong>Périmètre :</strong> 1 service, 2 à 4 médecins référents, 20 à 100 patients. Visez la représentativité, pas l'exhaustivité.</li>
+                        <li><strong>Engagement écrit :</strong> Obtenez un accord de principe conditionnel avant le pilote : <em>"Si les résultats atteignent [KPI convenu], vous vous engagez à étudier un déploiement à [périmètre élargi] dans les 3 mois suivants."</em></li>
+                        <li><strong>KPI à suivre :</strong> Temps économisé par soignant/semaine, taux d'adoption à J30/J60, NPS utilisateurs, indicateur clinique spécifique à votre solution.</li>
+                        <li><strong>Rapport de pilote :</strong> PDF de 6 à 10 pages avec données avant/après, témoignages et calcul du ROI projeté sur 12 mois. Ce document est présenté en réunion formelle avec champion + acheteur économique — c'est le pivot vers la signature.</li>
                     </ul>
 
-                    <h4>3.4 — La négociation et la gestion des objections typiques en santé</h4>
-                    <p>[CONTENU À COMPLÉTER] — Les objections les plus fréquentes et comment y répondre :</p>
-                    <ul>
-                        <li><em>"Nous n'avons pas de budget"</em> — [réponse type]</li>
-                        <li><em>"Nous avons déjà une solution"</em> — [réponse type]</li>
-                        <li><em>"Nous devons en parler à la commission"</em> — [réponse type]</li>
-                        <li><em>"Vos données ne sont pas assez probantes"</em> — [réponse type]</li>
-                        <li><em>"Le DSI bloque pour des raisons de sécurité"</em> — [réponse type]</li>
-                        <li><em>"Vous êtes trop cher"</em> — [réponse type]</li>
-                    </ul>
-                    <p>[Ajouter un guide de négociation tarifaire adapté aux contraintes budgétaires hospitalières]</p>
+                    <h4>3.4 — La négociation et la gestion des 6 objections inévitables</h4>
+
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin: 10px 0;">
+                        <p style="font-weight: 600; margin-bottom: 6px; color: #c0392b;">&#x1F4AC; "Nous n'avons pas de budget."</p>
+                        <p style="font-size: 0.9rem; margin: 0; color: #444;"><strong>Signification réelle :</strong> pas de budget prévu — mais il se crée quand la douleur est assez forte. <strong>Réponse :</strong> "Calculons ensemble ce que le problème actuel vous coûte réellement — DMS, réadmissions, temps soignant. Ça nous dira si une solution est financièrement justifiable." Si le calcul est convaincant, le budget se trouve — via ARS, budget formation, ou réallocation interne.</p>
+                    </div>
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin: 10px 0;">
+                        <p style="font-weight: 600; margin-bottom: 6px; color: #c0392b;">&#x1F4AC; "Nous avons déjà une solution."</p>
+                        <p style="font-size: 0.9rem; margin: 0; color: #444;"><strong>Réponse :</strong> "Quelle solution utilisez-vous ? Qu'est-ce qui vous satisfait le plus… et le moins ?" — 80% du temps, un gap existe. Positionnez-vous en complément, pas en remplacement.</p>
+                    </div>
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin: 10px 0;">
+                        <p style="font-weight: 600; margin-bottom: 6px; color: #c0392b;">&#x1F4AC; "Nous devons en parler à la commission."</p>
+                        <p style="font-size: 0.9rem; margin: 0; color: #444;">C'est une étape normale, pas un refus. <strong>Réponse :</strong> "Sur quels critères la commission sera-t-elle exigeante ? Je prépare un dossier adapté à leurs questions." Devenez le partenaire de votre champion, pas un vendeur extérieur.</p>
+                    </div>
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin: 10px 0;">
+                        <p style="font-weight: 600; margin-bottom: 6px; color: #c0392b;">&#x1F4AC; "Vos données ne sont pas assez probantes."</p>
+                        <p style="font-size: 0.9rem; margin: 0; color: #444;"><strong>Réponse honnête :</strong> "Vous avez raison sur le niveau de preuve. Voici notre étude pilote sur N patients, sans interprétation excessive. Nous cherchons des partenaires pour co-construire une étude plus robuste et la co-publier. Seriez-vous intéressé ?" — La faiblesse devient opportunité de partenariat scientifique.</p>
+                    </div>
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin: 10px 0;">
+                        <p style="font-weight: 600; margin-bottom: 6px; color: #c0392b;">&#x1F4AC; "Le DSI bloque pour des raisons de sécurité."</p>
+                        <p style="font-size: 0.9rem; margin: 0; color: #444;">Blocage légitime — ne le contournez pas. <strong>Réponse :</strong> "Organisez 30 minutes avec votre DSI. Je lui envoie en avance notre dossier de sécurité (certification HDS, ISO 27001, résultats de pentest, PIA CNIL) pour qu'il puisse l'examiner avant notre échange." Un DSI qui reçoit un dossier complet avant la réunion est 3 fois plus favorable.</p>
+                    </div>
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin: 10px 0;">
+                        <p style="font-weight: 600; margin-bottom: 6px; color: #c0392b;">&#x1F4AC; "Vous êtes trop cher."</p>
+                        <p style="font-size: 0.9rem; margin: 0; color: #444;"><strong>Ne réduisez jamais le prix immédiatement</strong> — cela dévalue votre solution et crée un précédent. Réponse ROI : "À [prix/an], le retour sur investissement est atteint en [N mois] d'après le calcul que je vous ai présenté." Réponse flexibilité : "Proposons une entrée progressive sur [service pilote] à [prix réduit] pendant 6 mois pour démontrer la valeur avant l'extension."</p>
+                    </div>
 
                     <h4>3.5 — Le closing : transformer l'essai en contrat</h4>
-                    <p>[CONTENU À COMPLÉTER] — Comment conclure sans brusquer en santé :</p>
+                    <p><strong>Décoder les signaux d'achat en santé</strong></p>
                     <ul>
-                        <li>Les signaux d'achat en santé (différents des signaux classiques)</li>
-                        <li>La technique du résumé de bénéfices avant la proposition finale</li>
-                        <li>Gérer les délais administratifs (marchés publics, DROM, bon de commande)</li>
-                        <li>Le suivi post-proposition : rester présent sans harceler</li>
-                        <li>Quand et comment relancer sans nuire à la relation</li>
+                        <li><em>Le clinicien :</em> "Pouvez-vous présenter ça à mon chef de service ?" → Signal très fort. Organisez cette réunion dans la semaine.</li>
+                        <li><em>Le DSI :</em> "Avez-vous une documentation API et votre roadmap HL7 ?" → Il anticipe l'intégration. Répondez en 24h avec un document complet.</li>
+                        <li><em>Le DAF :</em> "Proposez-vous du crédit-bail ou des facilités de paiement ?" → Le budget est en cours de déblocage.</li>
+                        <li><em>Le directeur :</em> "Quel est votre délai de déploiement et votre support ?" → Il projette déjà le go-live. Répondez avec un planning précis et nommé.</li>
                     </ul>
+                    <p><strong>Gérer la période administrative post-décision</strong></p>
+                    <p>Une fois la décision prise, le circuit administratif ajoute 2 à 6 mois (appel d'offres, validation juridique, bon de commande, délibération). Ce n'est pas un désengagement. Pendant cette période : maintenez le contact mensuel avec votre champion, commencez la documentation d'intégration technique, et identifiez les utilisateurs clés pour préparer l'onboarding.</p>
+                    <p><strong>Le référencement UGAP — le raccourci vers tous les acheteurs publics</strong></p>
+                    <p>L'UGAP est la centrale d'achat publique. Référencé sur l'UGAP, un hôpital public peut acheter votre solution sans appel d'offres. Le processus de référencement prend 6 à 18 mois, mais une fois obtenu, votre solution est accessible à 3 000 établissements publics. Investissement long, retour massif.</p>
                 </div>
 
                 <!-- ============================================================ -->
@@ -7546,48 +7807,102 @@
                     </p>
 
                     <h4>4.1 — Hôpitaux et cliniques (marchés publics, appels d'offres)</h4>
-                    <p>[CONTENU À COMPLÉTER] — Spécificités de la vente aux établissements de santé :</p>
+                    <p><strong>Comprendre les seuils de la commande publique</strong></p>
                     <ul>
-                        <li>Le code des marchés publics : seuils, procédures, délais</li>
-                        <li>Comment être référencé et répondre à un appel d'offres</li>
-                        <li>Le rôle du PHRC (Programme Hospitalier de Recherche Clinique) comme levier</li>
-                        <li>Les interlocuteurs clés : DAF, DSI, CME, ingénieurs biomédicaux</li>
-                        <li>Les pièges de la commande publique et comment les éviter</li>
+                        <li><strong>Moins de 40 000 € HT :</strong> Achat en gré à gré simplifié. Trois devis suffisent généralement. Circuit le plus rapide — idéal pour un premier contrat "pied dans la porte".</li>
+                        <li><strong>40 000 € à 215 000 € HT :</strong> MAPA (Marché à Procédure Adaptée) avec publicité obligatoire sur le profil acheteur de l'établissement. Délai : 2 à 4 mois.</li>
+                        <li><strong>Au-delà de 215 000 € HT :</strong> Appel d'offres ouvert formalisé avec publication au BOAMP et JOUE. Délai : 4 à 9 mois.</li>
                     </ul>
+                    <p><strong>Les 5 interlocuteurs clés et comment les approcher</strong></p>
+                    <ul>
+                        <li><strong>Chef de service (médecin) :</strong> Champion clinique potentiel. Approche via congrès, publication ou recommandation pair. Argument : bénéfice patient + gain de temps.</li>
+                        <li><strong>DSI :</strong> Validateur technique incontournable. Approche par email avec dossier sécurité complet (HDS, pentest, API doc). Réunion technique dédiée dès le début.</li>
+                        <li><strong>DAF / Directeur des achats :</strong> Acheteur économique. Argument central : business case chiffré avec TCO (coût total de possession) et délai de ROI.</li>
+                        <li><strong>Ingénieur biomédical :</strong> Validateur pour les DM physiques et équipements. Documentation technique (normes, marquage CE, maintenance).</li>
+                        <li><strong>CME (Commission Médicale d'Établissement) :</strong> Pour les solutions impactant les pratiques cliniques, une présentation en CME est souvent nécessaire. Votre champion vous y introduit.</li>
+                    </ul>
+                    <p><strong>Le PHRC comme levier de financement</strong></p>
+                    <p>Le Programme Hospitalier de Recherche Clinique (PHRC) finance des études cliniques réalisées en partenariat avec des CHU. Si votre solution a besoin d'une validation clinique robuste, un PHRC co-porté avec un CHU partenaire vous permet à la fois de financer l'étude et de créer une relation institutionnelle profonde avec votre futur client.</p>
 
-                    <div class="tip-box" style="background: linear-gradient(135deg, #004d2e 0%, #001a0f 100%); border-left: 4px solid #00ff88; color: #333;">
-                        <h4>&#x1F6E0;&#xFE0F; Outil pratique — Checklist appel d'offres santé</h4>
-                        <p style="color: #ffffff;">[CONTENU À COMPLÉTER] — Liste de vérification pour répondre à un appel d'offres hospitalier : documents requis, critères d'évaluation typiques, pièges administratifs fréquents.</p>
+                    <div class="tip-box" style="background: linear-gradient(135deg, #004d2e 0%, #001a0f 100%); border-left: 4px solid #00ff88;">
+                        <h4>&#x1F6E0;&#xFE0F; Checklist réponse à un appel d'offres hospitalier</h4>
+                        <p style="color: #f0f0f0; font-size: 0.9rem; margin-bottom: 8px;"><strong>Documents de candidature :</strong></p>
+                        <ul style="color: #f0f0f0; font-size: 0.9rem;">
+                            <li>&#x2610; Kbis de moins de 3 mois + extrait RCS</li>
+                            <li>&#x2610; Chiffres d'affaires des 3 derniers exercices (ou liasse fiscale si &lt; 3 ans d'existence)</li>
+                            <li>&#x2610; Attestations fiscales (URSSAF, impôts) de moins de 6 mois</li>
+                            <li>&#x2610; Références clients comparables (fiche par référence : établissement, périmètre, durée, contact)</li>
+                            <li>&#x2610; CV des intervenants projet</li>
+                            <li>&#x2610; Certifications (HDS, ISO 13485, ISO 27001, marquage CE si applicable)</li>
+                        </ul>
+                        <p style="color: #f0f0f0; font-size: 0.9rem; margin: 8px 0;"><strong>Offre technique :</strong></p>
+                        <ul style="color: #f0f0f0; font-size: 0.9rem;">
+                            <li>&#x2610; Réponse précise au cahier des charges (point par point — ne renvoyez pas à votre documentation générale)</li>
+                            <li>&#x2610; Architecture technique + plan d'intégration SIH</li>
+                            <li>&#x2610; Plan de formation et d'onboarding</li>
+                            <li>&#x2610; SLA détaillé (disponibilité, RTO, RPO, support)</li>
+                            <li>&#x2610; Politique RGPD + DPA modèle + certification HDS</li>
+                        </ul>
+                        <p style="color: #f0f0f0; font-size: 0.9rem; margin: 8px 0;"><strong>Pièges fréquents :</strong></p>
+                        <ul style="color: #f0f0f0; font-size: 0.9rem;">
+                            <li>&#x26A0;&#xFE0F; Ne jamais dépasser la date limite de remise — zéro tolérance dans les marchés publics</li>
+                            <li>&#x26A0;&#xFE0F; Répondre uniquement aux critères du CCTP — pas de "contenu bonus" non demandé</li>
+                            <li>&#x26A0;&#xFE0F; Vérifier si le marché est alloti (lot 1, lot 2…) et ne répondre qu'aux lots pertinents</li>
+                        </ul>
                     </div>
 
                     <h4>4.2 — Médecins libéraux et cabinets de groupe</h4>
-                    <p>[CONTENU À COMPLÉTER] — Comment adapter son approche aux professionnels libéraux :</p>
+                    <p><strong>Les spécificités de la décision en libéral</strong></p>
+                    <p>Le médecin libéral est à la fois l'utilisateur et le décideur. La décision est individuelle et peut être prise en quelques semaines — c'est la bonne nouvelle. La moins bonne : son budget personnel est limité (un généraliste secteur 1 ne dépensera pas volontiers 300 €/mois pour un outil dont il n'est pas sûr du ROI), et il est influencé par ses pairs bien plus que par des arguments commerciaux.</p>
+                    <p><strong>Les arguments qui convertissent un médecin libéral :</strong></p>
                     <ul>
-                        <li>La décision est individuelle mais soumise à l'influence des pairs</li>
-                        <li>Le critère n°1 : gain de temps et simplicité d'usage</li>
-                        <li>Le prix : comment positionner une offre abordable pour le libéral</li>
-                        <li>Le canal de distribution : syndicats professionnels, URPS, logiciels métier intégrés</li>
-                        <li>Cas particulier des MSP (Maisons de Santé Pluriprofessionnelles) et CPTS</li>
+                        <li><strong>Le gain de temps immédiat et mesurable :</strong> "Votre consultation de suivi diabète passe de 25 minutes à 15 minutes grâce au compte-rendu automatisé — soit 4 patients supplémentaires par semaine." Le médecin libéral facture à l'acte : chaque minute économisée est un revenu potentiel.</li>
+                        <li><strong>La déduction fiscale :</strong> En BNC, les abonnements à des logiciels professionnels sont déductibles du bénéfice imposable. Un abonnement de 200 €/mois coûte en réalité 100 à 130 € après déduction fiscale. Mentionnez-le systématiquement.</li>
+                        <li><strong>La recommandation du confrère :</strong> "Le Dr. Moreau, dans votre réseau, l'utilise depuis 3 mois — je peux vous mettre en contact directement." Vaut mieux que n'importe quel argument commercial.</li>
+                    </ul>
+                    <p><strong>Les canaux de distribution libéral</strong></p>
+                    <ul>
+                        <li><strong>Intégration dans les logiciels métier existants :</strong> Si votre solution peut s'intégrer dans Doctolib, HelloDoc, Mediwin, ou Medecin.fr via API, l'adoption est 5 fois plus rapide. L'utilisateur ne change pas d'outil — votre solution s'insère dans son workflow existant.</li>
+                        <li><strong>URPS et syndicats professionnels :</strong> Un partenariat avec une URPS (Union Régionale des Professionnels de Santé) ou un syndicat médical (CSMF, FMF, MG France) vous donne accès à des milliers de médecins avec une caution institutionnelle.</li>
+                        <li><strong>MSP et CPTS :</strong> Les Maisons de Santé Pluriprofessionnelles (MSP) et Communautés Professionnelles Territoriales de Santé (CPTS) ont des budgets propres issus des ARS (dotation ACI). La décision est collective (assemblée des professionnels) mais il existe un coordinateur — ciblez-le. L'argument clé : amélioration de la coordination entre professionnels du pôle.</li>
                     </ul>
 
                     <h4>4.3 — Mutuelles, assureurs et institutions parapubliques</h4>
-                    <p>[CONTENU À COMPLÉTER] — Vendre à des payeurs plutôt qu'à des utilisateurs :</p>
+                    <p><strong>La logique du payeur — radicalement différente de la logique utilisateur</strong></p>
+                    <p>Votre interlocuteur ne sera jamais l'utilisateur final (patient ou médecin). C'est la direction innovation, la direction médicale, ou la direction des risques. Leur unique critère de décision : le ROI en réduction de sinistres, d'hospitalisations ou de dépenses de santé.</p>
+                    <p><strong>Construire un business case pour une mutuelle</strong></p>
+                    <p>Exemple pour une application d'observance thérapeutique chez les patients diabétiques :</p>
                     <ul>
-                        <li>L'argument ROI est central : réduction des hospitalisations, prévention, observance</li>
-                        <li>Les processus d'achat longs et fortement procéduraux</li>
-                        <li>Les interlocuteurs : direction innovation, direction médicale, direction des risques</li>
-                        <li>Les contrats de type "service managé" ou "paiement à la performance"</li>
-                        <li>Cas particulier de l'Assurance Maladie et des ARS</li>
+                        <li>1 hospitalisation évitée pour complication diabétique = 4 000 à 9 000 euros économisés par la mutuelle</li>
+                        <li>Coût de votre application par adhérent/an : 60 euros</li>
+                        <li>Si l'app évite 1 hospitalisation pour 40 adhérents : ROI positif à partir de 4 000/40 = 100 euros/adhérent — vous êtes à 60 euros → ROI de 67%</li>
+                        <li>Montrez ce calcul. Si votre data pilote le confirme sur 200 patients, la mutuelle signe.</li>
+                    </ul>
+                    <p><strong>Les modèles contractuels adaptés aux payeurs</strong></p>
+                    <ul>
+                        <li><strong>Paiement à la performance (value-based) :</strong> Vous ne facturez que si les indicateurs de résultat sont atteints (réduction des hospitalisations, taux d'observance). Risqué pour vous, mais très séduisant pour le payeur — et différenciateur fort.</li>
+                        <li><strong>Service managé :</strong> Vous prenez en charge l'intégralité du déploiement, de la formation et du suivi — le payeur n'a qu'à valider les résultats. Prix plus élevé, adoption plus rapide.</li>
+                        <li><strong>Pilote régional avant déploiement national :</strong> Stratégie standard chez les mutuelles — acceptez-la sans négocier, mais obtenez par écrit les conditions du passage au national si le pilote est concluant.</li>
                     </ul>
 
                     <h4>4.4 — Patients en direct (B2C)</h4>
-                    <p>[CONTENU À COMPLÉTER] — Spécificités de la vente directe au patient :</p>
+                    <p><strong>Le parcours d'achat du patient en santé</strong></p>
+                    <ol>
+                        <li><strong>Prise de conscience :</strong> Symptômes, diagnostic récent, article lu. Le patient cherche à comprendre et à agir.</li>
+                        <li><strong>Recherche :</strong> Google ("application suivi diabète"), forums de patients, associations (AFD, Ligue contre le cancer…), groupes Facebook.</li>
+                        <li><strong>Comparaison :</strong> Avis sur les stores, comparatifs en ligne, recommandation médicale (décisive).</li>
+                        <li><strong>Essai :</strong> Téléchargement ou inscription freemium. La fenêtre d'adoption est courte : J1, J3 et J7 sont les moments de churn maximal.</li>
+                        <li><strong>Adoption ou abandon :</strong> Si le patient obtient une valeur perçue dès la première utilisation, il reste. Sinon, il désinstalle et n'y revient jamais.</li>
+                        <li><strong>Recommandation :</strong> Un patient satisfait en parle à son entourage. Dans les pathologies chroniques, les communautés de patients sont extrêmement actives et soudées.</li>
+                    </ol>
+                    <p><strong>Le rôle décisif de la recommandation médicale</strong></p>
+                    <p>Environ 80% des patients qui utilisent durablement une application de santé l'ont d'abord vue recommandée par leur médecin. La vente B2C en santé passe donc massivement par le B2B2C : convaincre les médecins qui recommanderont l'app à leurs patients. Votre funnel B2C commence toujours par le professionnel de santé.</p>
+                    <p><strong>Les canaux B2C spécifiques</strong></p>
                     <ul>
-                        <li>Le parcours d'achat du patient : recherche, comparaison, décision, adoption</li>
-                        <li>Le rôle de la recommandation médicale dans la décision d'achat</li>
-                        <li>Les plateformes et canaux adaptés (SEO, communautés de patients, associations)</li>
-                        <li>La gestion des avis et de la réputation en ligne</li>
-                        <li>Contraintes RGPD et réglementaires pour le marketing B2C santé</li>
+                        <li><strong>SEO :</strong> Articles de blog "comment gérer mon [pathologie]", "application [pathologie] comparatif 2025" → trafic organique qualifié de patients en phase de recherche active. C'est le canal le plus rentable à long terme.</li>
+                        <li><strong>Associations de patients :</strong> Partenariat éditorial avec l'AFD, la Fédération Française de Cardiologie, les associations pathologie-spécifiques. Une mention dans leur newsletter (souvent 50 000 à 200 000 abonnés) vaut une campagne publicitaire de 20 000 euros.</li>
+                        <li><strong>Réseaux sociaux patients :</strong> Présence organique et honnête dans les groupes Facebook "Vivre avec le diabète", Reddit, forums Carenity. Ne vendez pas — apportez de la valeur, répondez aux questions, et les membres viendront vers vous naturellement.</li>
+                        <li><strong>Marketing via les médecins :</strong> Cartes de recommandation à distribuer en cabinet, intégration dans la prescription numérique, QR code en salle d'attente. Le médecin devient votre commercial le plus crédible.</li>
                     </ul>
                 </div>
 
@@ -7603,47 +7918,145 @@
                     </p>
 
                     <h4>5.1 — L'onboarding : le moment décisif</h4>
-                    <p>[CONTENU À COMPLÉTER] — Pourquoi les 90 premiers jours après la signature définissent tout :</p>
+                    <p>Acquérir un client en santé coûte cher et prend du temps. Si l'onboarding échoue, vous avez dépensé 6 à 18 mois de cycle commercial pour un client qui churne en 3 mois. Les 90 premiers jours après la signature définissent la durée de vie du contrat.</p>
+
+                    <p><strong>La fenêtre d'adoption est plus courte qu'on ne le pense</strong></p>
                     <ul>
-                        <li>Le plan d'onboarding type : qui forme qui, en combien de temps, avec quels supports</li>
-                        <li>Les indicateurs d'adoption à suivre dès le démarrage</li>
-                        <li>Gérer les résistances au changement chez les soignants</li>
-                        <li>L'importance d'un champion interne formé et motivé</li>
-                        <li>Les erreurs d'onboarding qui causent le churn précoce</li>
+                        <li><strong>J1 à J14 :</strong> Installation, configuration, premiers pas. Taux d'abandon maximal. Un soignant qui ne comprend pas le produit en 10 minutes ne fera jamais l'effort de revenir.</li>
+                        <li><strong>J15 à J30 :</strong> Usage régulier ou abandon définitif. Moment critique. Votre analytics doit vous alerter si le taux d'utilisation est inférieur à 2 sessions/semaine.</li>
+                        <li><strong>J31 à J90 :</strong> Si utilisé régulièrement, l'habitude est formée. Probabilité de churn à 1 an : inférieure à 15%. Si sous-utilisé, probabilité de non-renouvellement : supérieure à 60%.</li>
+                    </ul>
+
+                    <p><strong>Le plan d'onboarding type pour un établissement hospitalier</strong></p>
+                    <ol>
+                        <li><strong>Kick-off (J0) :</strong> Réunion avec champion interne + DSI + référents utilisateurs. Définition des KPI de succès, désignation d'un référent côté hôpital, planning détaillé sur 90 jours.</li>
+                        <li><strong>Intégration technique (J0 à J14) :</strong> Votre équipe tech + DSI de l'hôpital. Connexion API, paramétrage, tests de données. Cible : 0 bug bloquant en J14.</li>
+                        <li><strong>Formation utilisateurs (J7 à J21) :</strong> Sessions de maximum 60 à 90 minutes par groupe de 8 à 12 soignants (pas plus — le groupe trop grand tue la qualité). E-learning asynchrone disponible ensuite pour les nouveaux arrivants. Principe fondamental : la formation doit enseigner le bénéfice patient et le gain de temps — pas la liste des fonctionnalités.</li>
+                        <li><strong>Suivi J30 :</strong> Analyse des logs d'usage. Identification des non-adoptants. Appel de 30 minutes avec le champion pour décider des actions correctives (nouvelle session de formation, adaptation du paramétrage, démo individuelle pour les résistants).</li>
+                        <li><strong>Bilan J60 :</strong> Revue des KPI vs objectifs. Si les indicateurs sont bons : commencez à préparer l'étude de cas. Si sous-performance : plan d'action structuré.</li>
+                        <li><strong>Bilan J90 :</strong> Rapport d'adoption complet. Base de la discussion d'expansion (nouveaux services, nouveaux services, nouveaux sites).</li>
+                    </ol>
+
+                    <p><strong>Gérer la résistance au changement chez les soignants</strong></p>
+                    <p>Les soignants ne résistent pas au progrès — ils résistent à la surcharge. Votre outil est perçu comme une charge supplémentaire avant d'être perçu comme un gain. Comment réduire la friction à zéro :</p>
+                    <ul>
+                        <li><strong>Intégrez dans le workflow existant</strong> plutôt qu'en ajoutant un nouvel outil à côté. Si le médecin doit ouvrir un 5ème écran, c'est perdu d'avance.</li>
+                        <li><strong>La formation doit tenir en 10 minutes max</strong> pour les fonctions de base. Si votre produit nécessite 2 heures pour être utilisé correctement, simplifiez votre UX avant de déployer.</li>
+                        <li><strong>Identifiez 1 à 2 "super-users" par unité</strong> — des soignants enthousiastes qui aident leurs collègues au quotidien. Vous ne pouvez pas être dans chaque service à la fois.</li>
+                        <li><strong>La première valeur doit être visible dès J1</strong> — si le médecin ne voit pas un bénéfice concret lors de sa première utilisation, la probabilité d'adoption s'effondre.</li>
                     </ul>
 
                     <h4>5.2 — Suivi actif et expansion (upsell / cross-sell)</h4>
-                    <p>[CONTENU À COMPLÉTER] — Comment développer son chiffre d'affaires sur la base client existante :</p>
+                    <p><strong>Le QBR (Quarterly Business Review) adapté à la santé</strong></p>
+                    <p>Tous les 3 mois (ou 6 mois pour les petits comptes), réunion formelle avec champion + décideur économique. Ordre du jour type :</p>
                     <ul>
-                        <li>Le QBR (Quarterly Business Review) adapté à la santé</li>
-                        <li>Identifier les opportunités d'expansion : nouveaux services, nouvelles unités, nouveaux sites</li>
-                        <li>Les indicateurs de santé du compte client (usage, satisfaction, NPS)</li>
-                        <li>Quand proposer un upsell sans paraître opportuniste</li>
+                        <li>Revue des KPI : taux d'adoption, résultats cliniques mesurés, satisfaction (NPS utilisateurs)</li>
+                        <li>Ce qui fonctionne bien → documentez-le pour l'étude de cas</li>
+                        <li>Ce qui peut être amélioré → roadmap à partager, engagements mutuels</li>
+                        <li>Opportunités d'expansion : nouvelles unités intéressées, nouveaux services disponibles</li>
                     </ul>
+                    <p><strong>La stratégie "Cheval de Troie" pour l'expansion hospitalière</strong></p>
+                    <p>Démarrez avec 1 service pilote. Obtenez des résultats documentés. Présentez ces résultats à la direction. Déployez dans les 4 à 6 autres services du même type dans l'établissement. Puis utilisez ce compte comme référence pour les hôpitaux du GHT (Groupement Hospitalier de Territoire) associé. Un CHU pilote bien géré peut ouvrir 15 à 20 établissements en cascade.</p>
+                    <p><strong>Quand proposer un upsell sans paraître opportuniste</strong></p>
+                    <p>Règle d'or : jamais avant J90, et seulement si le NPS est supérieur à 50. La fenêtre idéale pour proposer une extension : lors du bilan J90 si les KPI sont atteints, ou lors d'un QBR avec données positives. La formule : <em>"Vous nous dites que les résultats sur [service A] sont au-delà de vos attentes. Nous avons des retours similaires de [CHU de référence] qui a ensuite déployé sur [service B et C]. Souhaiteriez-vous qu'on explore cette piste pour 2026 ?"</em></p>
 
-                    <h4>5.3 — Transformer ses clients en ambassadeurs (KOL, témoignages, études de cas)</h4>
-                    <p>[CONTENU À COMPLÉTER] — Comment faire de ses clients les meilleurs vecteurs de vente :</p>
+                    <h4>5.3 — Transformer ses clients en ambassadeurs</h4>
+                    <p><strong>Identifier et cultiver les KOLs (Key Opinion Leaders)</strong></p>
+                    <p>Un KOL en santé cumule 3 critères : (1) pratique clinique reconnue (chef de service, universitaire, auteur publié), (2) visibilité publique (congrès, réseaux sociaux, médias médicaux), (3) réseau d'influence sur ses pairs. Vous avez probablement 1 à 2 KOLs potentiels parmi vos 10 premiers clients — identifiez-les et investissez dans la relation.</p>
+                    <p><strong>Comment recruter un KOL éthiquement :</strong></p>
+                    <ol>
+                        <li>Identifiez parmi vos utilisateurs satisfaits ceux qui ont une visibilité publique existante.</li>
+                        <li>Approchez-les pour un partenariat scientifique : co-construction d'une étude, co-rédaction d'un article, présentation commune à un congrès.</li>
+                        <li>Formalisez via une convention déclarée à l'Ordre + Transparence Santé si rémunération (cf. Partie 8 — Aspects légaux).</li>
+                        <li>Intégrez-les dans votre comité scientifique ou advisory board : ils se sentent co-constructeurs, pas juste témoins.</li>
+                    </ol>
+                    <p><strong>Construire une étude de cas qui convertit</strong></p>
+                    <p>Structure en 5 parties :</p>
                     <ul>
-                        <li>Identifier et cultiver les Key Opinion Leaders (KOL) dans votre domaine</li>
-                        <li>Construire des études de cas convaincantes avec données mesurables</li>
-                        <li>Inviter vos clients à témoigner en congrès ou sur vos supports</li>
-                        <li>Le programme de référence client : comment le structurer en santé</li>
-                        <li>Les contraintes légales sur la valorisation des témoignages (Sunshine Act)</li>
+                        <li><strong>Contexte :</strong> Établissement (type, taille), population de patients, problème initial chiffré ("taux de réadmission à 30j : 19%, objectif HAS : 12%")</li>
+                        <li><strong>Déploiement :</strong> Durée, nombre d'utilisateurs, plan de formation, intégration technique</li>
+                        <li><strong>Résultats avant / après :</strong> KPI cliniques ET opérationnels avec données réelles. Pas d'interprétation excessive — les chiffres parlent.</li>
+                        <li><strong>Témoignages :</strong> Citation du médecin référent + du directeur si possible. Prénom, nom, fonction, établissement — les citations anonymes ne convainquent pas.</li>
+                        <li><strong>ROI calculé :</strong> Coût de la solution vs économies mesurées. Délai de retour sur investissement en mois.</li>
                     </ul>
+                    <p><strong>Le programme de référence client</strong></p>
+                    <p>Demandez explicitement à chaque client satisfait (NPS ≥ 8/10) de vous présenter à 2 confrères confrontés au même problème. Formalisez : <em>"Pourriez-vous me mettre en contact avec 2 ou 3 confrères que vous connaissez et qui ont ce même problème ? Un email d'introduction suffit."</em> Un client satisfait qui fait cette introduction génère un taux de conversion 4 à 5 fois supérieur à tout autre canal.</p>
 
-                    <h4>5.4 — Gérer les insatisfactions et prévenir le churn</h4>
-                    <p>[CONTENU À COMPLÉTER] — Comment détecter les signaux faibles et éviter la perte d'un client :</p>
+                    <h4>5.4 — Prévenir et gérer le churn</h4>
+                    <p><strong>Les signaux d'alarme à surveiller en temps réel</strong></p>
                     <ul>
-                        <li>Les signaux d'alarme précoces : baisse d'utilisation, silence du champion, changement de direction</li>
-                        <li>Le processus de "rescue" d'un compte en difficulté</li>
-                        <li>Comment gérer un client insatisfait sans nuire à sa réputation</li>
-                        <li>Apprendre du churn : l'analyse post-mortem d'une perte de client</li>
-                        <li>Distinguer churn inévitable (budget coupé, fermeture) vs. churn évitable</li>
+                        <li>Baisse de plus de 30% du taux de connexion sur 4 semaines consécutives</li>
+                        <li>Le champion interne quitte l'établissement ou change de poste (risque maximal — son successeur n'a pas d'attachement à votre solution)</li>
+                        <li>Absence de réponse à vos emails pendant 3 semaines ou plus</li>
+                        <li>Un utilisateur se plaint directement à vous — c'est souvent le signe que l'insatisfaction est plus large</li>
+                        <li>Mention d'un concurrent lors d'une conversation informelle</li>
                     </ul>
+                    <p><strong>Le processus de "rescue" d'un compte en difficulté</strong></p>
+                    <ol>
+                        <li>Dès le signal détecté : appel téléphonique dans les 24h (pas d'email — le téléphone crée le lien humain que l'email ne peut pas).</li>
+                        <li>Écoute sans défensive : <em>"Je vois que l'utilisation a baissé ces dernières semaines. Qu'est-ce qui se passe ?"</em></li>
+                        <li>Diagnostic : problème technique ? Changement de priorités institutionnelles ? Insatisfaction produit ? Départ du champion ?</li>
+                        <li>Plan d'action concret avec engagements datés de votre côté.</li>
+                        <li>Vérification à J+14 : call de confirmation que les actions ont eu effet.</li>
+                    </ol>
+                    <p><strong>Distinguer churn évitable vs inévitable</strong></p>
+                    <p>Churn inévitable (15 à 20% du total) : budget coupé pour raisons économiques, fermeture ou fusion de l'établissement, changement stratégique sans lien avec votre solution. Rien à faire — analysez et passez à autre chose. Churn évitable (80 à 85% du total) : insatisfaction produit, onboarding raté, perte du champion, arrivée d'un concurrent mieux positionné. Chaque churn évitable doit faire l'objet d'un post-mortem écrit de 2 pages : cause racine, signaux qui auraient dû être détectés, action corrective pour les comptes suivants.</p>
 
-                    <div class="tip-box" style="background: linear-gradient(135deg, #004d2e 0%, #001a0f 100%); border-left: 4px solid #00ff88; color: #333;">
-                        <h4>&#x1F6E0;&#xFE0F; Outil pratique — Tableau de bord commercial santé</h4>
-                        <p style="color: #ffffff;">[CONTENU À COMPLÉTER] — Les 8 métriques commerciales essentielles à suivre chaque mois : nombre d'opportunités actives, taux de conversion par étape, durée moyenne du cycle de vente, ARR, NRR, NPS, taux de churn, et pipeline prévisionnel à 6 mois.</p>
+                    <div class="tip-box" style="background: linear-gradient(135deg, #004d2e 0%, #001a0f 100%); border-left: 4px solid #00ff88;">
+                        <h4>&#x1F4CA; Tableau de bord commercial santé — Les 8 métriques à suivre chaque semaine</h4>
+                        <div style="overflow-x: auto; margin-top: 10px;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; color: #f0f0f0;">
+                                <thead>
+                                    <tr style="background: #00ff88; color: #001a0f;">
+                                        <th style="padding: 8px; border: 1px solid #004d2e; text-align: left;">Métrique</th>
+                                        <th style="padding: 8px; border: 1px solid #004d2e; text-align: left;">Définition</th>
+                                        <th style="padding: 8px; border: 1px solid #004d2e; text-align: left;">Objectif cible</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background: rgba(0,255,136,0.05);">
+                                        <td style="padding: 7px; border: 1px solid #004d2e;"><strong>Pipeline actif</strong></td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">Nb d'opportunités qualifiées par étape du funnel</td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">3× votre objectif ARR annuel en valeur pipeline</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;"><strong>Taux de conversion</strong></td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">% de prospects qui passent d'une étape à la suivante</td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">Démo → pilote : &gt;40% / Pilote → contrat : &gt;60%</td>
+                                    </tr>
+                                    <tr style="background: rgba(0,255,136,0.05);">
+                                        <td style="padding: 7px; border: 1px solid #004d2e;"><strong>Durée cycle moyen</strong></td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">Jours entre premier contact et signature</td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">À suivre par segment (CHU ≠ libéral ≠ mutuelle)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;"><strong>ARR</strong></td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">Annual Recurring Revenue — revenu annualisé contractuel</td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">+10% MoM en phase de croissance</td>
+                                    </tr>
+                                    <tr style="background: rgba(0,255,136,0.05);">
+                                        <td style="padding: 7px; border: 1px solid #004d2e;"><strong>NRR</strong></td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">Net Revenue Retention — ARR conservé + expansion / ARR initial</td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">&gt;110% (expansion compense le churn)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;"><strong>NPS</strong></td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">Net Promoter Score — mesuré à J90 et chaque renouvellement</td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">&gt;50 (excellent en santé B2B)</td>
+                                    </tr>
+                                    <tr style="background: rgba(0,255,136,0.05);">
+                                        <td style="padding: 7px; border: 1px solid #004d2e;"><strong>Taux de churn mensuel</strong></td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">% de contrats perdus par mois</td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">&lt;1,5% mensuel (&lt;18% annualisé)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;"><strong>CAC / LTV</strong></td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">Coût d'acquisition client / Valeur vie client</td>
+                                        <td style="padding: 7px; border: 1px solid #004d2e;">LTV ≥ 3× CAC (seuil de viabilité économique)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -7669,12 +8082,59 @@
                     </ol>
 
                     <div class="tip-box" style="background: #ffebee; border-left: 4px solid #f44336;">
-                        <h4>&#x26A0;&#xFE0F; Checklist — Les 10 erreurs commerciales les plus fréquentes en santé</h4>
-                        <p>[CONTENU À COMPLÉTER] — Liste des erreurs classiques : vendre trop tôt sans preuve clinique, ignorer le DSI, sous-estimer les délais administratifs, négliger l'onboarding, ne pas suivre ses métriques, dépendre d'un seul client, brûler ses relations par de la pression commerciale excessive...</p>
+                        <h4>&#x26A0;&#xFE0F; Les 10 erreurs commerciales les plus fréquentes en santé</h4>
+                        <ol style="margin: 0; padding-left: 20px;">
+                            <li><strong>Vendre trop tôt, sans preuve clinique suffisante.</strong> Vous signez 2 contrats grâce à votre réseau — puis ça s'arrête. Sans données, vous ne pouvez pas scaler. Investissez dans l'étude pilote avant de recruter des commerciaux.</li>
+                            <li><strong>Ignorer le DSI jusqu'à la dernière minute.</strong> Il peut bloquer une vente à laquelle vous avez consacré 8 mois. Intégrez-le dès le deuxième rendez-vous.</li>
+                            <li><strong>Sous-estimer les délais dans le plan de trésorerie.</strong> Construire un prévisionnel basé sur des signatures à 6 mois alors que vos cycles réels durent 14 mois — c'est la cause n°1 de crise de trésorerie en startup santé B2B.</li>
+                            <li><strong>Négliger l'onboarding après la signature.</strong> Signer et passer immédiatement au prospect suivant. Résultat : churn à 12 mois et pas de renouvellement.</li>
+                            <li><strong>Ne pas former votre champion interne.</strong> Il doit pouvoir défendre votre solution sans vous dans les réunions internes. Si vous n'avez pas investi dans sa formation, il ne le fera pas.</li>
+                            <li><strong>Dépendre d'un seul gros client pour plus de 40% du CA.</strong> Si ce client churne ou gèle son budget, vous êtes en danger immédiat. Diversifiez dès que possible.</li>
+                            <li><strong>Faire du cold emailing de masse en espérant un retour.</strong> Voir Section 3.1 — résumé : taux de retour de 0,3%, image de marque dégradée, temps perdu.</li>
+                            <li><strong>Ne pas mesurer vos métriques clés chaque semaine.</strong> Un entrepreneur qui ne connaît pas son taux de churn, son CAC et son NRR pilote à l'aveugle.</li>
+                            <li><strong>Promettre des fonctionnalités non encore développées pour signer.</strong> Le client signera, mais churne dès qu'il réalise que la promesse n'est pas tenue. Votre réputation dans un secteur aussi connecté est irrécupérable.</li>
+                            <li><strong>Relancer de façon agressive des prospects silencieux.</strong> En santé, brûler une relation est définitif. Un médecin qui reçoit 3 emails de relance en 2 semaines ne vous répondra plus jamais — et le dira à ses confrères.</li>
+                        </ol>
                     </div>
                 </div>
 
             </div>
+            <!-- CALCULATEUR ROI E-SANTÉ -->
+            <div class="inline-calculator" id="calcROI">
+                <div class="calc-header">
+                    <div class="calc-icon">📈</div>
+                    <div>
+                        <p class="calc-title">Calculateur ROI e-Santé</p>
+                        <p class="calc-subtitle">Estimez le retour sur investissement de votre solution pour un établissement de santé</p>
+                    </div>
+                </div>
+                <div class="calc-fields">
+                    <div class="calc-field">
+                        <label for="roi_users">Nombre de soignants utilisateurs</label>
+                        <input type="number" id="roi_users" placeholder="ex. 50" min="1" />
+                    </div>
+                    <div class="calc-field">
+                        <label for="roi_time">Temps économisé par soignant/jour (minutes)</label>
+                        <input type="number" id="roi_time" placeholder="ex. 20" min="1" />
+                    </div>
+                    <div class="calc-field">
+                        <label for="roi_cost">Coût horaire moyen d'un soignant (€/h)</label>
+                        <input type="number" id="roi_cost" placeholder="ex. 45" min="1" />
+                    </div>
+                    <div class="calc-field">
+                        <label for="roi_price">Prix annuel de votre solution (€/an)</label>
+                        <input type="number" id="roi_price" placeholder="ex. 30000" min="1" />
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcROI()">Calculer le ROI</button>
+                <div class="calc-result" id="roi_result">
+                    <div class="calc-result-main" id="roi_main"></div>
+                    <div class="calc-result-label" id="roi_label"></div>
+                    <div class="calc-result-detail" id="roi_detail"></div>
+                    <div id="roi_alert"></div>
+                </div>
+            </div>
+
             <div class="part-navigation">
                 <div class="nav-part-btn prev" data-page="part5">
                     <div class="label">Précédent</div>
@@ -9551,6 +10011,75 @@
             </div>
         </div>
 
+        <!-- CALCULATEUR CONFORMITÉ RÉGLEMENTAIRE -->
+        <div class="container">
+            <div class="inline-calculator" id="calcConformite">
+                <div class="calc-header">
+                    <div class="calc-icon">⚖️</div>
+                    <div>
+                        <p class="calc-title">Score de Conformité Réglementaire</p>
+                        <p class="calc-subtitle">Évaluez votre niveau de conformité réglementaire e-santé en moins de 2 minutes</p>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
+                    <div class="calc-field">
+                        <label for="conf_dm">Votre solution est-elle un dispositif médical (DM) ou un logiciel d'aide à la décision clinique ?</label>
+                        <select id="conf_dm">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="3">Non — outil de gestion/admin sans vocation clinique</option>
+                            <option value="2">Incertain — contient des fonctions d'aide clinique</option>
+                            <option value="1">Oui — avec qualification DM et marquage CE en cours</option>
+                            <option value="0">Oui — sans démarche de qualification engagée</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label for="conf_hds">Votre hébergeur de données de santé est-il certifié HDS ?</label>
+                        <select id="conf_hds">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="3">Oui — hébergeur certifié HDS (OVH, Microsoft Azure Health, AWS Healthcare…)</option>
+                            <option value="2">En cours de mise en conformité</option>
+                            <option value="0">Non — ou pas de données de santé stockées</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label for="conf_rgpd">Avez-vous réalisé une Analyse d'Impact (AIPD/PIA) pour vos traitements de données personnelles ?</label>
+                        <select id="conf_rgpd">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="3">Oui — AIPD documentée et à jour</option>
+                            <option value="2">En cours de réalisation</option>
+                            <option value="1">Non — pas encore entamée</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label for="conf_cgu">Vos CGU/CGV et politique de confidentialité sont-elles rédigées et accessibles ?</label>
+                        <select id="conf_cgu">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="3">Oui — revues par un avocat, accessibles en 1 clic</option>
+                            <option value="2">Oui — rédigées en interne, non encore validées</option>
+                            <option value="1">Non — pas encore rédigées</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label for="conf_anticadeaux">Vos conventions avec des professionnels de santé sont-elles déclarées (Loi anti-cadeaux / Sunshine Act) ?</label>
+                        <select id="conf_anticadeaux">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="3">Oui — toutes déclarées sur Transparence Santé</option>
+                            <option value="2">En cours — conventions en cours de déclaration</option>
+                            <option value="1">Non — pas encore initié</option>
+                            <option value="3">Non applicable — pas de conventions avec des PS</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calcConformite()">Évaluer ma conformité</button>
+                <div class="calc-result" id="conf_result">
+                    <div class="calc-result-main" id="conf_main"></div>
+                    <div class="calc-result-label" id="conf_label"></div>
+                    <div class="calc-result-detail" id="conf_detail"></div>
+                    <div id="conf_alert"></div>
+                </div>
+            </div>
+        </div>
+
         <!-- NAVIGATION -->
         <div class="container">
             <div class="part-navigation">
@@ -9714,8 +10243,8 @@
                 <h1>Nos tarifs</h1>
                 <p class="subtitle">Un accompagnement adapté à chaque étape de votre projet</p>
                 <p>
-                    Choisissez la formule qui correspond à vos besoins. Toutes incluent l'accès au parcours complet
-                    et à nos ressources pédagogiques.
+                    Choisissez la formule qui correspond à vos besoins. <strong>Paiement unique, accès à vie</strong> — pas d'abonnement, pas de frais cachés.
+                    Toutes les formules incluent l'accès complet au parcours et aux ressources pédagogiques.
                 </p>
             </div>
         </section>
@@ -9743,8 +10272,8 @@
                 <div class="pricing-card featured">
                     <div class="pricing-popular">Le plus populaire</div>
                     <div class="pricing-badge">Accompagné</div>
-                    <div class="pricing-price">49€<span>/mois</span></div>
-                    <div class="pricing-period">Sans engagement</div>
+                    <div class="pricing-price">49€</div>
+                    <div class="pricing-period">Paiement unique</div>
                     <p class="pricing-description">Pour ceux qui veulent avancer efficacement avec l'aide de l'IA et de la communauté.</p>
                     <ul class="pricing-features">
                         <li class="included">Tout le contenu Découverte</li>
@@ -9760,8 +10289,8 @@
 
                 <div class="pricing-card">
                     <div class="pricing-badge">Premium</div>
-                    <div class="pricing-price">199€<span>/mois</span></div>
-                    <div class="pricing-period">Engagement 3 mois</div>
+                    <div class="pricing-price">199€</div>
+                    <div class="pricing-period">Paiement unique</div>
                     <p class="pricing-description">Un accompagnement sur-mesure pour concrétiser votre projet avec un expert dédié.</p>
                     <ul class="pricing-features">
                         <li class="included">Tout le contenu Accompagné</li>
@@ -9789,7 +10318,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Oui, vous pouvez passer d'une formule à l'autre à tout moment. La mise à niveau est immédiate, et en cas de rétrogradation, elle prend effet à la fin de votre période de facturation en cours.</p>
+                        <p>Oui, vous pouvez choisir la formule qui vous convient à tout moment. Chaque formule est un paiement unique — il n'y a pas d'abonnement ni de facturation récurrente. Vous payez une fois et bénéficiez de l'accès sans limite de durée.</p>
                     </div>
                 </div>
 
@@ -9829,7 +10358,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Oui. Si vous n'êtes pas satisfait, vous pouvez demander un remboursement complet dans les 14 jours suivant votre souscription, sans condition.</p>
+                        <p>Oui. Si vous n'êtes pas satisfait, vous pouvez demander un remboursement complet dans les 14 jours suivant votre achat, sans condition.</p>
                     </div>
                 </div>
             </div>
@@ -10217,6 +10746,18 @@
                     <a href="https://www.hackyourcare.com/contact" target="_blank" class="cta-button secondary">Cr&eacute;er un agent personnalis&eacute;</a>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL RECHERCHE -->
+    <div id="searchModal" class="search-modal" role="dialog" aria-modal="true" aria-label="Recherche">
+        <div class="search-modal-inner">
+            <div class="search-input-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon" width="20" height="20"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="searchInput" placeholder="Rechercher dans le contenu…" autocomplete="off" />
+                <button class="search-close-btn" data-action="closeSearch" aria-label="Fermer la recherche">&#x2715;</button>
+            </div>
+            <div id="searchResults" class="search-results" aria-live="polite"></div>
         </div>
     </div>
 
