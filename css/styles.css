@@ -136,6 +136,173 @@ body {
     width: 100%;
 }
 
+/* Search nav button */
+.search-nav-btn {
+    background: none;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #999;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 10px;
+    transition: all 0.3s ease;
+}
+
+.search-nav-btn:hover {
+    color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+
+/* ========================================
+   SEARCH MODAL
+   ======================================== */
+.search-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 4000;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 80px;
+    backdrop-filter: blur(4px);
+}
+
+.search-modal.active {
+    display: flex;
+}
+
+.search-modal-inner {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 20px;
+    background: #0d1a12;
+    border: 1px solid var(--primary-green);
+    border-radius: 14px;
+    box-shadow: 0 20px 60px rgba(0, 255, 136, 0.15);
+    overflow: hidden;
+}
+
+.search-input-wrap {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    gap: 12px;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.search-input-wrap .search-icon {
+    color: var(--primary-green);
+    flex-shrink: 0;
+}
+
+#searchInput {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1.1em;
+    font-family: inherit;
+}
+
+#searchInput::placeholder {
+    color: #555;
+}
+
+.search-close-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 1.2em;
+    line-height: 1;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.search-close-btn:hover {
+    color: #fff;
+    background: #1a1a1a;
+}
+
+.search-results {
+    max-height: 420px;
+    overflow-y: auto;
+    padding: 8px 0;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border-bottom: 1px solid #0d0d0d;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background: rgba(0, 255, 136, 0.06);
+}
+
+.search-result-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 255, 136, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    flex-shrink: 0;
+}
+
+.search-result-content h4 {
+    color: #fff;
+    font-size: 0.95em;
+    margin: 0 0 4px;
+}
+
+.search-result-content p {
+    color: #666;
+    font-size: 0.82em;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.search-result-tag {
+    display: inline-block;
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--primary-green);
+    font-size: 0.72em;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-bottom: 5px;
+}
+
+.search-empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: #555;
+    font-size: 0.95em;
+}
+
+.search-hint {
+    padding: 16px 20px;
+    color: #444;
+    font-size: 0.82em;
+    text-align: center;
+    border-top: 1px solid #111;
+}
+
 /* ========================================
    READING PROGRESS BAR
    ======================================== */
@@ -652,23 +819,66 @@ body {
     line-height: 1.7;
 }
 
-/* Tip-box with dark text (333) */
-.tip-box[style*="color: #333"] h4,
-.tip-box[style*="color: #333"] p {
-    color: #e0e0e0 !important;
+/* Tip-box with light background — force dark readable text */
+.tip-box[style*="background: #fff3e0"],
+.tip-box[style*="background: #e8f5e9"],
+.tip-box[style*="background: #ffebee"],
+.tip-box[style*="background: #e3f2fd"],
+.tip-box[style*="background: #f3e5f5"],
+.tip-box[style*="background: #fff8e1"],
+.tip-box[style*="color: #333"] {
+    color: #333 !important;
 }
 
+.tip-box[style*="background: #fff3e0"] h4,
+.tip-box[style*="background: #e8f5e9"] h4,
+.tip-box[style*="background: #ffebee"] h4,
+.tip-box[style*="background: #e3f2fd"] h4,
+.tip-box[style*="background: #f3e5f5"] h4,
+.tip-box[style*="background: #fff8e1"] h4,
+.tip-box[style*="color: #333"] h4 {
+    color: #1a1a1a !important;
+}
+
+.tip-box[style*="background: #fff3e0"] p,
+.tip-box[style*="background: #fff3e0"] ul,
+.tip-box[style*="background: #fff3e0"] ol,
+.tip-box[style*="background: #fff3e0"] li,
+.tip-box[style*="background: #fff3e0"] strong,
+.tip-box[style*="background: #e8f5e9"] p,
+.tip-box[style*="background: #e8f5e9"] ul,
+.tip-box[style*="background: #e8f5e9"] ol,
+.tip-box[style*="background: #e8f5e9"] li,
+.tip-box[style*="background: #e8f5e9"] strong,
+.tip-box[style*="background: #ffebee"] p,
+.tip-box[style*="background: #ffebee"] ul,
+.tip-box[style*="background: #ffebee"] ol,
+.tip-box[style*="background: #ffebee"] li,
+.tip-box[style*="background: #ffebee"] strong,
+.tip-box[style*="background: #e3f2fd"] p,
+.tip-box[style*="background: #e3f2fd"] ul,
+.tip-box[style*="background: #e3f2fd"] ol,
+.tip-box[style*="background: #e3f2fd"] li,
+.tip-box[style*="background: #e3f2fd"] strong,
+.tip-box[style*="background: #f3e5f5"] p,
+.tip-box[style*="background: #f3e5f5"] ul,
+.tip-box[style*="background: #f3e5f5"] ol,
+.tip-box[style*="background: #f3e5f5"] li,
+.tip-box[style*="background: #f3e5f5"] strong,
+.tip-box[style*="background: #fff8e1"] p,
+.tip-box[style*="background: #fff8e1"] ul,
+.tip-box[style*="background: #fff8e1"] ol,
+.tip-box[style*="background: #fff8e1"] li,
+.tip-box[style*="background: #fff8e1"] strong,
+.tip-box[style*="color: #333"] p,
+.tip-box[style*="color: #333"] ul,
+.tip-box[style*="color: #333"] ol,
+.tip-box[style*="color: #333"] li,
 .tip-box[style*="color: #333"] strong {
-    color: #e0e0e0;
+    color: #333 !important;
 }
 
-/* Tables in dark text tip-box */
-.tip-box[style*="color: #333"] table {
-    background: white;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
+/* Tables in light background tip-box */
 .tip-box[style*="color: #333"] table th,
 .tip-box[style*="color: #333"] table td {
     color: #333 !important;
@@ -683,17 +893,7 @@ body {
     color: #333 !important;
 }
 
-/* Lists in dark text tip-box */
-.tip-box[style*="color: #333"] ul,
-.tip-box[style*="color: #333"] ol {
-    color: #e0e0e0;
-}
-
-.tip-box[style*="color: #333"] li {
-    color: #e0e0e0;
-}
-
-/* Background boxes inside dark text tip-box */
+/* Background boxes inside light background tip-box */
 .tip-box[style*="color: #333"] div[style*="background: white"] {
     color: #333 !important;
 }
@@ -1601,6 +1801,167 @@ footer {
     color: #999;
     font-size: 1em;
     line-height: 1.8;
+}
+
+/* ========================================
+   INLINE CALCULATORS
+   ======================================== */
+.inline-calculator {
+    background: linear-gradient(135deg, #0a1f12 0%, #000 100%);
+    border: 1px solid var(--primary-green);
+    border-radius: 14px;
+    padding: 35px 40px;
+    margin: 50px 0;
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.08);
+}
+
+.inline-calculator .calc-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.inline-calculator .calc-icon {
+    font-size: 2em;
+    width: 52px;
+    height: 52px;
+    background: rgba(0, 255, 136, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inline-calculator .calc-title {
+    color: var(--primary-green);
+    font-size: 1.25em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.inline-calculator .calc-subtitle {
+    color: #888;
+    font-size: 0.85em;
+    margin: 4px 0 0;
+}
+
+.inline-calculator .calc-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.inline-calculator .calc-field label {
+    display: block;
+    color: #aaa;
+    font-size: 0.85em;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.inline-calculator .calc-field input,
+.inline-calculator .calc-field select {
+    width: 100%;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1em;
+    padding: 12px 14px;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.inline-calculator .calc-field input:focus,
+.inline-calculator .calc-field select:focus {
+    outline: none;
+    border-color: var(--primary-green);
+}
+
+.inline-calculator .calc-btn {
+    background: var(--primary-green);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 32px;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.inline-calculator .calc-btn:hover {
+    background: #00cc6a;
+    transform: translateY(-1px);
+}
+
+.inline-calculator .calc-result {
+    display: none;
+    background: rgba(0, 255, 136, 0.06);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    border-radius: 10px;
+    padding: 24px;
+    margin-top: 20px;
+}
+
+.inline-calculator .calc-result.visible {
+    display: block;
+}
+
+.inline-calculator .calc-result-main {
+    font-size: 2em;
+    font-weight: 800;
+    color: var(--primary-green);
+    margin-bottom: 8px;
+}
+
+.inline-calculator .calc-result-label {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 16px;
+}
+
+.inline-calculator .calc-result-detail {
+    color: #ccc;
+    font-size: 0.9em;
+    line-height: 1.7;
+    border-top: 1px solid #1a1a1a;
+    padding-top: 14px;
+    margin-top: 14px;
+}
+
+.inline-calculator .calc-result-detail strong {
+    color: #fff;
+}
+
+.calc-result-alert {
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.88em;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.calc-result-alert.danger {
+    background: rgba(255, 82, 82, 0.15);
+    color: #ff7070;
+    border-left: 3px solid #ff5252;
+}
+
+.calc-result-alert.warning {
+    background: rgba(255, 193, 7, 0.12);
+    color: #ffd54f;
+    border-left: 3px solid #ffc107;
+}
+
+.calc-result-alert.success {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--primary-green);
+    border-left: 3px solid var(--primary-green);
 }
 
 /* ========================================
