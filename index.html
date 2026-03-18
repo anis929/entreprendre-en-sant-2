@@ -200,14 +200,14 @@
                 </div>
 
                 <div class="section-card bonus-card" data-page="videos">
-                    <span class="section-number">BONUS &#x1F3A5;</span>
-                    <h3>Vidéos &amp; Coulisses</h3>
-                    <p class="description">Découvrez nos conseils en vidéo et plongez dans les coulisses.</p>
+                    <span class="section-number">RESSOURCES &#x1F4A1;</span>
+                    <h3>Médias &amp; Contenus</h3>
+                    <p class="description">Vidéos, podcasts et ressources pour accélérer votre parcours entrepreneurial.</p>
                     <ul>
-                        <li>Accompagnement &amp; Tips</li>
-                        <li>Astuces d'entrepreneurs</li>
-                        <li>Moments de vie</li>
-                        <li>Témoignages terrain</li>
+                        <li>Vidéos spécialisées en entrepreneuriat santé</li>
+                        <li>Analyses stratégiques et conseils</li>
+                        <li>Témoignages d'entrepreneurs</li>
+                        <li>Astuces terrain et bonnes pratiques</li>
                     </ul>
                 </div>
             </div>
@@ -10916,6 +10916,83 @@
                     <a href="https://www.hackyourcare.com/contact" target="_blank" class="cta-button">D&eacute;marrer avec un agent</a>
                     <a href="https://www.hackyourcare.com/contact" target="_blank" class="cta-button secondary">Discuter d'un agent personnalis&eacute;</a>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION : MÉDIAS & RESSOURCES -->
+    <div id="videos" class="page">
+        <!-- DATA: Media Content Registry (Centralized data for easy maintenance) -->
+        <!-- HOW TO ADD MORE CONTENT: Add new objects to the mediaContent array below -->
+        <!-- Structure: { type, title, description, youtubeId, category, order, date } -->
+        <script type="application/json" id="mediaContentData">
+        {
+            "content": [
+                {
+                    "id": 1,
+                    "type": "video",
+                    "title": "Entrepreneuriat en santé : les défis incontournables",
+                    "description": "Découvrez les 3 pilliers fondamentaux de l'entrepreneuriat en santé et comment les maîtriser pour réussir votre projet.",
+                    "youtubeId": "KBSxtAphpEA",
+                    "category": "Fondamentaux",
+                    "order": 1,
+                    "date": "2026-03-15"
+                }
+            ]
+        }
+        </script>
+
+        <section class="media-hero">
+            <div class="container">
+                <h1>Ressources Médias</h1>
+                <p class="subtitle">Vidéos, podcasts et contenus éditoriaux pour accélérer votre parcours entrepreneurial</p>
+                <p>
+                    Accédez à nos meilleurs contenus : conseils structurés, analyses du marché, témoignages d'entrepreneurs, et astuces pratiques
+                    pour naviguer les défis spécifiques de l'entrepreneuriat en santé.
+                </p>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- MEDIA GRID -->
+            <div class="media-section">
+                <div class="media-grid" id="mediaGrid">
+                    <!-- Content is populated dynamically via JavaScript -->
+                    <!-- Fallback while content is loading -->
+                    <div class="media-card">
+                        <div class="media-thumbnail">
+                            <div class="video-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5h3V9h4v3h3l-5 5z"/></svg>
+                            </div>
+                        </div>
+                        <div class="media-content">
+                            <div class="media-badge">Vidéo</div>
+                            <h3>Entrepreneuriat en santé : les défis incontournables</h3>
+                            <p>Découvrez les 3 pilliers fondamentaux de l'entrepreneuriat en santé et comment les maîtriser pour réussir votre projet.</p>
+                            <a href="#" class="media-cta" data-media="0">Regarder la vidéo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIDEO PLAYER MODAL -->
+            <div id="mediaModal" class="media-modal" style="display: none;">
+                <div class="media-modal-overlay" data-action="closeMedia"></div>
+                <div class="media-modal-content">
+                    <button class="media-modal-close" data-action="closeMedia" aria-label="Fermer">&times;</button>
+                    <div class="media-modal-body">
+                        <div class="video-embed-wrapper" id="embedWrapper">
+                            <!-- YouTube embed will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA SECTION -->
+            <div class="media-cta-section">
+                <h3>Plus de contenus à venir</h3>
+                <p>Nous enrichissons régulièrement notre bibliothèque de vidéos, podcasts et ressources éditorialisées pour accompagner votre entrepreneuriat.</p>
+                <a href="https://www.hackyourcare.com/contact" target="_blank" class="cta-button">Suggérer un sujet</a>
             </div>
         </div>
     </div>

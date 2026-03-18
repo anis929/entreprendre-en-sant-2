@@ -2321,3 +2321,316 @@ footer {
         right: 0;
     }
 }
+
+/* ========================================
+   MEDIA & RESOURCES SECTION
+   ======================================== */
+
+/* Hero Section */
+.media-hero {
+    padding: 80px 0 60px;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, transparent 100%);
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.media-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.media-hero .subtitle {
+    font-size: 1.3rem;
+    color: var(--primary-green);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.media-hero p {
+    font-size: 1rem;
+    color: #aaa;
+    max-width: 800px;
+    line-height: 1.8;
+}
+
+/* Media Section */
+.media-section {
+    padding: 60px 0;
+}
+
+/* Media Grid */
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+/* Media Card */
+.media-card {
+    background: rgba(26, 26, 26, 0.5);
+    border: 1px solid #1a1a1a;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.media-card:hover {
+    border-color: var(--primary-green);
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.15);
+    transform: translateY(-5px);
+}
+
+/* Media Thumbnail */
+.media-thumbnail {
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    position: relative;
+    background: #0a0a0a;
+    overflow: hidden;
+}
+
+.media-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+.video-placeholder svg {
+    width: 60px;
+    height: 60px;
+    color: var(--primary-green);
+    opacity: 0.6;
+}
+
+/* Media Content */
+.media-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.media-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-green), #00cc6e);
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    width: fit-content;
+}
+
+.media-badge.podcast {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+}
+
+.media-badge.editorial {
+    background: linear-gradient(135deg, #4ecdc4, #44b7b1);
+}
+
+.media-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    color: #fff;
+}
+
+.media-card p {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 20px;
+    flex: 1;
+    line-height: 1.6;
+}
+
+/* Media CTA */
+.media-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-green);
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: center;
+}
+
+.media-cta:hover {
+    background: var(--hover-green);
+    transform: scale(1.02);
+}
+
+/* Media Modal */
+.media-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.media-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+
+.media-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    max-height: 80vh;
+    background: #000;
+    border: 1px solid #1a1a1a;
+    border-radius: 12px;
+    overflow: auto;
+    z-index: 2001;
+}
+
+.media-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid var(--primary-green);
+    color: var(--primary-green);
+    font-size: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 2002;
+    padding: 0;
+}
+
+.media-modal-close:hover {
+    background: var(--primary-green);
+    color: #000;
+}
+
+.media-modal-body {
+    padding: 0;
+}
+
+/* Video Embed Wrapper - Responsive */
+.video-embed-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    background: #0a0a0a;
+}
+
+.video-embed-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* CTA Section */
+.media-cta-section {
+    text-align: center;
+    padding: 60px 40px;
+    background: rgba(0, 255, 136, 0.03);
+    border: 1px solid #1a1a1a;
+    border-radius: 12px;
+    margin-bottom: 60px;
+}
+
+.media-cta-section h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.media-cta-section p {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .media-hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .media-hero .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .media-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .media-cta-section {
+        padding: 40px 30px;
+    }
+
+    .media-cta-section h3 {
+        font-size: 1.5rem;
+    }
+
+    .media-modal-content {
+        width: 95%;
+        max-height: 70vh;
+    }
+
+    .media-modal-close {
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+    }
+}
