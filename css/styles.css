@@ -811,6 +811,8 @@ body {
     color: var(--primary-green) !important;
     font-size: 1.4em;
     margin-bottom: 15px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
 }
 
 .tip-box p {
