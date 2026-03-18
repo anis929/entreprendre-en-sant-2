@@ -10501,6 +10501,88 @@
 
         <div class="container">
 
+            <!-- STATS BAR -->
+            <div class="agents-stats-bar">
+                <div class="agent-stat">
+                    <span class="agent-stat-number">7</span>
+                    <span class="agent-stat-label">Agents sp&eacute;cialis&eacute;s</span>
+                </div>
+                <div class="agent-stat-divider"></div>
+                <div class="agent-stat">
+                    <span class="agent-stat-number">15<small>min</small></span>
+                    <span class="agent-stat-label">Pour d&eacute;bloquer une situation</span>
+                </div>
+                <div class="agent-stat-divider"></div>
+                <div class="agent-stat">
+                    <span class="agent-stat-number">0</span>
+                    <span class="agent-stat-label">Installation requise</span>
+                </div>
+                <div class="agent-stat-divider"></div>
+                <div class="agent-stat">
+                    <span class="agent-stat-number">&infin;</span>
+                    <span class="agent-stat-label">Conversations illimit&eacute;es</span>
+                </div>
+            </div>
+
+            <!-- QUICK NAV -->
+            <div class="agent-quick-nav">
+                <span class="agent-quick-nav-label">Aller directement &agrave;&nbsp;:</span>
+                <a class="agent-quick-nav-item" onclick="scrollToAgent('agent-clarificateur');return false;" href="#">&#129504; Clarificateur</a>
+                <a class="agent-quick-nav-item" onclick="scrollToAgent('agent-guide');return false;" href="#">&#9878;&#65039; Guide juridique</a>
+                <a class="agent-quick-nav-item" onclick="scrollToAgent('agent-stratege');return false;" href="#">&#128176; Financement</a>
+                <a class="agent-quick-nav-item" onclick="scrollToAgent('agent-architecte');return false;" href="#">&#127959;&#65039; &Eacute;quipe</a>
+                <a class="agent-quick-nav-item" onclick="scrollToAgent('agent-marketing');return false;" href="#">&#128226; Marketing</a>
+                <a class="agent-quick-nav-item" onclick="scrollToAgent('agent-coach');return false;" href="#">&#128202; Finance</a>
+                <a class="agent-quick-nav-item" onclick="scrollToAgent('agent-vigie');return false;" href="#">&#128737;&#65039; Conformit&eacute;</a>
+            </div>
+
+            <!-- AGENT SELECTOR QUIZ -->
+            <div class="content-section">
+                <div class="content-card agent-selector-card">
+                    <h2 style="margin-bottom:10px;">&#127919; Quel agent vous faut-il&nbsp;?</h2>
+                    <p style="color:#aaa;margin-bottom:30px;">S&eacute;lectionnez votre d&eacute;fi principal pour obtenir une recommandation personnalis&eacute;e.</p>
+                    <div class="quiz-options" id="quizOptions">
+                        <button class="quiz-option-btn" onclick="selectAgentQuiz('clarificateur')">
+                            <span class="quiz-opt-icon">&#129504;</span>
+                            <span class="quiz-opt-text">Clarifier mon id&eacute;e de projet</span>
+                        </button>
+                        <button class="quiz-option-btn" onclick="selectAgentQuiz('guide')">
+                            <span class="quiz-opt-icon">&#9878;&#65039;</span>
+                            <span class="quiz-opt-text">Choisir mon statut juridique</span>
+                        </button>
+                        <button class="quiz-option-btn" onclick="selectAgentQuiz('stratege')">
+                            <span class="quiz-opt-icon">&#128176;</span>
+                            <span class="quiz-opt-text">Trouver des financements</span>
+                        </button>
+                        <button class="quiz-option-btn" onclick="selectAgentQuiz('architecte')">
+                            <span class="quiz-opt-icon">&#127959;&#65039;</span>
+                            <span class="quiz-opt-text">Structurer mon &eacute;quipe</span>
+                        </button>
+                        <button class="quiz-option-btn" onclick="selectAgentQuiz('marketing')">
+                            <span class="quiz-opt-icon">&#128226;</span>
+                            <span class="quiz-opt-text">D&eacute;velopper ma visibilit&eacute;</span>
+                        </button>
+                        <button class="quiz-option-btn" onclick="selectAgentQuiz('coach')">
+                            <span class="quiz-opt-icon">&#128202;</span>
+                            <span class="quiz-opt-text">Piloter mes finances</span>
+                        </button>
+                        <button class="quiz-option-btn" onclick="selectAgentQuiz('vigie')">
+                            <span class="quiz-opt-icon">&#128737;&#65039;</span>
+                            <span class="quiz-opt-text">V&eacute;rifier ma conformit&eacute;</span>
+                        </button>
+                    </div>
+                    <div class="quiz-result" id="quizResult" style="display:none;">
+                        <span id="quizResultIcon" style="font-size:3em;display:block;margin-bottom:15px;"></span>
+                        <h3 id="quizResultTitle" style="margin-bottom:10px;"></h3>
+                        <p id="quizResultDesc" style="color:#aaa;margin-bottom:25px;"></p>
+                        <div style="display:flex;gap:15px;flex-wrap:wrap;justify-content:center;">
+                            <button class="cta-button" onclick="scrollToAgentFromQuiz()" style="font-size:0.9em;padding:12px 25px;">Voir l&rsquo;agent &rarr;</button>
+                            <button class="cta-button secondary" onclick="resetAgentQuiz()" style="font-size:0.9em;padding:12px 25px;">Recommencer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- SECTION INTRO : AGENTS VS ACCOMPAGNEMENT -->
             <div class="content-section">
                 <div class="content-card">
@@ -10541,8 +10623,15 @@
 
             <!-- AGENT 1 : Clarificateur de projet -->
             <div class="agent-detail-card" id="agent-clarificateur">
-                <div class="agent-detail-icon" aria-label="Agent Clarificateur : cerveau">🧠</div>
+                <div class="agent-detail-icon" aria-label="Agent Clarificateur : cerveau">&#129504;</div>
                 <div class="agent-detail-content">
+                    <div class="agent-profile-tags">
+                        <span class="profile-tag">M&eacute;decin</span>
+                        <span class="profile-tag">Pharmacien</span>
+                        <span class="profile-tag">Kin&eacute;</span>
+                        <span class="profile-tag">Infirmier</span>
+                        <span class="profile-tag">Tout profil</span>
+                    </div>
                     <h3>Clarificateur de projet</h3>
                     <div class="agent-mission">
                         <strong>Mission :</strong> Transformer une intuition clinique en projet entrepreneurial structuré et viable.
@@ -10558,22 +10647,65 @@
                         <li>Pharmacien envisage une activité de conseil en prévention nutritionnelle</li>
                     </ul>
                     <div class="agent-benefits">
-                        <span class="benefit-tag">Idée formalisée en 15 min</span>
-                        <span class="benefit-tag">Vision claire et structurée</span>
-                        <span class="benefit-tag">Prêt à passer à l'action</span>
+                        <span class="benefit-tag">Id&eacute;e formalis&eacute;e en 15 min</span>
+                        <span class="benefit-tag">Vision claire et structur&eacute;e</span>
+                        <span class="benefit-tag">Pr&ecirc;t &agrave; passer &agrave; l&rsquo;action</span>
                     </div>
+
+                    <h4>Prompts pr&ecirc;ts &agrave; l&rsquo;emploi</h4>
+                    <div class="agent-prompts">
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je suis m&eacute;decin g&eacute;n&eacute;raliste et j&rsquo;ai l&rsquo;impression que mes patients diab&eacute;tiques manquent de suivi entre les consultations. J&rsquo;aimerais cr&eacute;er quelque chose mais je ne sais pas exactement quoi. Aide-moi &agrave; clarifier mon id&eacute;e en me posant les bonnes questions.&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;J&rsquo;ai deux id&eacute;es de projets sant&eacute;&nbsp;: l&rsquo;une sur la t&eacute;l&eacute;consultation sp&eacute;cialis&eacute;e, l&rsquo;autre sur une plateforme de formation pour soignants. Aide-moi &agrave; comparer ces deux options et &agrave; identifier laquelle correspond le mieux &agrave; mon profil et au march&eacute;.&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Mon id&eacute;e en une phrase&nbsp;: [votre id&eacute;e]. Maintenant aide-moi &agrave; la d&eacute;cortiquer&nbsp;: quel est le probl&egrave;me exact que je r&eacute;sous, pour qui, comment et pourquoi moi je suis le mieux plac&eacute; pour le faire&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                    </div>
+
+                    <h4>Aper&ccedil;u d&rsquo;une conversation type</h4>
+                    <div class="conversation-preview">
+                        <div class="conv-message conv-user">
+                            <span class="conv-avatar">&#128100;</span>
+                            <div class="conv-bubble">Je suis infirmi&egrave;re lib&eacute;rale et j&rsquo;aimerais cr&eacute;er une application pour aider les aidants familiaux. Mais je ne sais pas si c&rsquo;est une bonne id&eacute;e.</div>
+                        </div>
+                        <div class="conv-message conv-agent">
+                            <span class="conv-avatar">&#129504;</span>
+                            <div class="conv-bubble">Excellente intuition clinique&nbsp;! Pour clarifier votre projet, r&eacute;pondez &agrave; ces 3 questions&nbsp;:<br><br>1. Quel probl&egrave;me pr&eacute;cis rencontrent les aidants que vous voyez&nbsp;? (information, coordination, &eacute;puisement&nbsp;?)<br>2. Quelle solution imaginez-vous&nbsp;? (application mobile, guide, mise en r&eacute;seau&nbsp;?)<br>3. Avez-vous d&eacute;j&agrave; observ&eacute; des aidants utiliser des outils num&eacute;riques&nbsp;?</div>
+                        </div>
+                        <div class="conv-message conv-user">
+                            <span class="conv-avatar">&#128100;</span>
+                            <div class="conv-bubble">Le probl&egrave;me c&rsquo;est qu&rsquo;ils ne savent pas comment g&eacute;rer les urgences &agrave; domicile. J&rsquo;imagine une checklist interactive + un num&eacute;ro d&rsquo;astreinte.</div>
+                        </div>
+                        <div class="conv-message conv-agent">
+                            <span class="conv-avatar">&#129504;</span>
+                            <div class="conv-bubble">Parfait, votre id&eacute;e se pr&eacute;cise. Voici votre projet formalis&eacute;&nbsp;: <strong>Plateforme d&rsquo;aide &agrave; la gestion des situations critiques pour aidants familiaux</strong>, combinant protocoles d&rsquo;urgence interactifs et acc&egrave;s rapide &agrave; un professionnel de sant&eacute;. Cible&nbsp;: 11 millions d&rsquo;aidants en France. Prochaine &eacute;tape&nbsp;: valider la demande avec 10 aidants autour de vous.</div>
+                        </div>
+                    </div>
+
                     <div class="agent-resources">
                         <h4>Pour aller plus loin</h4>
-                        <p><strong>Consultant en innovation / stratégie</strong> — Pour affiner le positionnement et tester la viabilité sur le marché</p>
+                        <p><strong>Consultant en innovation / strat&eacute;gie</strong> &mdash; Pour affiner le positionnement et tester la viabilit&eacute; sur le march&eacute;</p>
                     </div>
                 </div>
             </div>
 
             <!-- AGENT 2 : Guide création entreprise santé -->
             <div class="agent-detail-card" id="agent-guide">
-                <div class="agent-detail-icon" aria-label="Agent Guide : balance de justice">⚖️</div>
+                <div class="agent-detail-icon" aria-label="Agent Guide : balance de justice">&#9878;&#65039;</div>
                 <div class="agent-detail-content">
-                    <h3>Guide création entreprise santé</h3>
+                    <div class="agent-profile-tags">
+                        <span class="profile-tag">M&eacute;decin</span>
+                        <span class="profile-tag">Pharmacien</span>
+                        <span class="profile-tag">Professions r&eacute;glement&eacute;es</span>
+                        <span class="profile-tag">Co-fondateur</span>
+                    </div>
+                    <h3>Guide cr&eacute;ation entreprise sant&eacute;</h3>
                     <div class="agent-mission">
                         <strong>Mission :</strong> Vous orienter vers la structure juridique la plus adaptée à votre projet de santé.
                     </div>
@@ -10588,21 +10720,56 @@
                         <li>Structurer juridiquement une activité de formation en santé</li>
                     </ul>
                     <div class="agent-benefits">
-                        <span class="benefit-tag">Statut adapté à votre situation</span>
-                        <span class="benefit-tag">Éviter les erreurs coûteuses</span>
-                        <span class="benefit-tag">Décision éclairée</span>
+                        <span class="benefit-tag">Statut adapt&eacute; &agrave; votre situation</span>
+                        <span class="benefit-tag">&Eacute;viter les erreurs co&ucirc;teuses</span>
+                        <span class="benefit-tag">D&eacute;cision &eacute;clair&eacute;e</span>
                     </div>
+
+                    <h4>Prompts pr&ecirc;ts &agrave; l&rsquo;emploi</h4>
+                    <div class="agent-prompts">
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je suis m&eacute;decin g&eacute;n&eacute;raliste en lib&eacute;ral (BNC) et je veux cr&eacute;er une startup d&rsquo;e-sant&eacute; en parall&egrave;le. Quelles sont mes options de structure juridique&nbsp;? Quels sont les risques de chaque option pour ma pratique lib&eacute;rale&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Nous sommes 3 m&eacute;decins associ&eacute;s qui voulons cr&eacute;er un centre de sant&eacute; pluridisciplinaire. Quelles structures juridiques sont possibles&nbsp;? Compare SELARL, SAS et SISA pour notre cas.&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je veux cr&eacute;er une activit&eacute; de formation en soins infirmiers. Je g&eacute;n&egrave;re environ 50&nbsp;000&euro;/an. Dois-je opter pour la micro-entreprise, une SASU ou rester en lib&eacute;ral&nbsp;? Quels sont les seuils &agrave; ne pas d&eacute;passer&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                    </div>
+
+                    <h4>Aper&ccedil;u d&rsquo;une conversation type</h4>
+                    <div class="conversation-preview">
+                        <div class="conv-message conv-user">
+                            <span class="conv-avatar">&#128100;</span>
+                            <div class="conv-bubble">Je suis cardiologue lib&eacute;ral et je veux cr&eacute;er un logiciel de t&eacute;l&eacute;surveillance cardiaque. Je ne sais pas si je dois cr&eacute;er une soci&eacute;t&eacute; ou rester en lib&eacute;ral.</div>
+                        </div>
+                        <div class="conv-message conv-agent">
+                            <span class="conv-avatar">&#9878;&#65039;</span>
+                            <div class="conv-bubble">Pour votre situation, je vois 3 options principales&nbsp;:<br><br><strong>Option 1&nbsp;: SASU</strong> &mdash; Id&eacute;ale si vous levez des fonds ou accueillez des associ&eacute;s. S&eacute;paration nette avec votre activit&eacute; lib&eacute;rale.<br><strong>Option 2&nbsp;: SAS</strong> &mdash; Si vous avez d&eacute;j&agrave; des co-fondateurs. Gouvernance flexible.<br><strong>Option 3&nbsp;: Lib&eacute;ral + convention de partenariat</strong> &mdash; Si vous restez minoritaire dans le projet.<br><br>Question cl&eacute;&nbsp;: avez-vous l&rsquo;intention de lever des fonds ou de rester bootstrapp&eacute;&nbsp;?</div>
+                        </div>
+                    </div>
+
                     <div class="agent-resources">
                         <h4>Pour aller plus loin</h4>
-                        <p><strong>Avocat spécialisé en droit de la santé</strong> — Pour valider le choix et formaliser les statuts légaux</p>
+                        <p><strong>Avocat sp&eacute;cialis&eacute; en droit de la sant&eacute;</strong> &mdash; Pour valider le choix et formaliser les statuts l&eacute;gaux</p>
                     </div>
                 </div>
             </div>
 
             <!-- AGENT 3 : Stratège financement -->
             <div class="agent-detail-card" id="agent-stratege">
-                <div class="agent-detail-icon" aria-label="Agent Stratège financement : sac de pièces">💰</div>
+                <div class="agent-detail-icon" aria-label="Agent Stratège financement : sac de pièces">&#128176;</div>
                 <div class="agent-detail-content">
+                    <div class="agent-profile-tags">
+                        <span class="profile-tag">Startup e-sant&eacute;</span>
+                        <span class="profile-tag">Medtech</span>
+                        <span class="profile-tag">Entrepreneur sant&eacute;</span>
+                        <span class="profile-tag">Porteur de projet</span>
+                    </div>
                     <h3>Strat&egrave;ge financement</h3>
                     <div class="agent-mission">
                         <strong>Mission :</strong> Identifier les sources de financement r&eacute;alistes et construire une strat&eacute;gie de lev&eacute;e adapt&eacute;e au secteur sant&eacute;.
@@ -10622,18 +10789,52 @@
                         <span class="benefit-tag">Strat&eacute;gie r&eacute;aliste</span>
                         <span class="benefit-tag">Dossiers pr&ecirc;ts &agrave; soumettre</span>
                     </div>
+
+                    <h4>Prompts pr&ecirc;ts &agrave; l&rsquo;emploi</h4>
+                    <div class="agent-prompts">
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je d&eacute;veloppe une application de suivi des patients atteints de BPCO. Je suis au stade MVP, pas encore de revenus. Quels financements publics puis-je cibler en France (BPI, r&eacute;gions, ANR) et par o&ugrave; commencer&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je veux pitcher mon projet medtech &agrave; des investisseurs. Mon dispositif m&eacute;dical de classe II est en phase de certification CE. Quels fonds d&rsquo;investissement sont sp&eacute;cialis&eacute;s en sant&eacute; en France et quel est le bon timing pour les approcher&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;J&rsquo;ai besoin de 150&nbsp;000&euro; pour financer ma startup de sant&eacute; num&eacute;rique. Aide-moi &agrave; construire un plan de financement hybride combinant subventions publiques, pr&ecirc;t d&rsquo;honneur et love money. Dans quel ordre solliciter ces financements&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                    </div>
+
+                    <h4>Aper&ccedil;u d&rsquo;une conversation type</h4>
+                    <div class="conversation-preview">
+                        <div class="conv-message conv-user">
+                            <span class="conv-avatar">&#128100;</span>
+                            <div class="conv-bubble">Mon projet est une plateforme de coordination des soins &agrave; domicile. J&rsquo;ai un MVP fonctionnel et 5 structures pilotes int&eacute;ress&eacute;es. J&rsquo;ai besoin de 200k&euro;. Par o&ugrave; commencer&nbsp;?</div>
+                        </div>
+                        <div class="conv-message conv-agent">
+                            <span class="conv-avatar">&#128176;</span>
+                            <div class="conv-bubble">Avec 5 structures pilotes, vous avez une traction r&eacute;elle. Voici votre plan de financement en 3 temps&nbsp;:<br><br><strong>Court terme (0&ndash;3 mois)&nbsp;:</strong> Bpifrance Aide &agrave; l&rsquo;Innovation (jusqu&rsquo;&agrave; 50k&euro; subvention) + Pr&ecirc;t d&rsquo;honneur Initiative France (20&ndash;50k&euro; sans int&eacute;r&ecirc;ts)<br><strong>Moyen terme (3&ndash;6 mois)&nbsp;:</strong> Appels &agrave; projets ANS &mdash; parfaitement adapt&eacute; &agrave; la coordination de soins<br><strong>Lev&eacute;e (6&ndash;12 mois)&nbsp;:</strong> Fonds sp&eacute;cialis&eacute;s sant&eacute; (Elaia, Kurma, 360 Capital) une fois les pilotes document&eacute;s<br><br>Voulez-vous que je d&eacute;taille le dossier Bpifrance&nbsp;?</div>
+                        </div>
+                    </div>
+
                     <div class="agent-resources">
                         <h4>Pour aller plus loin</h4>
-                        <p><strong>Directeur administratif et financier (DAF) / Consultant financier</strong> — Pour structurer le financement et négocier avec les partenaires</p>
+                        <p><strong>Directeur administratif et financier (DAF) / Consultant financier</strong> &mdash; Pour structurer le financement et n&eacute;gocier avec les partenaires</p>
                     </div>
                 </div>
             </div>
 
             <!-- AGENT 4 : Architecte d'équipe -->
             <div class="agent-detail-card" id="agent-architecte">
-                <div class="agent-detail-icon" aria-label="Agent Architecte d'équipe : construction">🏗️</div>
+                <div class="agent-detail-icon" aria-label="Agent Architecte d'équipe : construction">&#127959;&#65039;</div>
                 <div class="agent-detail-content">
-                    <h3>Architecte d'&eacute;quipe</h3>
+                    <div class="agent-profile-tags">
+                        <span class="profile-tag">Fondateur clinicien</span>
+                        <span class="profile-tag">Startup sant&eacute;</span>
+                        <span class="profile-tag">Cabinet en croissance</span>
+                    </div>
+                    <h3>Architecte d&rsquo;&eacute;quipe</h3>
                     <div class="agent-mission">
                         <strong>Mission :</strong> D&eacute;finir les profils cl&eacute;s &agrave; recruter et structurer votre &eacute;quipe pour r&eacute;ussir.
                     </div>
@@ -10652,17 +10853,52 @@
                         <span class="benefit-tag">Recrutements prioris&eacute;s</span>
                         <span class="benefit-tag">Comp&eacute;tences compl&eacute;mentaires</span>
                     </div>
+
+                    <h4>Prompts pr&ecirc;ts &agrave; l&rsquo;emploi</h4>
+                    <div class="agent-prompts">
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je suis m&eacute;decin fondateur d&rsquo;une startup de sant&eacute; mentale digitale. J&rsquo;ai une id&eacute;e valid&eacute;e et 80k&euro; de financement. Qui sont mes 3 premiers recrutements prioritaires et pourquoi&nbsp;? Donne-moi une grille de crit&egrave;res pour &eacute;valuer chaque profil.&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Mon associ&eacute; technique veut 40&nbsp;% des parts mais j&rsquo;ai des doutes sur ses comp&eacute;tences. Aide-moi &agrave; &eacute;valuer si c&rsquo;est un bon deal et comment structurer le pacte d&rsquo;associ&eacute;s pour prot&eacute;ger mon projet sant&eacute;.&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je veux ouvrir un second cabinet param&eacute;dical. J&rsquo;ai besoin de recruter 2 praticiens et une secr&eacute;taire m&eacute;dicale. Comment r&eacute;diger des fiches de poste attractives et quel processus de recrutement mettre en place&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                    </div>
+
+                    <h4>Aper&ccedil;u d&rsquo;une conversation type</h4>
+                    <div class="conversation-preview">
+                        <div class="conv-message conv-user">
+                            <span class="conv-avatar">&#128100;</span>
+                            <div class="conv-bubble">Je suis pharmacien et je veux cr&eacute;er une solution SaaS de pharmacovigilance. Je suis seul pour l&rsquo;instant. Ai-je besoin d&rsquo;un CTO ou puis-je d&eacute;marrer avec des prestataires&nbsp;?</div>
+                        </div>
+                        <div class="conv-message conv-agent">
+                            <span class="conv-avatar">&#127959;&#65039;</span>
+                            <div class="conv-bubble"><strong>Prestataire externe recommand&eacute; si&nbsp;:</strong> vous &ecirc;tes en phase de validation (MVP), le budget est contraint, la tech n&rsquo;est pas votre diff&eacute;renciateur principal.<br><strong>CTO associ&eacute; recommand&eacute; si&nbsp;:</strong> la tech est au c&oelig;ur de votre avantage concurrentiel, vous levez des fonds dans 12 mois, vous avez des donn&eacute;es sensibles &agrave; s&eacute;curiser.<br><br>Pour la pharmacovigilance (donn&eacute;es de sant&eacute; tr&egrave;s sensibles), je recommande un CTO d&egrave;s que possible, id&eacute;alement avec exp&eacute;rience HDS. Voulez-vous une trame de fiche de poste&nbsp;?</div>
+                        </div>
+                    </div>
+
                     <div class="agent-resources">
                         <h4>Pour aller plus loin</h4>
-                        <p><strong>Expert RH / Recruteur spécialisé santé</strong> — Pour identifier les meilleurs candidats et fiabiliser vos recrutements</p>
+                        <p><strong>Expert RH / Recruteur sp&eacute;cialis&eacute; sant&eacute;</strong> &mdash; Pour identifier les meilleurs candidats et fiabiliser vos recrutements</p>
                     </div>
                 </div>
             </div>
 
             <!-- AGENT 5 : Stratège marketing éthique -->
             <div class="agent-detail-card" id="agent-marketing">
-                <div class="agent-detail-icon" aria-label="Agent Stratège marketing : mégaphone">📢</div>
+                <div class="agent-detail-icon" aria-label="Agent Stratège marketing : mégaphone">&#128226;</div>
                 <div class="agent-detail-content">
+                    <div class="agent-profile-tags">
+                        <span class="profile-tag">M&eacute;decin</span>
+                        <span class="profile-tag">Praticien lib&eacute;ral</span>
+                        <span class="profile-tag">Startup B2C sant&eacute;</span>
+                        <span class="profile-tag">Ostéopathe</span>
+                    </div>
                     <h3>Strat&egrave;ge marketing &eacute;thique</h3>
                     <div class="agent-mission">
                         <strong>Mission :</strong> Construire une strat&eacute;gie d'acquisition et de communication respectueuse des r&egrave;gles d&eacute;ontologiques du secteur sant&eacute;.
@@ -10683,17 +10919,51 @@
                         <span class="benefit-tag">Visibilit&eacute; sans risque</span>
                         <span class="benefit-tag">Strat&eacute;gie durable</span>
                     </div>
+
+                    <h4>Prompts pr&ecirc;ts &agrave; l&rsquo;emploi</h4>
+                    <div class="agent-prompts">
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je suis m&eacute;decin g&eacute;n&eacute;raliste et je veux d&eacute;velopper mon activit&eacute; de t&eacute;l&eacute;consultation. Quels canaux de communication puis-je utiliser l&eacute;galement&nbsp;? Aide-moi &agrave; cr&eacute;er un plan de contenu LinkedIn sur 3 mois respectant le Code de d&eacute;ontologie.&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je lance une application de suivi nutritionnel destin&eacute;e aux patients diab&eacute;tiques. Comment d&eacute;finir mon message de positionnement pour convaincre &agrave; la fois les patients et les m&eacute;decins prescripteurs&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Mon cabinet de kin&eacute;sith&eacute;rapie veut attirer plus de patients. Je ne peux pas faire de publicit&eacute; classique. Quelles strat&eacute;gies de marketing de contenu et de r&eacute;f&eacute;rencement local puis-je utiliser sans enfreindre la d&eacute;ontologie&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                    </div>
+
+                    <h4>Aper&ccedil;u d&rsquo;une conversation type</h4>
+                    <div class="conversation-preview">
+                        <div class="conv-message conv-user">
+                            <span class="conv-avatar">&#128100;</span>
+                            <div class="conv-bubble">Je suis ost&eacute;opathe et je veux me faire conna&icirc;tre sur les r&eacute;seaux sociaux. Est-ce que j&rsquo;ai le droit de faire des publicit&eacute;s payantes sur Instagram&nbsp;?</div>
+                        </div>
+                        <div class="conv-message conv-agent">
+                            <span class="conv-avatar">&#128226;</span>
+                            <div class="conv-bubble">Pour les ost&eacute;opathes, les r&egrave;gles sont diff&eacute;rentes des professions m&eacute;dicales r&eacute;glement&eacute;es par le CNOM.<br><br><strong>Ce que vous pouvez faire&nbsp;:</strong> publicit&eacute;s Instagram pour informer sur vos services (pas de testimonials patients, pas de promesses de gu&eacute;rison).<br><strong>&Agrave; &eacute;viter absolument&nbsp;:</strong> avant/apr&egrave;s, allégations th&eacute;rapeutiques non valid&eacute;es.<br><strong>Ma recommandation&nbsp;:</strong> contenu &eacute;ducatif (posture, pr&eacute;vention des TMS) + g&eacute;olocalisation locale + partenariats avec des m&eacute;decins du sport. Budget publicitaire&nbsp;: 200&ndash;400&euro;/mois pour commencer. Voulez-vous un calendrier &eacute;ditorial&nbsp;?</div>
+                        </div>
+                    </div>
+
                     <div class="agent-resources">
                         <h4>Pour aller plus loin</h4>
-                        <p><strong>Expert en marketing santé / Responsable communication</strong> — Pour déployer votre stratégie et optimiser votre visibilité en toute conformité</p>
+                        <p><strong>Expert en marketing sant&eacute; / Responsable communication</strong> &mdash; Pour d&eacute;ployer votre strat&eacute;gie et optimiser votre visibilit&eacute; en toute conformit&eacute;</p>
                     </div>
                 </div>
             </div>
 
             <!-- AGENT 6 : Coach financier santé -->
             <div class="agent-detail-card" id="agent-coach">
-                <div class="agent-detail-icon" aria-label="Agent Coach financier : graphique">📊</div>
+                <div class="agent-detail-icon" aria-label="Agent Coach financier : graphique">&#128202;</div>
                 <div class="agent-detail-content">
+                    <div class="agent-profile-tags">
+                        <span class="profile-tag">Lib&eacute;ral</span>
+                        <span class="profile-tag">G&eacute;rant de cabinet</span>
+                        <span class="profile-tag">Dirigeant startup</span>
+                    </div>
                     <h3>Coach financier sant&eacute;</h3>
                     <div class="agent-mission">
                         <strong>Mission :</strong> Vous donner les cl&eacute;s de la gestion financi&egrave;re pour piloter votre activit&eacute; avec clart&eacute;.
@@ -10713,17 +10983,52 @@
                         <span class="benefit-tag">D&eacute;cisions &eacute;clair&eacute;es</span>
                         <span class="benefit-tag">Finances ma&icirc;tris&eacute;es</span>
                     </div>
+
+                    <h4>Prompts pr&ecirc;ts &agrave; l&rsquo;emploi</h4>
+                    <div class="agent-prompts">
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je g&eacute;n&egrave;re 8&nbsp;000&euro;/mois en tant que kin&eacute;sith&eacute;rapeute lib&eacute;ral. Mes charges fixes sont de 2&nbsp;500&euro;. Je veux cr&eacute;er un tableau de bord de pilotage simple avec 5 indicateurs cl&eacute;s. Quels KPIs me recommandes-tu et comment les calculer&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je veux lancer un service de coaching sant&eacute; en ligne &agrave; 150&euro;/mois l&rsquo;abonnement. J&rsquo;ai des charges fixes de 3&nbsp;000&euro;/mois. Quel est mon seuil de rentabilit&eacute; en nombre d&rsquo;abonn&eacute;s&nbsp;? Et quel est mon objectif de CA &agrave; 6 mois&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Ma startup SaaS sant&eacute; a 25 clients &agrave; 500&euro;/an. Je veux pr&eacute;voir ma tr&eacute;sorerie sur 12 mois avec un objectif de 100 clients. Aide-moi &agrave; construire un mod&egrave;le financier simple avec des hypoth&egrave;ses de croissance r&eacute;alistes pour le secteur sant&eacute;.&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                    </div>
+
+                    <h4>Aper&ccedil;u d&rsquo;une conversation type</h4>
+                    <div class="conversation-preview">
+                        <div class="conv-message conv-user">
+                            <span class="conv-avatar">&#128100;</span>
+                            <div class="conv-bubble">Je suis infirmier lib&eacute;ral avec 4&nbsp;200&euro; de revenus mensuels nets. Je veux savoir si je peux me permettre d&rsquo;embaucher une secr&eacute;taire &agrave; mi-temps.</div>
+                        </div>
+                        <div class="conv-message conv-agent">
+                            <span class="conv-avatar">&#128202;</span>
+                            <div class="conv-bubble"><strong>Co&ucirc;t d&rsquo;une secr&eacute;taire mi-temps&nbsp;:</strong> environ 900&ndash;1&nbsp;100&euro;/mois (charges sociales incluses).<br><strong>Votre seuil de viabilit&eacute;&nbsp;:</strong> la secr&eacute;taire doit vous lib&eacute;rer du temps pour g&eacute;n&eacute;rer +1&nbsp;200&euro;/mois (marge de s&eacute;curit&eacute; 10&nbsp;%).<br><br>Question cl&eacute;&nbsp;: combien d&rsquo;actes suppl&eacute;mentaires pourriez-vous r&eacute;aliser avec du temps administratif lib&eacute;r&eacute;&nbsp;? Si c&rsquo;est plus de 15 actes/semaine, l&rsquo;embauche est rentable. Voulez-vous simuler diff&eacute;rents sc&eacute;narios&nbsp;?</div>
+                        </div>
+                    </div>
+
                     <div class="agent-resources">
                         <h4>Pour aller plus loin</h4>
-                        <p><strong>Expertise-comptable / Consultant financier</strong> — Pour fiabiliser vos comptes et optimiser votre fiscalité</p>
+                        <p><strong>Expertise-comptable / Consultant financier</strong> &mdash; Pour fiabiliser vos comptes et optimiser votre fiscalit&eacute;</p>
                     </div>
                 </div>
             </div>
 
             <!-- AGENT 7 : Vigie légale & conformité -->
             <div class="agent-detail-card" id="agent-vigie">
-                <div class="agent-detail-icon" aria-label="Agent Vigie légale : bouclier">🛡️</div>
+                <div class="agent-detail-icon" aria-label="Agent Vigie légale : bouclier">&#128737;&#65039;</div>
                 <div class="agent-detail-content">
+                    <div class="agent-profile-tags">
+                        <span class="profile-tag">E-sant&eacute;</span>
+                        <span class="profile-tag">Dispositif m&eacute;dical</span>
+                        <span class="profile-tag">Donn&eacute;es de sant&eacute;</span>
+                        <span class="profile-tag">T&eacute;l&eacute;m&eacute;decine</span>
+                    </div>
                     <h3>Vigie l&eacute;gale &amp; conformit&eacute;</h3>
                     <div class="agent-mission">
                         <strong>Mission :</strong> V&eacute;rifier la conformit&eacute; r&eacute;glementaire de votre projet et anticiper les risques juridiques.
@@ -10743,22 +11048,328 @@
                         <span class="benefit-tag">Risques anticip&eacute;s</span>
                         <span class="benefit-tag">S&eacute;r&eacute;nit&eacute; juridique</span>
                     </div>
+
+                    <h4>Prompts pr&ecirc;ts &agrave; l&rsquo;emploi</h4>
+                    <div class="agent-prompts">
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je d&eacute;veloppe une application mobile de suivi des sympt&ocirc;mes pour les patients atteints de maladies chroniques. Les donn&eacute;es sont stock&eacute;es sur un serveur cloud. Quelles sont mes obligations RGPD et HDS&nbsp;? Ai-je besoin d&rsquo;un h&eacute;bergeur certifi&eacute; HDS&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Mon logiciel d&rsquo;aide au diagnostic ophtalmologique utilise de l&rsquo;IA. Doit-il &ecirc;tre certifi&eacute; dispositif m&eacute;dical de classe IIa&nbsp;? Quelles sont les &eacute;tapes de certification CE MDR et quel est le d&eacute;lai r&eacute;aliste&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-text">&laquo;&thinsp;Je suis m&eacute;decin et je fais de la t&eacute;l&eacute;consultation via une plateforme externe. Quelles sont mes responsabilit&eacute;s personnelles en mati&egrave;re de RGPD&nbsp;? Que dois-je v&eacute;rifier aupr&egrave;s de la plateforme que j&rsquo;utilise&nbsp;?&thinsp;&raquo;</p>
+                            <button class="copy-prompt-btn" onclick="copyPrompt(this)">&#128203; Copier ce prompt</button>
+                        </div>
+                    </div>
+
+                    <h4>Aper&ccedil;u d&rsquo;une conversation type</h4>
+                    <div class="conversation-preview">
+                        <div class="conv-message conv-user">
+                            <span class="conv-avatar">&#128100;</span>
+                            <div class="conv-bubble">Je lance une plateforme de coordination des soins entre m&eacute;decins et infirmi&egrave;res. Les donn&eacute;es &eacute;chang&eacute;es sont des ordonnances et des comptes rendus. Suis-je obligé d&rsquo;avoir un h&eacute;bergeur HDS&nbsp;?</div>
+                        </div>
+                        <div class="conv-message conv-agent">
+                            <span class="conv-avatar">&#128737;&#65039;</span>
+                            <div class="conv-bubble"><strong>R&eacute;ponse directe&nbsp;: Oui, l&rsquo;HDS est obligatoire.</strong><br><br>Les ordonnances et comptes rendus m&eacute;dicaux sont des donn&eacute;es de sant&eacute; au sens de l&rsquo;article L.1111-8 du Code de la sant&eacute; publique. Dès lors que vous les h&eacute;bergez, vous devez utiliser un h&eacute;bergeur certifi&eacute; HDS.<br><br><strong>H&eacute;bergeurs HDS certifi&eacute;s recommand&eacute;s&nbsp;:</strong> OVHcloud, AWS (r&eacute;gion Paris), Microsoft Azure (r&eacute;gion France), Outscale.<br><strong>Co&ucirc;t suppl&eacute;mentaire&nbsp;:</strong> environ +20&ndash;40&nbsp;% vs h&eacute;bergement standard.<br><strong>D&eacute;lai de mise en conformit&eacute;&nbsp;:</strong> 2&ndash;4 semaines si votre architecture le permet. Voulez-vous une checklist compl&egrave;te&nbsp;?</div>
+                        </div>
+                    </div>
+
                     <div class="agent-resources">
                         <h4>Pour aller plus loin</h4>
-                        <p><strong>Avocat en droit de la santé / Responsable conformité</strong> — Pour valider votre stratégie réglementaire et sécuriser votre activité</p>
+                        <p><strong>Avocat en droit de la sant&eacute; / Responsable conformit&eacute;</strong> &mdash; Pour valider votre strat&eacute;gie r&eacute;glementaire et s&eacute;curiser votre activit&eacute;</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- SECTION : ENCHAÎNER LES AGENTS -->
+            <div class="section-header" style="margin-top:80px;">
+                <h2>&#128279; Comment ench&icirc;ner les agents pour maximiser votre progression</h2>
+                <p>Les agents sont encore plus puissants utilis&eacute;s en s&eacute;quence. Voici 3 parcours types selon votre situation.</p>
+            </div>
+            <div class="workflow-container">
+                <div class="workflow-path">
+                    <div class="workflow-path-title">&#128640; Parcours Lancement &mdash; De l&rsquo;id&eacute;e &agrave; la cr&eacute;ation d&rsquo;entreprise</div>
+                    <div class="workflow-path-subtitle">Vous avez une id&eacute;e et vous voulez la transformer en projet r&eacute;el</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><span class="workflow-step-icon">&#129504;</span><span class="workflow-step-name">Clarificateur</span><span class="workflow-step-desc">Formaliser l&rsquo;id&eacute;e</span></div>
+                        <div class="workflow-arrow">&rarr;</div>
+                        <div class="workflow-step"><span class="workflow-step-icon">&#9878;&#65039;</span><span class="workflow-step-name">Guide juridique</span><span class="workflow-step-desc">Choisir le statut</span></div>
+                        <div class="workflow-arrow">&rarr;</div>
+                        <div class="workflow-step"><span class="workflow-step-icon">&#128176;</span><span class="workflow-step-name">Financement</span><span class="workflow-step-desc">Trouver les fonds</span></div>
+                        <div class="workflow-arrow">&rarr;</div>
+                        <div class="workflow-step"><span class="workflow-step-icon">&#128737;&#65039;</span><span class="workflow-step-name">Vigie l&eacute;gale</span><span class="workflow-step-desc">Valider la conformit&eacute;</span></div>
+                    </div>
+                </div>
+                <div class="workflow-path">
+                    <div class="workflow-path-title">&#128200; Parcours Croissance &mdash; D&eacute;velopper une activit&eacute; existante</div>
+                    <div class="workflow-path-subtitle">Vous avez d&eacute;j&agrave; lanc&eacute; et vous voulez acc&eacute;l&eacute;rer</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><span class="workflow-step-icon">&#128202;</span><span class="workflow-step-name">Coach financier</span><span class="workflow-step-desc">Diagnostiquer les chiffres</span></div>
+                        <div class="workflow-arrow">&rarr;</div>
+                        <div class="workflow-step"><span class="workflow-step-icon">&#127959;&#65039;</span><span class="workflow-step-name">Architecte &eacute;quipe</span><span class="workflow-step-desc">Structurer l&rsquo;&eacute;quipe</span></div>
+                        <div class="workflow-arrow">&rarr;</div>
+                        <div class="workflow-step"><span class="workflow-step-icon">&#128226;</span><span class="workflow-step-name">Marketing &eacute;thique</span><span class="workflow-step-desc">Acc&eacute;l&eacute;rer l&rsquo;acquisition</span></div>
+                    </div>
+                </div>
+                <div class="workflow-path">
+                    <div class="workflow-path-title">&#128737;&#65039; Parcours S&eacute;curisation &mdash; S&eacute;curiser un projet en cours</div>
+                    <div class="workflow-path-subtitle">Vous voulez v&eacute;rifier et optimiser votre situation actuelle</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><span class="workflow-step-icon">&#128737;&#65039;</span><span class="workflow-step-name">Vigie l&eacute;gale</span><span class="workflow-step-desc">Audit de conformit&eacute;</span></div>
+                        <div class="workflow-arrow">&rarr;</div>
+                        <div class="workflow-step"><span class="workflow-step-icon">&#9878;&#65039;</span><span class="workflow-step-name">Guide juridique</span><span class="workflow-step-desc">Optimiser la structure</span></div>
+                        <div class="workflow-arrow">&rarr;</div>
+                        <div class="workflow-step"><span class="workflow-step-icon">&#128202;</span><span class="workflow-step-name">Coach financier</span><span class="workflow-step-desc">S&eacute;curiser les finances</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION : CAS D'USAGE PAR PROFIL -->
+            <div class="section-header" style="margin-top:80px;">
+                <h2>&#128100; Cas d&rsquo;usage par profil</h2>
+                <p>D&eacute;couvrez comment des professionnels de sant&eacute; avec votre profil utilisent les agents IA.</p>
+            </div>
+            <div class="profiles-grid">
+                <div class="profile-usecase-card">
+                    <div class="profile-usecase-header"><span class="profile-usecase-icon">&#129658;</span><h4>M&eacute;decin g&eacute;n&eacute;raliste</h4></div>
+                    <ul class="profile-usecase-list">
+                        <li><span class="usecase-agent-badge">&#129504;</span>Clarifier un projet de t&eacute;l&eacute;consultation sp&eacute;cialis&eacute;e</li>
+                        <li><span class="usecase-agent-badge">&#9878;&#65039;</span>Comprendre les r&egrave;gles du cumul lib&eacute;ral&nbsp;+ SASU</li>
+                        <li><span class="usecase-agent-badge">&#128226;</span>Cr&eacute;er une strat&eacute;gie de contenu LinkedIn conforme au CNOM</li>
+                        <li><span class="usecase-agent-badge">&#128737;&#65039;</span>V&eacute;rifier les obligations RGPD de son logiciel de cabinet</li>
+                    </ul>
+                </div>
+                <div class="profile-usecase-card">
+                    <div class="profile-usecase-header"><span class="profile-usecase-icon">&#128138;</span><h4>Pharmacien</h4></div>
+                    <ul class="profile-usecase-list">
+                        <li><span class="usecase-agent-badge">&#129504;</span>Concevoir une offre de conseil en nutrition personnalis&eacute;e</li>
+                        <li><span class="usecase-agent-badge">&#128176;</span>Identifier des financements pour diversifier son officine</li>
+                        <li><span class="usecase-agent-badge">&#128202;</span>Calculer la rentabilit&eacute; d&rsquo;un nouveau service (bilan de m&eacute;dication)</li>
+                        <li><span class="usecase-agent-badge">&#128737;&#65039;</span>V&eacute;rifier la conformit&eacute; d&rsquo;une plateforme de vente en ligne</li>
+                    </ul>
+                </div>
+                <div class="profile-usecase-card">
+                    <div class="profile-usecase-header"><span class="profile-usecase-icon">&#129338;</span><h4>Kin&eacute; / Ost&eacute;o / Para-m&eacute;dical</h4></div>
+                    <ul class="profile-usecase-list">
+                        <li><span class="usecase-agent-badge">&#129504;</span>Transformer une expertise clinique en programme digital</li>
+                        <li><span class="usecase-agent-badge">&#128226;</span>Attirer de nouveaux patients sans violer la d&eacute;ontologie</li>
+                        <li><span class="usecase-agent-badge">&#9878;&#65039;</span>Choisir entre SASU et micro-entreprise pour les formations</li>
+                        <li><span class="usecase-agent-badge">&#128202;</span>&Eacute;valuer la viabilit&eacute; d&rsquo;un second cabinet</li>
+                    </ul>
+                </div>
+                <div class="profile-usecase-card">
+                    <div class="profile-usecase-header"><span class="profile-usecase-icon">&#127973;</span><h4>Infirmier / IDEL</h4></div>
+                    <ul class="profile-usecase-list">
+                        <li><span class="usecase-agent-badge">&#129504;</span>Cr&eacute;er un service de coordination de soins &agrave; domicile</li>
+                        <li><span class="usecase-agent-badge">&#128176;</span>Trouver des financements pour un projet de t&eacute;l&eacute;soin</li>
+                        <li><span class="usecase-agent-badge">&#127959;&#65039;</span>Constituer une &eacute;quipe pluridisciplinaire &agrave; domicile</li>
+                        <li><span class="usecase-agent-badge">&#128737;&#65039;</span>S&eacute;curiser le partage de donn&eacute;es patients entre professionnels</li>
+                    </ul>
+                </div>
+                <div class="profile-usecase-card">
+                    <div class="profile-usecase-header"><span class="profile-usecase-icon">&#128640;</span><h4>Entrepreneur e-sant&eacute; / Medtech</h4></div>
+                    <ul class="profile-usecase-list">
+                        <li><span class="usecase-agent-badge">&#128176;</span>Construire un plan de financement BPI&nbsp;+ investisseurs</li>
+                        <li><span class="usecase-agent-badge">&#127959;&#65039;</span>Recruter les bons profils tech&nbsp;+ sant&eacute; d&egrave;s le d&eacute;part</li>
+                        <li><span class="usecase-agent-badge">&#128737;&#65039;</span>Naviguer les exigences MDR pour un dispositif m&eacute;dical</li>
+                        <li><span class="usecase-agent-badge">&#128226;</span>Construire une strat&eacute;gie go-to-market pour les professionnels de sant&eacute;</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SECTION : RESSOURCES -->
+            <div class="section-header" style="margin-top:80px;">
+                <h2>&#128218; Ressources &amp; Documents</h2>
+                <p>Guides, checklists et templates pour aller plus loin &agrave; chaque &eacute;tape de votre projet.</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-card-header">
+                        <span class="resource-type-badge checklist">Checklist</span>
+                        <span class="resource-agent-tag">&#129504; + &#9878;&#65039;</span>
+                    </div>
+                    <h4>Checklist lancement startup sant&eacute;</h4>
+                    <p>Les 20 &eacute;tapes incontournables avant de cr&eacute;er votre entreprise de sant&eacute;. De l&rsquo;id&eacute;e &agrave; l&rsquo;immatriculation.</p>
+                    <div class="resource-preview">
+                        <div class="resource-checklist-preview">
+                            <div class="checklist-item">&#9989; Id&eacute;e valid&eacute;e avec 10 futurs utilisateurs</div>
+                            <div class="checklist-item">&#9989; &Eacute;tude de march&eacute; (taille, concurrents)</div>
+                            <div class="checklist-item">&#9989; Business model document&eacute;</div>
+                            <div class="checklist-item">&#9989; Structure juridique choisie</div>
+                            <div class="checklist-item muted">&hellip; 16 autres &eacute;tapes</div>
+                        </div>
+                    </div>
+                    <button class="resource-expand-btn" onclick="toggleResource(this)">Voir la checklist compl&egrave;te &darr;</button>
+                    <div class="resource-full-content" style="display:none;">
+                        <div class="resource-checklist-full">
+                            <strong>Phase 1 &mdash; Validation de l&rsquo;id&eacute;e</strong>
+                            <div class="checklist-item">&#9989; Probl&egrave;me identifi&eacute; et formul&eacute; clairement</div>
+                            <div class="checklist-item">&#9989; 10 entretiens avec des futurs utilisateurs r&eacute;alis&eacute;s</div>
+                            <div class="checklist-item">&#9989; Solution minimum viable d&eacute;finie</div>
+                            <div class="checklist-item">&#9989; March&eacute; estim&eacute; (TAM / SAM / SOM)</div>
+                            <div class="checklist-item">&#9989; 3 concurrents directs analys&eacute;s</div>
+                            <strong>Phase 2 &mdash; Business model</strong>
+                            <div class="checklist-item">&#9989; Proposition de valeur r&eacute;dig&eacute;e (1 phrase)</div>
+                            <div class="checklist-item">&#9989; Mod&egrave;le de revenus d&eacute;fini (SaaS, abonnement, acte&hellip;)</div>
+                            <div class="checklist-item">&#9989; Prix test&eacute;s avec des clients potentiels</div>
+                            <div class="checklist-item">&#9989; Canvas Business Model compl&eacute;t&eacute;</div>
+                            <strong>Phase 3 &mdash; Structure juridique</strong>
+                            <div class="checklist-item">&#9989; Statut juridique choisi et justifi&eacute;</div>
+                            <div class="checklist-item">&#9989; Obligations d&eacute;ontologiques v&eacute;rifi&eacute;es</div>
+                            <div class="checklist-item">&#9989; Obligations RGPD identifi&eacute;es</div>
+                            <div class="checklist-item">&#9989; &Eacute;ventuelle qualification DM &eacute;valu&eacute;e</div>
+                            <strong>Phase 4 &mdash; Financement</strong>
+                            <div class="checklist-item">&#9989; Budget de lancement estim&eacute;</div>
+                            <div class="checklist-item">&#9989; Sources de financement identifi&eacute;es</div>
+                            <div class="checklist-item">&#9989; Pr&eacute;visionnel financier sur 24 mois</div>
+                            <div class="checklist-item">&#9989; Plan de tr&eacute;sorerie sur 6 mois</div>
+                            <strong>Phase 5 &mdash; Lancement</strong>
+                            <div class="checklist-item">&#9989; MVP d&eacute;velopp&eacute; ou prototyp&eacute;</div>
+                            <div class="checklist-item">&#9989; 3 clients pilotes engag&eacute;s</div>
+                            <div class="checklist-item">&#9989; Strat&eacute;gie de communication d&eacute;finie</div>
+                            <div class="checklist-item">&#9989; Immatriculation et d&eacute;marches administratives effectu&eacute;es</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-card-header">
+                        <span class="resource-type-badge guide">Guide</span>
+                        <span class="resource-agent-tag">&#128737;&#65039;</span>
+                    </div>
+                    <h4>RGPD pour soignants entrepreneurs&nbsp;: l&rsquo;essentiel</h4>
+                    <p>Ce que vous devez savoir sur la protection des donn&eacute;es de sant&eacute;, sans le jargon juridique.</p>
+                    <div class="resource-preview">
+                        <div class="resource-checklist-preview">
+                            <div class="checklist-item">&#128204; Quelles donn&eacute;es n&eacute;cessitent l&rsquo;HDS&nbsp;?</div>
+                            <div class="checklist-item">&#128204; Vos obligations en tant que responsable de traitement</div>
+                            <div class="checklist-item">&#128204; Les mentions l&eacute;gales obligatoires</div>
+                            <div class="checklist-item muted">&hellip; et bien plus</div>
+                        </div>
+                    </div>
+                    <button class="resource-expand-btn" onclick="toggleResource(this)">Lire le guide &darr;</button>
+                    <div class="resource-full-content" style="display:none;">
+                        <div class="resource-checklist-full">
+                            <strong>1. &Ecirc;tes-vous concern&eacute; par le RGPD&nbsp;?</strong>
+                            <p>Oui, d&egrave;s lors que vous collectez des donn&eacute;es personnelles de patients ou d&rsquo;utilisateurs, m&ecirc;me dans une application, un formulaire ou un email.</p>
+                            <strong>2. Les donn&eacute;es de sant&eacute;&nbsp;: une cat&eacute;gorie &agrave; part</strong>
+                            <p>Sympt&ocirc;mes, diagnostics, ordonnances, r&eacute;sultats d&rsquo;analyses sont des donn&eacute;es &laquo;&nbsp;sensibles&nbsp;&raquo; au sens du RGPD. Traitement interdit sans consentement explicite ou base l&eacute;gale sp&eacute;cifique.</p>
+                            <strong>3. L&rsquo;H&eacute;bergement de Donn&eacute;es de Sant&eacute; (HDS)</strong>
+                            <p>Si vous stockez des donn&eacute;es de sant&eacute;, l&rsquo;h&eacute;bergeur doit &ecirc;tre certifi&eacute; HDS par l&rsquo;ANS. Les principaux&nbsp;: OVHcloud, AWS Paris, Azure France, Outscale.</p>
+                            <strong>4. Vos obligations concr&egrave;tes</strong>
+                            <div class="checklist-item">&#128203; Registre des activit&eacute;s de traitement</div>
+                            <div class="checklist-item">&#128203; Politique de confidentialit&eacute; sur votre site/app</div>
+                            <div class="checklist-item">&#128203; Consentement explicite avant collecte de donn&eacute;es sensibles</div>
+                            <div class="checklist-item">&#128203; Droit d&rsquo;acc&egrave;s, de rectification et d&rsquo;effacement pour vos utilisateurs</div>
+                            <div class="checklist-item">&#128203; Notification CNIL en cas de violation de donn&eacute;es (72h)</div>
+                            <strong>5. &Agrave; qui s&rsquo;adresser</strong>
+                            <p>CNIL (cnil.fr) pour les guides officiels. ANS pour les r&eacute;f&eacute;rentiels HDS. Avocat RGPD sant&eacute; pour un accompagnement personnalis&eacute;.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-card-header">
+                        <span class="resource-type-badge template">Template</span>
+                        <span class="resource-agent-tag">&#128176;</span>
+                    </div>
+                    <h4>Structure d&rsquo;un pitch deck sant&eacute; en 10 slides</h4>
+                    <p>Le plan de pr&eacute;sentation optimal pour convaincre des investisseurs sp&eacute;cialis&eacute;s sant&eacute;/medtech.</p>
+                    <div class="resource-preview">
+                        <div class="resource-checklist-preview">
+                            <div class="checklist-item">Slide 1 &mdash; Le probl&egrave;me (donn&eacute;es chiffr&eacute;es)</div>
+                            <div class="checklist-item">Slide 2 &mdash; La solution et comment elle fonctionne</div>
+                            <div class="checklist-item">Slide 3 &mdash; Validation clinique / preuves</div>
+                            <div class="checklist-item muted">&hellip; 7 autres slides d&eacute;taill&eacute;es</div>
+                        </div>
+                    </div>
+                    <button class="resource-expand-btn" onclick="toggleResource(this)">Voir les 10 slides &darr;</button>
+                    <div class="resource-full-content" style="display:none;">
+                        <div class="resource-checklist-full">
+                            <div class="checklist-item"><strong>Slide 1 &mdash; Le probl&egrave;me&nbsp;:</strong> donn&eacute;es &eacute;pid&eacute;miologiques, co&ucirc;t pour le syst&egrave;me de sant&eacute;, v&eacute;cu patient/soignant</div>
+                            <div class="checklist-item"><strong>Slide 2 &mdash; La solution&nbsp;:</strong> comment &ccedil;a marche, d&eacute;mo ou screenshot, diff&eacute;rence avec l&rsquo;existant</div>
+                            <div class="checklist-item"><strong>Slide 3 &mdash; Validation&nbsp;:</strong> &eacute;tudes cliniques, pilotes, t&eacute;moignages de professionnels de sant&eacute;</div>
+                            <div class="checklist-item"><strong>Slide 4 &mdash; March&eacute;&nbsp;:</strong> TAM / SAM / SOM avec sources, dynamiques du march&eacute; sant&eacute;</div>
+                            <div class="checklist-item"><strong>Slide 5 &mdash; Business model&nbsp;:</strong> comment vous gagnez de l&rsquo;argent, prix, LTV, CAC estim&eacute;</div>
+                            <div class="checklist-item"><strong>Slide 6 &mdash; Traction&nbsp;:</strong> clients actuels, chiffre d&rsquo;affaires, croissance, lettres d&rsquo;intention</div>
+                            <div class="checklist-item"><strong>Slide 7 &mdash; R&eacute;glementation&nbsp;:</strong> statut MDR, certifications en cours, RGPD/HDS (rassure les investisseurs)</div>
+                            <div class="checklist-item"><strong>Slide 8 &mdash; &Eacute;quipe&nbsp;:</strong> fondateurs, exp&eacute;riences cliniques ET entrepreneuriales, advisors</div>
+                            <div class="checklist-item"><strong>Slide 9 &mdash; Roadmap&nbsp;:</strong> milestones des 18 prochains mois, utilisation des fonds</div>
+                            <div class="checklist-item"><strong>Slide 10 &mdash; La demande&nbsp;:</strong> montant recherch&eacute;, valorisation, use of funds d&eacute;taill&eacute;</div>
+                            <p><em>Conseil&nbsp;: en sant&eacute;, les slides 3 (validation) et 7 (r&eacute;glementation) sont souvent d&eacute;cisifs pour les investisseurs.</em></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-card-header">
+                        <span class="resource-type-badge checklist">Checklist</span>
+                        <span class="resource-agent-tag">&#128737;&#65039;</span>
+                    </div>
+                    <h4>Suis-je concern&eacute; par la r&eacute;glementation des dispositifs m&eacute;dicaux&nbsp;?</h4>
+                    <p>D&eacute;terminez en 10 questions si votre solution num&eacute;rique doit &ecirc;tre qualifi&eacute;e de dispositif m&eacute;dical (DM).</p>
+                    <div class="resource-preview">
+                        <div class="resource-checklist-preview">
+                            <div class="checklist-item">&#10067; Votre solution prend-elle des d&eacute;cisions cliniques&nbsp;?</div>
+                            <div class="checklist-item">&#10067; Analyse-t-elle des donn&eacute;es physiologiques&nbsp;?</div>
+                            <div class="checklist-item">&#10067; Est-elle destin&eacute;e &agrave; des professionnels de sant&eacute;&nbsp;?</div>
+                            <div class="checklist-item muted">&hellip; 7 autres questions</div>
+                        </div>
+                    </div>
+                    <button class="resource-expand-btn" onclick="toggleResource(this)">Voir la check-list compl&egrave;te &darr;</button>
+                    <div class="resource-full-content" style="display:none;">
+                        <div class="resource-checklist-full">
+                            <p>Si vous r&eacute;pondez OUI &agrave; l&rsquo;une de ces questions, votre solution est probablement un dispositif m&eacute;dical soumis au r&egrave;glement MDR 2017/745.</p>
+                            <div class="checklist-item">&#10067; Votre solution est-elle destin&eacute;e &agrave; diagnostiquer, pr&eacute;venir, surveiller ou traiter une maladie&nbsp;?</div>
+                            <div class="checklist-item">&#10067; Analyse-t-elle des donn&eacute;es physiologiques (ECG, saturation, tension&hellip;)&nbsp;?</div>
+                            <div class="checklist-item">&#10067; Aide-t-elle &agrave; prendre des d&eacute;cisions cliniques&nbsp;?</div>
+                            <div class="checklist-item">&#10067; Calcule-t-elle une dose m&eacute;dicamenteuse&nbsp;?</div>
+                            <div class="checklist-item">&#10067; Pr&eacute;dit-elle un risque de sant&eacute; (chute, d&eacute;compensation&hellip;)&nbsp;?</div>
+                            <div class="checklist-item">&#10067; Est-elle utilis&eacute;e dans un acte m&eacute;dical direct&nbsp;?</div>
+                            <div class="checklist-item">&#10067; Son dysfonctionnement pourrait-il mettre en danger un patient&nbsp;?</div>
+                            <div class="checklist-item">&#10067; Est-elle destin&eacute;e &agrave; des professionnels de sant&eacute; dans leur pratique clinique&nbsp;?</div>
+                            <div class="checklist-item">&#10067; Revendique-t-elle une efficacit&eacute; th&eacute;rapeutique ou diagnostique&nbsp;?</div>
+                            <div class="checklist-item">&#10067; Interagit-elle avec d&rsquo;autres dispositifs m&eacute;dicaux certifi&eacute;s&nbsp;?</div>
+                            <strong>Si OUI &agrave; au moins 1 question&nbsp;:</strong>
+                            <p>Consultez le Guide MDCG 2019-11 de la Commission Europ&eacute;enne et rapprochez-vous d&rsquo;un organisme notifi&eacute; (BSI, T&Uuml;V, LNE-G-MED) pour qualifier votre classe de risque (I, IIa, IIb, III).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION : TÉMOIGNAGES -->
+            <div class="section-header" style="margin-top:80px;">
+                <h2>&#128172; Ce qu&rsquo;ils en disent</h2>
+                <p>Des professionnels de sant&eacute; qui ont utilis&eacute; les agents pour faire avancer leur projet.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-quote">&laquo;&thinsp;J&rsquo;avais une id&eacute;e de t&eacute;l&eacute;consultation sp&eacute;cialis&eacute;e depuis 2 ans mais je ne savais pas comment la formaliser. En 20 minutes avec le Clarificateur, j&rsquo;avais une description de projet claire et une liste de 5 actions concr&egrave;tes. &Ccedil;a m&rsquo;a d&eacute;bloqu&eacute; imm&eacute;diatement.&thinsp;&raquo;</p>
+                    <div class="testimonial-author"><span class="testimonial-avatar">&#129658;</span><div><strong>Dr. Marie L.</strong><span>M&eacute;decin g&eacute;n&eacute;raliste, Paris</span></div></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-quote">&laquo;&thinsp;La Vigie l&eacute;gale m&rsquo;a identifi&eacute; une obligation HDS que je ne connaissais pas. Sans &ccedil;a, j&rsquo;aurais lanc&eacute; ma plateforme avec une faille juridique majeure. Le co&ucirc;t d&rsquo;un avocat pour m&rsquo;expliquer &ccedil;a aurait &eacute;t&eacute; bien plus &eacute;lev&eacute;.&thinsp;&raquo;</p>
+                    <div class="testimonial-author"><span class="testimonial-avatar">&#128187;</span><div><strong>Thomas B.</strong><span>Fondateur e-sant&eacute;, Lyon</span></div></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-quote">&laquo;&thinsp;Le Strat&egrave;ge financement m&rsquo;a aid&eacute; &agrave; identifier le dispositif Bpifrance Aide &agrave; l&rsquo;Innovation. Je n&rsquo;en avais jamais entendu parler. J&rsquo;ai soumis le dossier et obtenu 45&nbsp;000&euro; de subvention pour mon projet de r&eacute;&eacute;ducation digitale.&thinsp;&raquo;</p>
+                    <div class="testimonial-author"><span class="testimonial-avatar">&#129338;</span><div><strong>Sophie M.</strong><span>Kin&eacute;sith&eacute;rapeute, Bordeaux</span></div></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-quote">&laquo;&thinsp;L&rsquo;Architecte d&rsquo;&eacute;quipe m&rsquo;a convaincu de ne pas recruter un CTO tout de suite et d&rsquo;aller d&rsquo;abord avec un prestataire. J&rsquo;ai &eacute;conomis&eacute; 40&nbsp;000&euro; la premi&egrave;re ann&eacute;e et trouv&eacute; le bon associ&eacute; tech 6 mois plus tard.&thinsp;&raquo;</p>
+                    <div class="testimonial-author"><span class="testimonial-avatar">&#128138;</span><div><strong>Dr. Antoine P.</strong><span>Chirurgien &amp; fondateur medtech</span></div></div>
                 </div>
             </div>
 
             <!-- SECTION : FONCTIONNEMENT -->
             <div class="content-section">
                 <div class="content-card">
-                    <h3>Comment fonctionnent nos agents IA ?</h3>
-                    <p>
-                        Chaque agent est un <strong>GPT sp&eacute;cialis&eacute;</strong>, con&ccedil;u avec une logique m&eacute;tier propre au secteur sant&eacute;.
-                        Ce ne sont pas des chatbots g&eacute;n&eacute;riques : ils appliquent des m&eacute;thodologies structur&eacute;es et int&egrave;grent les contraintes r&eacute;glementaires sp&eacute;cifiques &agrave; l'entrepreneuriat en sant&eacute;.
-                        R&eacute;sultat : vous ne recevez pas une r&eacute;ponse g&eacute;n&eacute;rique, mais une recommandation actionnable et contextuelle.
-                    </p>
+                    <h3>Comment fonctionnent nos agents IA&nbsp;?</h3>
+                    <p>Chaque agent est un <strong>GPT sp&eacute;cialis&eacute;</strong>, con&ccedil;u avec une logique m&eacute;tier propre au secteur sant&eacute;. Ce ne sont pas des chatbots g&eacute;n&eacute;riques&nbsp;: ils appliquent des m&eacute;thodologies structur&eacute;es et int&egrave;grent les contraintes r&eacute;glementaires sp&eacute;cifiques &agrave; l&rsquo;entrepreneuriat en sant&eacute;. R&eacute;sultat&nbsp;: vous ne recevez pas une r&eacute;ponse g&eacute;n&eacute;rique, mais une recommandation actionnable et contextuelle.</p>
                     <h4>La puissance du sp&eacute;cialiste en 15 minutes</h4>
                     <ul>
                         <li><strong>Structuration imm&eacute;diate</strong> &mdash; Transforme une question floue en r&eacute;ponse ordonn&eacute;e</li>
@@ -10766,7 +11377,6 @@
                         <li><strong>Logique m&eacute;tier</strong> &mdash; R&eacute;pond comme un expert du domaine, pas une IA g&eacute;n&eacute;raliste</li>
                         <li><strong>D&eacute;marrage autonome</strong> &mdash; Id&eacute;al pour clarifier avant de solliciter un expert co&ucirc;teux</li>
                     </ul>
-
                     <h4>Acc&egrave;s simple et illimit&eacute;</h4>
                     <ul>
                         <li><strong>Lien priv&eacute;</strong> &mdash; Apr&egrave;s achat, acc&egrave;s direct sans installation technique</li>
@@ -10774,15 +11384,50 @@
                         <li><strong>Conversations illimit&eacute;es</strong> &mdash; Explorez sans restriction, approfondissez autant que n&eacute;cessaire</li>
                         <li><strong>Acc&egrave;s permanent</strong> &mdash; Continuez &agrave; utiliser votre agent, avec mises &agrave; jour incluses</li>
                     </ul>
-
                     <div class="tip-box">
-                        <h4>Agents IA + experts humains : le mod&egrave;le optimal</h4>
-                        <p>
-                            Vos agents IA clarifient, structurent et cr&eacute;ent les options rapidement.
-                            Quand vous avez besoin de validation, d'approfondissement ou d'engagement l&eacute;gal/financi&egrave;re,
-                            nos recommandations d'experts compl&eacute;mentaires (disponibles pour chaque agent) vous orientent vers le sp&eacute;cialiste appropri&eacute;.
-                            L'IA acc&eacute;l&egrave;re, l'expertise humaine s&eacute;curise.
-                        </p>
+                        <h4>Agents IA + experts humains&nbsp;: le mod&egrave;le optimal</h4>
+                        <p>Vos agents IA clarifient, structurent et cr&eacute;ent les options rapidement. Quand vous avez besoin de validation, d&rsquo;approfondissement ou d&rsquo;engagement l&eacute;gal/financier, nos recommandations d&rsquo;experts compl&eacute;mentaires vous orientent vers le sp&eacute;cialiste appropri&eacute;. L&rsquo;IA acc&eacute;l&egrave;re, l&rsquo;expertise humaine s&eacute;curise.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION : FAQ AGENTS -->
+            <div class="section-header" style="margin-top:80px;">
+                <h2>&#10067; Questions fr&eacute;quentes sur les agents IA</h2>
+            </div>
+            <div class="content-section">
+                <div class="content-card" style="padding:0;">
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">Les agents remplacent-ils un avocat ou un comptable&nbsp;?</div>
+                        <div class="faq-answer">Non. Les agents IA vous permettent de comprendre les enjeux, d&rsquo;explorer les options et de pr&eacute;parer vos questions avant de consulter un expert. Ils acc&eacute;l&egrave;rent votre compr&eacute;hension et vous &eacute;vitent de payer un avocat pour des questions basiques. Pour des d&eacute;cisions engageantes (signature de contrat, choix fiscal d&eacute;finitif), un expert humain reste indispensable.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">Combien de temps faut-il pour obtenir une r&eacute;ponse utile&nbsp;?</div>
+                        <div class="faq-answer">En moyenne 10 &agrave; 20 minutes pour une premi&egrave;re r&eacute;ponse structur&eacute;e. Avec un bon prompt (voir la biblioth&egrave;que ci-dessus), vous pouvez obtenir un plan d&rsquo;action complet en une seule conversation. Pour des sujets complexes, comptez 30 &agrave; 45 minutes d&rsquo;&eacute;changes approfondis.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">Mes donn&eacute;es sont-elles confidentielles&nbsp;?</div>
+                        <div class="faq-answer">Les conversations avec les agents GPT sont r&eacute;gies par les conditions d&rsquo;utilisation d&rsquo;OpenAI. Nous vous recommandons de ne pas partager de donn&eacute;es patients, num&eacute;ros de s&eacute;curit&eacute; sociale ou informations personnelles identifiables dans vos &eacute;changes. Utilisez des cas fictifs ou anonymis&eacute;s pour illustrer vos questions.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">Puis-je utiliser plusieurs agents en m&ecirc;me temps&nbsp;?</div>
+                        <div class="faq-answer">Absolument, c&rsquo;est m&ecirc;me recommand&eacute;. Commencez par le Clarificateur pour formaliser votre projet, puis passez au Guide juridique pour le statut, au Strat&egrave;ge financement pour les fonds, etc. La section &laquo;&nbsp;Ench&icirc;ner les agents&nbsp;&raquo; ci-dessus vous propose des parcours optimis&eacute;s selon votre situation.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">Les agents sont-ils mis &agrave; jour r&eacute;guli&egrave;rement&nbsp;?</div>
+                        <div class="faq-answer">Oui. Les agents sont mis &agrave; jour d&egrave;s que la r&eacute;glementation &eacute;volue (nouveaux textes HDS, RGPD, MDR, arr&ecirc;t&eacute;s d&eacute;ontologiques) et quand de nouvelles pratiques entrepreneuriales &eacute;mergent dans le secteur sant&eacute;. Les mises &agrave; jour sont incluses dans votre abonnement sans co&ucirc;t suppl&eacute;mentaire.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">Comment acc&eacute;der aux agents apr&egrave;s l&rsquo;abonnement&nbsp;?</div>
+                        <div class="faq-answer">Apr&egrave;s souscription, vous recevez par email un lien priv&eacute; pour chacun des 7 agents. Vous acc&eacute;dez directement &agrave; l&rsquo;interface de conversation, sans installation ni compte suppl&eacute;mentaire &agrave; cr&eacute;er (un compte ChatGPT gratuit suffit pour utiliser les GPTs personnalis&eacute;s).</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">Quelle diff&eacute;rence avec ChatGPT Plus que j&rsquo;utilise d&eacute;j&agrave;&nbsp;?</div>
+                        <div class="faq-answer">ChatGPT Plus est un assistant g&eacute;n&eacute;raliste. Nos agents sont des GPTs sp&eacute;cialis&eacute;s avec des instructions syst&egrave;me sp&eacute;cifiques au secteur sant&eacute;&nbsp;: ils connaissent les structures juridiques des professions de sant&eacute;, les r&eacute;glementations HDS/MDR/RGPD sant&eacute;, les financements BPI sp&eacute;cifiques &agrave; l&rsquo;e-sant&eacute;, les r&egrave;gles d&eacute;ontologiques du CNOM. C&rsquo;est la diff&eacute;rence entre un m&eacute;decin g&eacute;n&eacute;raliste et un sp&eacute;cialiste.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">Puis-je annuler mon abonnement &agrave; tout moment&nbsp;?</div>
+                        <div class="faq-answer">Oui, sans engagement ni frais de r&eacute;siliation. L&rsquo;abonnement se renouvelle chaque mois et peut &ecirc;tre annul&eacute; &agrave; n&rsquo;importe quel moment. Vous conservez l&rsquo;acc&egrave;s jusqu&rsquo;&agrave; la fin de la p&eacute;riode pay&eacute;e.</div>
                     </div>
                 </div>
             </div>
@@ -10807,6 +11452,7 @@
                         <li class="included">Formation 30 min &agrave; l'utilisation des agents (1x &agrave; l'inscription)</li>
                         <li class="included">15 minutes d'accompagnement mensuel avec l'&eacute;quipe</li>
                         <li class="included">Acc&egrave;s complet au parcours en 8 &eacute;tapes</li>
+                        <li class="included">Biblioth&egrave;que de prompts pr&ecirc;ts &agrave; l&rsquo;emploi</li>
                         <li class="included">Syst&egrave;me de notes et marque-pages</li>
                     </ul>
                     <a href="https://www.hackyourcare.com/contact" target="_blank" class="cta-button">D&eacute;marrer maintenant</a>
@@ -10894,6 +11540,11 @@
                             <div class="comparison-cell label">Mise &agrave; jour</div>
                             <div class="comparison-cell">Non</div>
                             <div class="comparison-cell highlight">Continue</div>
+                        </div>
+                        <div class="comparison-row">
+                            <div class="comparison-cell label">Prompts guid&eacute;s</div>
+                            <div class="comparison-cell">&Agrave; cr&eacute;er soi-m&ecirc;me</div>
+                            <div class="comparison-cell highlight">Biblioth&egrave;que incluse</div>
                         </div>
                         <div class="comparison-row">
                             <div class="comparison-cell label">Accompagnement</div>
