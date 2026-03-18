@@ -806,6 +806,86 @@
     }
 
     // ========================================
+    // AGENTS PAGE — INTERACTIVE FEATURES
+    // ========================================
+
+    // Copy prompt to clipboard
+    window.copyPrompt = function (btn) {
+        var text = btn.previousElementSibling.textContent.trim();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function () {
+                btn.textContent = '✅ Copié !';
+                btn.classList.add('copied');
+                setTimeout(function () {
+                    btn.textContent = '📋 Copier ce prompt';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(function () {
+                showToast('Sélectionnez le texte manuellement', 3000);
+            });
+        } else {
+            showToast('Sélectionnez le texte manuellement', 3000);
+        }
+    };
+
+    // Agent quiz data
+    var AGENT_QUIZ_DATA = {
+        clarificateur: { icon: '🧠', title: 'Clarificateur de projet', desc: 'Idéal pour transformer votre intuition en projet structuré en moins de 20 minutes.', anchor: 'agent-clarificateur' },
+        guide: { icon: '⚖️', title: 'Guide création entreprise santé', desc: 'Pour choisir le bon statut juridique sans erreur coûteuse.', anchor: 'agent-guide' },
+        stratege: { icon: '💰', title: 'Stratège financement', desc: 'Pour identifier les meilleures sources de financement adaptées à votre projet.', anchor: 'agent-stratege' },
+        architecte: { icon: '🏗️', title: 'Architecte d\'équipe', desc: 'Pour structurer votre équipe et prioriser vos recrutements dès le départ.', anchor: 'agent-architecte' },
+        marketing: { icon: '📢', title: 'Stratège marketing éthique', desc: 'Pour vous rendre visible sans violer les règles déontologiques.', anchor: 'agent-marketing' },
+        coach: { icon: '📊', title: 'Coach financier santé', desc: 'Pour piloter vos finances avec clarté et prendre de meilleures décisions.', anchor: 'agent-coach' },
+        vigie: { icon: '🛡️', title: 'Vigie légale & conformité', desc: 'Pour sécuriser votre projet sur le plan réglementaire avant tout lancement.', anchor: 'agent-vigie' }
+    };
+
+    var currentQuizAgent = null;
+
+    window.selectAgentQuiz = function (agentId) {
+        currentQuizAgent = agentId;
+        var data = AGENT_QUIZ_DATA[agentId];
+        if (!data) return;
+        var opts = document.getElementById('quizOptions');
+        var result = document.getElementById('quizResult');
+        if (opts) opts.style.display = 'none';
+        if (result) {
+            document.getElementById('quizResultIcon').textContent = data.icon;
+            document.getElementById('quizResultTitle').textContent = 'Notre recommandation : ' + data.title;
+            document.getElementById('quizResultDesc').textContent = data.desc;
+            result.style.display = 'block';
+        }
+    };
+
+    window.scrollToAgentFromQuiz = function () {
+        if (!currentQuizAgent) return;
+        var data = AGENT_QUIZ_DATA[currentQuizAgent];
+        if (data) scrollToAgent(data.anchor);
+    };
+
+    window.resetAgentQuiz = function () {
+        currentQuizAgent = null;
+        var opts = document.getElementById('quizOptions');
+        var result = document.getElementById('quizResult');
+        if (opts) opts.style.display = 'grid';
+        if (result) result.style.display = 'none';
+    };
+
+    window.scrollToAgent = function (anchorId) {
+        var el = document.getElementById(anchorId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return false;
+    };
+
+    // Toggle expandable resource sections
+    window.toggleResource = function (btn) {
+        var fullContent = btn.nextElementSibling;
+        if (!fullContent) return;
+        var isVisible = fullContent.style.display !== 'none';
+        fullContent.style.display = isVisible ? 'none' : 'block';
+        btn.textContent = isVisible ? 'Voir le contenu complet \u2193' : 'R\u00e9duire \u2191';
+    };
+
+    // ========================================
     // INITIALIZATION
     // ========================================
     document.addEventListener('DOMContentLoaded', function () {
