@@ -537,6 +537,50 @@ body {
     z-index: 1;
 }
 
+/* HERO TRUST BOX - Réassurance */
+.hero-trust-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.trust-item {
+    background: rgba(0, 255, 136, 0.05);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    border-radius: 8px;
+    padding: 25px;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+
+.trust-item:hover {
+    background: rgba(0, 255, 136, 0.08);
+    border-color: rgba(0, 255, 136, 0.4);
+    transform: translateY(-2px);
+}
+
+.trust-icon {
+    color: var(--primary-green);
+    font-size: 1.5em;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.trust-item p {
+    color: #d0d0d0;
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.trust-item strong {
+    color: var(--primary-green);
+}
+
 /* ========================================
    SECTIONS GRID
    ======================================== */
@@ -2008,6 +2052,11 @@ footer {
 
     .hero-section h1 {
         font-size: 2.5em;
+    }
+
+    .hero-trust-box {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
 
     .toast-container {
