@@ -79,7 +79,7 @@
         'how': 'howPage',
         'pricing': 'pricingPage',
         'aiAgents': 'aiAgents',
-        'videos': 'videosPage',
+        'videos': 'videos',
         'ideaFinder': 'ideaFinderPage',
         'marketStudy': 'marketStudyPage',
         'competitionAnalysis': 'competitionAnalysisPage',
@@ -121,6 +121,11 @@
 
         if (targetPage) {
             targetPage.classList.add('active');
+        }
+
+        // Initialize media content if showing videos page
+        if (pageName === 'videos') {
+            initializeMedia();
         }
 
         // Update active nav link
