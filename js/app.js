@@ -621,9 +621,192 @@
     });
 
     // ========================================
+    // MEDIA SECTION FUNCTIONALITY
+    // ========================================
+
+    // Initialize media content from JSON data
+    function initializeMedia() {
+        var mediaDataElement = document.getElementById('mediaContentData');
+        if (!mediaDataElement) return;
+
+        try {
+            var mediaData = JSON.parse(mediaDataElement.textContent);
+            var mediaContent = mediaData.content || [];
+
+            // Populate media grid
+            populateMediaGrid(mediaContent);
+
+            // Setup media modal handlers
+            setupMediaModal();
+        } catch (e) {
+            console.error('Error loading media content:', e);
+        }
+    }
+
+    // Populate media grid with cards from data
+    function populateMediaGrid(content) {
+        var mediaGrid = document.getElementById('mediaGrid');
+        if (!mediaGrid) return;
+
+        // Sort by order
+        content.sort(function(a, b) {
+            return (a.order || 0) - (b.order || 0);
+        });
+
+        // Clear existing content
+        mediaGrid.innerHTML = '';
+
+        // Create cards for each media item
+        content.forEach(function(item, index) {
+            var card = createMediaCard(item, index);
+            mediaGrid.appendChild(card);
+        });
+    }
+
+    // Create individual media card element
+    function createMediaCard(item, index) {
+        var card = document.createElement('div');
+        card.className = 'media-card';
+
+        // Determine badge color based on type
+        var badgeClass = '';
+        var badgeText = '';
+        switch(item.type) {
+            case 'podcast':
+                badgeClass = 'podcast';
+                badgeText = 'Podcast';
+                break;
+            case 'editorial':
+                badgeClass = 'editorial';
+                badgeText = 'Editorial';
+                break;
+            case 'video':
+            default:
+                badgeText = 'Vidéo';
+                break;
+        }
+
+        // Get YouTube thumbnail if available
+        var thumbnail = '';
+        if (item.youtubeId) {
+            thumbnail = 'https://img.youtube.com/vi/' + item.youtubeId + '/maxresdefault.jpg';
+        }
+
+        var html = '<div class="media-thumbnail">' +
+                   (thumbnail ? '<img src="' + thumbnail + '" alt="' + escapeHtml(item.title) + '" />' :
+                    '<div class="video-placeholder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5h3V9h4v3h3l-5 5z"/></svg></div>') +
+                   '</div>' +
+                   '<div class="media-content">' +
+                   '<div class="media-badge' + (badgeClass ? ' ' + badgeClass : '') + '">' + badgeText + '</div>' +
+                   '<h3>' + escapeHtml(item.title) + '</h3>' +
+                   '<p>' + escapeHtml(item.description) + '</p>' +
+                   '<a href="#" class="media-cta" data-media="' + index + '" data-type="' + item.type + '">Regarder</a>' +
+                   '</div>';
+
+        card.innerHTML = html;
+
+        // Add click handler for CTA
+        var cta = card.querySelector('.media-cta');
+        if (cta) {
+            cta.addEventListener('click', function(e) {
+                e.preventDefault();
+                openMediaModal(item);
+            });
+        }
+
+        return card;
+    }
+
+    // Setup media modal event handlers
+    function setupMediaModal() {
+        var modal = document.getElementById('mediaModal');
+        if (!modal) return;
+
+        // Close button
+        var closeBtn = modal.querySelector('.media-modal-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                closeMediaModal();
+            });
+        }
+
+        // Click overlay to close
+        var overlay = modal.querySelector('.media-modal-overlay');
+        if (overlay) {
+            overlay.addEventListener('click', function() {
+                closeMediaModal();
+            });
+        }
+
+        // Keyboard escape to close
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display !== 'none') {
+                closeMediaModal();
+            }
+        });
+    }
+
+    // Open media modal and create embed
+    function openMediaModal(item) {
+        var modal = document.getElementById('mediaModal');
+        if (!modal) return;
+
+        var embedWrapper = document.getElementById('embedWrapper');
+        if (!embedWrapper) return;
+
+        // Clear previous embed
+        embedWrapper.innerHTML = '';
+
+        // Create appropriate embed based on type
+        if (item.type === 'video' && item.youtubeId) {
+            var iframe = document.createElement('iframe');
+            iframe.setAttribute('width', '100%');
+            iframe.setAttribute('height', '100%');
+            iframe.setAttribute('src', 'https://www.youtube.com/embed/' + item.youtubeId + '?autoplay=1');
+            iframe.setAttribute('title', escapeHtml(item.title));
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', 'allowfullscreen');
+            embedWrapper.appendChild(iframe);
+        }
+        // Add podcast or other embed types here as needed
+        else if (item.type === 'podcast' && item.podcastUrl) {
+            var podcastEmbed = document.createElement('iframe');
+            podcastEmbed.setAttribute('src', item.podcastUrl);
+            podcastEmbed.setAttribute('height', '152');
+            podcastEmbed.setAttribute('width', '100%');
+            podcastEmbed.setAttribute('frameborder', 'no');
+            podcastEmbed.setAttribute('scrolling', 'no');
+            embedWrapper.appendChild(podcastEmbed);
+        }
+
+        // Show modal
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Close media modal
+    function closeMediaModal() {
+        var modal = document.getElementById('mediaModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    // Utility: Escape HTML for safe display
+    function escapeHtml(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // ========================================
     // INITIALIZATION
     // ========================================
     document.addEventListener('DOMContentLoaded', function () {
+        // Initialize media section
+        initializeMedia();
+
         // Restore last visited page
         var lastPage = Storage.getRaw('lastPage');
         if (lastPage && lastPage !== 'home') {
