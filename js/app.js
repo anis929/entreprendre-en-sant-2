@@ -105,6 +105,8 @@
     // NAVIGATION
     // ========================================
     function showPage(pageName) {
+        console.log('showPage called with:', pageName);
+
         // Remove active from all nav links
         document.querySelectorAll('.nav-item a').forEach(function (link) {
             link.classList.remove('active');
@@ -117,14 +119,18 @@
 
         // Show target page
         var pageId = PAGE_MAP[pageName] || 'homePage';
+        console.log('PageId:', pageId);
         var targetPage = document.getElementById(pageId);
+        console.log('Target page found:', !!targetPage);
 
         if (targetPage) {
             targetPage.classList.add('active');
+            console.log('Page displayed:', pageId);
         }
 
         // Initialize media content if showing videos page
         if (pageName === 'videos') {
+            console.log('Initializing media...');
             initializeMedia();
         }
 
@@ -631,12 +637,20 @@
 
     // Initialize media content from JSON data
     function initializeMedia() {
+        console.log('initializeMedia called');
         var mediaDataElement = document.getElementById('mediaContentData');
-        if (!mediaDataElement) return;
+        console.log('mediaDataElement found:', !!mediaDataElement);
+
+        if (!mediaDataElement) {
+            console.error('mediaContentData element not found!');
+            return;
+        }
 
         try {
             var mediaData = JSON.parse(mediaDataElement.textContent);
+            console.log('JSON parsed successfully:', mediaData);
             var mediaContent = mediaData.content || [];
+            console.log('Media content loaded:', mediaContent.length, 'items');
 
             // Populate media grid
             populateMediaGrid(mediaContent);
@@ -650,8 +664,14 @@
 
     // Populate media grid with cards from data
     function populateMediaGrid(content) {
+        console.log('populateMediaGrid called with', content.length, 'items');
         var mediaGrid = document.getElementById('mediaGrid');
-        if (!mediaGrid) return;
+        console.log('mediaGrid element found:', !!mediaGrid);
+
+        if (!mediaGrid) {
+            console.error('mediaGrid element not found!');
+            return;
+        }
 
         // Sort by order
         content.sort(function(a, b) {
@@ -660,12 +680,14 @@
 
         // Clear existing content
         mediaGrid.innerHTML = '';
+        console.log('Cleared mediaGrid, creating', content.length, 'cards');
 
         // Create cards for each media item
         content.forEach(function(item, index) {
             var card = createMediaCard(item, index);
             mediaGrid.appendChild(card);
         });
+        console.log('Grid populated with', mediaGrid.children.length, 'cards');
     }
 
     // Create individual media card element
