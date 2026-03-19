@@ -697,6 +697,12 @@
             thumbnail = 'https://img.youtube.com/vi/' + item.youtubeId + '/maxresdefault.jpg';
         }
 
+        // Determine CTA: external link or modal
+        var isExternal = !item.youtubeId && !item.podcastUrl && item.externalUrl;
+        var ctaHtml = isExternal
+            ? '<a href="' + escapeHtml(item.externalUrl) + '" target="_blank" rel="noopener noreferrer" class="media-cta">Voir sur YouTube</a>'
+            : '<a href="#" class="media-cta" data-media="' + index + '" data-type="' + item.type + '">Regarder</a>';
+
         var html = '<div class="media-thumbnail">' +
                    (thumbnail ? '<img src="' + thumbnail + '" alt="' + escapeHtml(item.title) + '" />' :
                     '<div class="video-placeholder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5h3V9h4v3h3l-5 5z"/></svg></div>') +
@@ -705,18 +711,20 @@
                    '<div class="media-badge' + (badgeClass ? ' ' + badgeClass : '') + '">' + badgeText + '</div>' +
                    '<h3>' + escapeHtml(item.title) + '</h3>' +
                    '<p>' + escapeHtml(item.description) + '</p>' +
-                   '<a href="#" class="media-cta" data-media="' + index + '" data-type="' + item.type + '">Regarder</a>' +
+                   ctaHtml +
                    '</div>';
 
         card.innerHTML = html;
 
-        // Add click handler for CTA
-        var cta = card.querySelector('.media-cta');
-        if (cta) {
-            cta.addEventListener('click', function(e) {
-                e.preventDefault();
-                openMediaModal(item);
-            });
+        // Add click handler for modal CTA (not external links)
+        if (!isExternal) {
+            var cta = card.querySelector('.media-cta');
+            if (cta) {
+                cta.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openMediaModal(item);
+                });
+            }
         }
 
         return card;
