@@ -79,6 +79,7 @@
         'how': 'howPage',
         'pricing': 'pricingPage',
         'aiAgents': 'aiAgents',
+        'aiComparison': 'aiComparison',
         'videos': 'videos',
         'ideaFinder': 'ideaFinderPage',
         'marketStudy': 'marketStudyPage',
@@ -136,7 +137,7 @@
             navSelector = '[data-page="how"]';
         } else if (pageName === 'pricing') {
             navSelector = '[data-page="pricing"]';
-        } else if (pageName.indexOf('ai') === 0) {
+        } else if (pageName === 'aiComparison' || pageName.indexOf('ai') === 0) {
             navSelector = '[data-page="aiAgents"]';
         } else if (pageName === 'videos') {
             navSelector = '[data-page="videos"]';
