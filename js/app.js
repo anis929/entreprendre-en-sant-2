@@ -691,6 +691,15 @@
         if (pageTarget) {
             e.preventDefault();
             showPage(pageTarget.dataset.page);
+            // Auto-scroll to target element if data-scroll attribute is present
+            if (pageTarget.dataset.scroll) {
+                setTimeout(function() {
+                    var targetElement = document.getElementById(pageTarget.dataset.scroll);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 300);
+            }
             return;
         }
 
