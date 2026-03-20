@@ -727,6 +727,21 @@ body {
     border-bottom: none;
 }
 
+.agent-logo {
+    display: inline-block;
+    font-size: 2em;
+    margin-bottom: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.agent-logo:hover {
+    transform: scale(1.2);
+}
+
 .bonus-card {
     background: linear-gradient(135deg, var(--dark-green) 0%, #001a0f 100%);
     border: 2px solid var(--primary-green);
@@ -1063,8 +1078,8 @@ body {
 
 .ai-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
 }
 
 .ai-card {
@@ -1295,9 +1310,10 @@ body {
 }
 
 .agents-pricing-period {
-    font-size: 0.95em;
-    color: #666;
+    font-size: 1.2em;
+    color: #999;
     margin-bottom: 25px;
+    font-weight: 500;
 }
 
 .agents-pricing-description {
@@ -1764,9 +1780,10 @@ footer {
 }
 
 .pricing-period {
-    font-size: 0.95em;
-    color: #666;
+    font-size: 1.2em;
+    color: #999;
     margin-bottom: 25px;
+    font-weight: 500;
 }
 
 .pricing-description {
