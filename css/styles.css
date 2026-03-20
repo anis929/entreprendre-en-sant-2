@@ -727,6 +727,21 @@ body {
     border-bottom: none;
 }
 
+.agent-logo {
+    display: inline-block;
+    font-size: 2em;
+    margin-bottom: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.agent-logo:hover {
+    transform: scale(1.2);
+}
+
 .bonus-card {
     background: linear-gradient(135deg, var(--dark-green) 0%, #001a0f 100%);
     border: 2px solid var(--primary-green);
@@ -1063,8 +1078,8 @@ body {
 
 .ai-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
 }
 
 .ai-card {
@@ -1129,6 +1144,117 @@ body {
     font-size: 1em;
     position: relative;
     z-index: 1;
+}
+
+/* ========================================
+   PILLAR 3 SECTION
+   ======================================== */
+.pillar3-section {
+    background: linear-gradient(135deg, var(--dark-green) 0%, #001a0f 100%);
+    padding: 80px 0;
+    margin: 80px 0;
+    border-top: 1px solid var(--primary-green);
+    border-bottom: 1px solid var(--primary-green);
+}
+
+.pillar3-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-green);
+    font-size: 2.2em;
+}
+
+.pillar3-subtitle {
+    text-align: center;
+    font-size: 1.1em;
+    color: #ccc;
+    margin-bottom: 60px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+}
+
+.pillar3-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.pillar3-benefits {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.pillar3-benefit-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.pillar3-benefit-item:hover {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: var(--primary-green);
+    transform: translateY(-5px);
+}
+
+.pillar3-icon {
+    font-size: 3em;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.pillar3-benefit-item h4 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--primary-green);
+}
+
+.pillar3-benefit-item p {
+    color: #aaa;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.pillar3-cta {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 50px;
+    border-radius: 12px;
+    border: 1px solid var(--primary-green);
+    text-align: center;
+}
+
+.pillar3-cta h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.pillar3-cta p {
+    color: #bbb;
+    margin-bottom: 30px;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .pillar3-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .pillar3-benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .pillar3-section h2 {
+        font-size: 1.8em;
+    }
 }
 
 /* ========================================
@@ -1295,9 +1421,10 @@ body {
 }
 
 .agents-pricing-period {
-    font-size: 0.95em;
-    color: #666;
+    font-size: 1.2em;
+    color: #999;
     margin-bottom: 25px;
+    font-weight: 500;
 }
 
 .agents-pricing-description {
@@ -1764,9 +1891,10 @@ footer {
 }
 
 .pricing-period {
-    font-size: 0.95em;
-    color: #666;
+    font-size: 1.2em;
+    color: #999;
     margin-bottom: 25px;
+    font-weight: 500;
 }
 
 .pricing-description {
