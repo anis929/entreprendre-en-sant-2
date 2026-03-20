@@ -647,6 +647,9 @@ body {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
 .section-card::before {
@@ -730,7 +733,8 @@ body {
 .agent-logo {
     display: inline-block;
     font-size: 2em;
-    margin-bottom: 15px;
+    margin-top: auto;
+    margin-bottom: 0;
     cursor: pointer;
     text-decoration: none;
     transition: transform 0.3s ease;
