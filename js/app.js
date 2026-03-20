@@ -475,15 +475,60 @@
         { page: 'part8', icon: '8️⃣', tag: 'Partie 8', title: 'RGPD et données de santé', keywords: 'rgpd données santé cnil hds hébergement agrément article 9 dpo pia aipd pseudonymisation' },
         { page: 'part8', icon: '8️⃣', tag: 'Partie 8', title: 'Propriété intellectuelle et brevets', keywords: 'brevet propriété intellectuelle pi logiciel secret commercial nda confidentialité inpi' },
         { page: 'part8', icon: '8️⃣', tag: 'Partie 8', title: 'Contrats et anti-cadeaux', keywords: 'contrat cgv cgu saas sous-traitance anti-cadeaux loi sunshine act conventions hospitalières' },
-        { page: 'part8', icon: '8️⃣', tag: 'Partie 8', title: 'Éthique et déontologie médicale', keywords: 'éthique déontologie code médecin infirmier ordre professionnel conseil national' }
+        { page: 'part8', icon: '8️⃣', tag: 'Partie 8', title: 'Éthique et déontologie médicale', keywords: 'éthique déontologie code médecin infirmier ordre professionnel conseil national' },
+        // Agents IA individuels
+        { page: 'aiAgents', icon: '🎯', tag: 'Agent IA', title: 'Clarificateur — Affinez votre idée', keywords: 'clarificateur idée affiner concept validation problème solution' },
+        { page: 'aiAgents', icon: '📋', tag: 'Agent IA', title: 'Guide — Étapes du parcours', keywords: 'guide étapes parcours structure roadmap planning' },
+        { page: 'aiAgents', icon: '🎲', tag: 'Agent IA', title: 'Stratège — Positionnement et marché', keywords: 'stratège positionnement marché stratégie concurrence analyse' },
+        { page: 'aiAgents', icon: '🏗️', tag: 'Agent IA', title: 'Architecte — Modèle opérationnel', keywords: 'architecte modèle opérationnel structure organisation processus' },
+        { page: 'aiAgents', icon: '📢', tag: 'Agent IA', title: 'Marketing — Go-to-market', keywords: 'marketing gtm go to market communication acquisition clients' },
+        { page: 'aiAgents', icon: '🏅', tag: 'Agent IA', title: 'Coach — Mentorat personnalisé', keywords: 'coach mentor mentorat coaching conseils accompagnement' },
+        { page: 'aiAgents', icon: '👁️', tag: 'Agent IA', title: 'Vigie — Surveillance réglementaire', keywords: 'vigie surveillance réglementation nouvelles juridique conformité' },
+        // Sections spéciales
+        { page: 'part1', icon: '1️⃣', tag: 'Partie 1', title: 'Design thinking et innovation', keywords: 'design thinking innovation méthode itération feedback utilisateurs' },
+        { page: 'part2', icon: '2️⃣', tag: 'Partie 2', title: 'Canvas Business Model', keywords: 'business model canvas bmc partenaires ressources activités valeur clients' },
+        { page: 'part3', icon: '3️⃣', tag: 'Partie 3', title: 'Immatriculation et droits', keywords: 'immatriculation siren siret kbis numéro inscription registre' },
+        { page: 'part4', icon: '4️⃣', tag: 'Partie 4', title: 'Salaires et rémunération', keywords: 'salaires rémunération paie cotisations sociales bulletin' },
+        { page: 'part5', icon: '5️⃣', tag: 'Partie 5', title: 'Réseaux sociaux et content', keywords: 'réseaux sociaux contenu linkedin facebook twitter instagram newsletter' },
+        { page: 'part6', icon: '6️⃣', tag: 'Partie 6', title: 'Prospection et démonstration', keywords: 'prospection démonstration pitch présentation closing signature contrat' },
+        { page: 'part7', icon: '7️⃣', tag: 'Partie 7', title: 'Traction et métriques', keywords: 'traction métriques kpi mrr arr ltv cac nps churn growth hacking' },
+        { page: 'part8', icon: '8️⃣', tag: 'Partie 8', title: 'Fondations légales', keywords: 'fondations légales cadre juridique conformité réglementation' },
+        // Recherches courantes facilitées
+        { page: 'aiComparison', icon: '🤖', tag: 'Agents IA', title: 'Comparaison des agents IA', keywords: 'comparaison agents différences outils lesquels' },
+        { page: 'how', icon: '📖', tag: 'Comment ça marche', title: 'Structure du parcours', keywords: 'structure étapes progression modules cours contenu' },
+        { page: 'pricing', icon: '💳', tag: 'Tarifs', title: 'Formule Gratuit', keywords: 'gratuit essai test accès free formule' },
+        { page: 'pricing', icon: '💳', tag: 'Tarifs', title: 'Formule Accompagné', keywords: 'accompagné coaching mentoring support assistance conseil' },
+        { page: 'pricing', icon: '💳', tag: 'Tarifs', title: 'Formule Premium', keywords: 'premium avancé complet complet tout accès full' }
     ];
 
     function openSearch() {
         var modal = document.getElementById('searchModal');
         var input = document.getElementById('searchInput');
+        var container = document.getElementById('searchResults');
         modal.classList.add('active');
         setTimeout(function () { input.focus(); }, 50);
-        renderSearchResults('');
+
+        // Show suggestions instead of empty state
+        container.innerHTML = '<div class="search-suggestions">' +
+            '<p style="color: #666; font-size: 0.85em; margin-bottom: 12px; padding: 0 20px;">Recherches populaires:</p>' +
+            '<div style="display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px; margin-bottom: 20px;">' +
+            '<span class="search-suggestion" data-query="financement">💰 Financement</span>' +
+            '<span class="search-suggestion" data-query="agents ia">🤖 Agents IA</span>' +
+            '<span class="search-suggestion" data-query="marketing">📢 Marketing</span>' +
+            '<span class="search-suggestion" data-query="équipe">👥 Équipe</span>' +
+            '<span class="search-suggestion" data-query="statut juridique">⚖️ Statut juridique</span>' +
+            '<span class="search-suggestion" data-query="rgpd">🔒 RGPD</span>' +
+            '<span class="search-suggestion" data-query="vente">💼 Vente</span>' +
+            '<span class="search-suggestion" data-query="validation">✅ Validation</span>' +
+            '</div></div>';
+
+        // Add click listeners to suggestions
+        container.querySelectorAll('.search-suggestion').forEach(function (el) {
+            el.addEventListener('click', function () {
+                input.value = el.dataset.query;
+                renderSearchResults(el.dataset.query);
+            });
+        });
     }
 
     function closeSearch() {
@@ -496,7 +541,25 @@
         return str.toLowerCase()
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '')
-            .replace(/[^a-z0-9 ]/g, ' ');
+            .trim()
+            .replace(/\s+/g, ' ');
+    }
+
+    function calculateScore(item, terms) {
+        var titleNorm = normalizeStr(item.title);
+        var keywordsNorm = normalizeStr(item.keywords);
+        var tagNorm = normalizeStr(item.tag);
+        var score = 0;
+
+        terms.forEach(function (term) {
+            var titleMatches = (titleNorm.match(new RegExp(term, 'g')) || []).length;
+            var keywordMatches = (keywordsNorm.match(new RegExp(term, 'g')) || []).length;
+            var tagMatches = (tagNorm.match(new RegExp(term, 'g')) || []).length;
+
+            // Scoring: titre > keywords > tag
+            score += (titleMatches * 10) + (keywordMatches * 3) + (tagMatches * 1);
+        });
+        return score;
     }
 
     function renderSearchResults(query) {
@@ -504,32 +567,80 @@
         var q = normalizeStr(query.trim());
 
         if (!q) {
-            container.innerHTML = '<p class="search-empty">Tapez votre recherche pour explorer le contenu…</p>';
+            container.innerHTML = '<p class="search-empty">🔍 Tapez votre recherche pour explorer le contenu…</p>';
             return;
         }
 
         var terms = q.split(/\s+/).filter(Boolean);
-        var results = SEARCH_INDEX.filter(function (item) {
+        var results = [];
+        var seen = {};
+
+        // Recherche exacte (tous les termes présents)
+        SEARCH_INDEX.forEach(function (item) {
+            var key = item.page + '|' + item.title;
+            if (seen[key]) return;
+
             var haystack = normalizeStr(item.title + ' ' + item.keywords + ' ' + item.tag);
-            return terms.every(function (term) { return haystack.indexOf(term) !== -1; });
+            var allTermsFound = terms.every(function (term) {
+                return haystack.indexOf(term) !== -1;
+            });
+
+            if (allTermsFound) {
+                var score = calculateScore(item, terms);
+                var result = {
+                    page: item.page,
+                    icon: item.icon,
+                    tag: item.tag,
+                    title: item.title,
+                    keywords: item.keywords,
+                    score: score,
+                    matchType: 'exact'
+                };
+                results.push(result);
+                seen[key] = true;
+            }
         });
 
-        // Deduplicate by page+title
-        var seen = {};
-        results = results.filter(function (item) {
-            var key = item.page + '|' + item.title;
-            if (seen[key]) return false;
-            seen[key] = true;
-            return true;
-        });
+        // Si pas de résultats, recherche partielle (au moins un terme)
+        if (results.length === 0) {
+            SEARCH_INDEX.forEach(function (item) {
+                var key = item.page + '|' + item.title;
+                if (seen[key]) return;
+
+                var haystack = normalizeStr(item.title + ' ' + item.keywords + ' ' + item.tag);
+                var someTermFound = terms.some(function (term) {
+                    return haystack.indexOf(term) !== -1;
+                });
+
+                if (someTermFound) {
+                    var score = calculateScore(item, terms);
+                    var result = {
+                        page: item.page,
+                        icon: item.icon,
+                        tag: item.tag,
+                        title: item.title,
+                        keywords: item.keywords,
+                        score: score,
+                        matchType: 'partial'
+                    };
+                    results.push(result);
+                    seen[key] = true;
+                }
+            });
+        }
+
+        // Tri par score (meilleur en premier)
+        results.sort(function (a, b) { return b.score - a.score; });
 
         if (results.length === 0) {
-            container.innerHTML = '<p class="search-empty">Aucun résultat pour "<strong>' + query.replace(/</g, '&lt;') + '</strong>"</p>';
+            container.innerHTML = '<p class="search-empty">❌ Aucun résultat pour "<strong>' + query.replace(/</g, '&lt;') + '</strong>"<br><small style="font-size: 0.85em; opacity: 0.7;">Essayez avec des mots-clés différents ou des mots-clés plus génériques</small></p>';
             return;
         }
 
-        var html = results.slice(0, 12).map(function (item) {
-            return '<div class="search-result-item" data-page="' + item.page + '">' +
+        var displayResults = results.slice(0, 20);
+        var html = displayResults.map(function (item) {
+            var matchClass = item.matchType === 'exact' ? ' exact-match' : '';
+            return '<div class="search-result-item' + matchClass + '" data-page="' + item.page + '">' +
                 '<div class="search-result-icon">' + item.icon + '</div>' +
                 '<div class="search-result-content">' +
                 '<span class="search-result-tag">' + item.tag + '</span>' +
@@ -537,7 +648,11 @@
                 '</div></div>';
         }).join('');
 
-        container.innerHTML = html + '<p class="search-hint">Appuyez sur Échap pour fermer • ' + results.length + ' résultat' + (results.length > 1 ? 's' : '') + '</p>';
+        var countText = results.length > displayResults.length ?
+            displayResults.length + '/' + results.length + ' résultats' :
+            results.length + ' résultat' + (results.length > 1 ? 's' : '');
+
+        container.innerHTML = html + '<p class="search-hint">⌨️ Appuyez sur <strong>Échap</strong> pour fermer • ' + countText + '</p>';
 
         container.querySelectorAll('.search-result-item').forEach(function (el) {
             el.addEventListener('click', function () {
