@@ -1903,15 +1903,15 @@ footer {
 
 .pricing-price span {
     font-size: 0.35em;
-    font-weight: 500;
-    color: #888;
+    font-weight: 800;
+    color: #fff;
     letter-spacing: 0;
 }
 
 .pricing-period {
     font-size: 0.35em;
-    color: #888;
-    font-weight: 500;
+    color: #fff;
+    font-weight: 800;
     letter-spacing: 0;
     margin-left: 10px;
 }
