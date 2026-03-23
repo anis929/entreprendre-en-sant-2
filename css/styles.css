@@ -1842,6 +1842,8 @@ footer {
     text-align: center;
     position: relative;
     transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .pricing-card:hover {
@@ -2011,9 +2013,9 @@ footer {
 }
 
 .pricing-price-placeholder {
-    font-size: 1.8em;
-    font-weight: 700;
-    color: var(--primary-green);
+    font-size: 3.5em;
+    font-weight: 800;
+    color: #fff;
     margin-bottom: 5px;
 }
 
@@ -2024,7 +2026,7 @@ footer {
     color: var(--primary-green);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-top: 25px;
+    margin-top: auto;
     margin-bottom: 15px;
     text-align: left;
     padding-top: 20px;
@@ -2033,7 +2035,7 @@ footer {
 
 .pricing-section-title:first-of-type {
     border-top: none;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 /* LISTES BÉNÉFICES ET EXPERTS */
