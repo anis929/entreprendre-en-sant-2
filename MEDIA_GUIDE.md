@@ -12,7 +12,7 @@ Les contenus média sont centralisés dans une balise `<script type="application
   "type": "video",
   "title": "Titre du contenu",
   "description": "Description courte (une ou deux phrases)",
-  "youtubeId": "KBSxtAphpEA",
+  "youtubeId": "EXEMPLE123ABC",
   "category": "Fondamentaux",
   "order": 1,
   "date": "2026-03-15"
@@ -39,8 +39,8 @@ Les contenus média sont centralisés dans une balise `<script type="application
 
 ### Étape 1: Récupérer l'ID YouTube
 
-Pour une URL: `https://youtu.be/KBSxtAphpEA`
-L'ID YouTube est: `KBSxtAphpEA`
+Pour une URL: `https://youtu.be/dQw4w9WgXcQ`
+L'ID YouTube est: `dQw4w9WgXcQ`
 
 ### Étape 2: Ajouter l'objet dans le JSON
 
@@ -144,7 +144,7 @@ Ajoutez un nouvel objet au tableau `"content"`:
       "type": "video",
       "title": "Entrepreneuriat en santé : les défis incontournables",
       "description": "Découvrez les 3 pilliers fondamentaux de l'entrepreneuriat en santé et comment les maîtriser.",
-      "youtubeId": "KBSxtAphpEA",
+      "youtubeId": "EXEMPLE123ABC",
       "category": "Fondamentaux",
       "order": 1,
       "date": "2026-03-15"
