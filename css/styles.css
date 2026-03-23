@@ -1073,6 +1073,14 @@ body {
     border-bottom: 1px solid #1a1a1a;
 }
 
+.ai-section h2 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+    text-align: center;
+}
+
 .ai-section-subtitle {
     text-align: center;
     font-size: 1.2em;
@@ -1901,10 +1909,11 @@ footer {
 }
 
 .pricing-period {
-    font-size: 1.2em;
-    color: #999;
-    margin-bottom: 25px;
+    font-size: 0.35em;
+    color: #888;
     font-weight: 500;
+    letter-spacing: 0;
+    margin-left: 10px;
 }
 
 .pricing-description {
