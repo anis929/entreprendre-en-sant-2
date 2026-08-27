@@ -3789,3 +3789,169 @@ button:focus-visible,
     background: none;
     margin-right: 0.25em;
 }
+
+/* ----------------------------------------
+   Tuile — variante compacte de la carte, pour les grilles éditoriales
+   (guides de choix, cas d'usage, fiches outil)
+   ---------------------------------------- */
+.tile {
+    padding: 25px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    background: rgba(0, 255, 136, 0.02);
+    transition: var(--transition-card);
+}
+
+.tile:hover {
+    border-color: var(--border-accent-soft);
+    background: var(--accent-wash);
+}
+
+.tile > h4 {
+    color: var(--brand-green);
+    margin-top: 0;
+    margin-bottom: var(--space-xs);
+}
+
+.tile > p {
+    color: #aaa;
+    margin-bottom: var(--space-2xs);
+}
+
+.tile > p:last-child {
+    margin-bottom: 0;
+    font-size: 0.9em;
+}
+
+/* Fond plein, sans teinte verte */
+.tile--sunken {
+    padding: var(--space-sm);
+    background: var(--surface-sunken);
+}
+
+/* Encadré à filet latéral, pour une remarque ou un conseil */
+.tile--accent {
+    padding: var(--space-sm);
+    border: none;
+    border-left: 3px solid var(--brand-green);
+    background: var(--accent-wash);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* Ligne d'information sur fond teinté, empilable */
+.note-line {
+    background: var(--accent-wash);
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: var(--space-2xs);
+}
+
+.note-line:last-child {
+    margin-bottom: 0;
+}
+
+/* Liste sans puce, au gris de corps de texte */
+.plain-list {
+    list-style: none;
+    padding: 0;
+    color: #aaa;
+    font-size: 0.95em;
+    line-height: 1.8;
+}
+
+/* Grille éditoriale un cran plus large que .grid-auto */
+.grid-auto--wide {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+}
+
+/* La première colonne d'un tableau de données porte l'accent */
+.data-table td:first-child {
+    color: var(--brand-green);
+    font-weight: 600;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Grille éditoriale au rythme exact de .sections-grid de l'accueil,
+   avec la respiration verticale attendue en cours de page. */
+.grid-auto--flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+}
+
+/* Niveaux de texte secondaire */
+.u-note {
+    color: #aaa;
+    font-size: 0.9em;
+    line-height: 1.8;
+}
+
+.u-fine {
+    color: var(--text-faint);
+    font-size: 0.85em;
+}
+
+.u-italic { font-style: italic; }
+.u-mt-xs { margin-top: var(--space-xs); }
+.u-mb-xs { margin-bottom: var(--space-xs); }
+.u-flush { margin: 0; }
+
+/* ----------------------------------------
+   Compléments de la page Agents IA
+   ---------------------------------------- */
+.u-mb-md { margin-bottom: var(--space-md); }
+
+/* Rangée de boutons horizontale, centrée et repliable */
+.button-row {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Variante compacte du bouton principal — l'accueil n'utilise pas ce
+   modificateur, sa règle .cta-button reste intacte. */
+.cta-button--compact {
+    font-size: 0.9em;
+    padding: 12px 25px;
+}
+
+.cta-button--compact.secondary {
+    padding: 10px 23px;
+}
+
+/* Pictogramme de résultat du questionnaire */
+.quiz-result-icon {
+    font-size: 3em;
+    display: block;
+    margin-bottom: var(--space-xs);
+}
+
+/* Lien accentué au fil du texte */
+.inline-link {
+    color: var(--brand-green);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.inline-link:hover {
+    border-bottom-color: var(--brand-green);
+}
+
+/* Carte de contenu sans gouttière interne (contenu à bord perdu) */
+.content-card--flush {
+    padding: 0;
+}
+
+/* Carte de contenu mise en avant */
+.content-card--featured {
+    border: 2px solid var(--brand-green);
+}
