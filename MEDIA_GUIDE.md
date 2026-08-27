@@ -29,9 +29,28 @@ Les contenus média sont centralisés dans une balise `<script type="application
 | `description` | string | ✅ | Description courte (max 150 caractères recommandé) |
 | `youtubeId` | string | ❌ | ID YouTube (requis si type = video) |
 | `podcastUrl` | string | ❌ | URL d'embed podcast (requis si type = podcast) |
+| `externalUrl` | string | ❌ | Lien externe, si le contenu n'est ni une vidéo ni un podcast embarqué |
 | `category` | string | ✅ | Catégorie: Fondamentaux, Tips, Témoignages, etc. |
 | `order` | number | ✅ | Ordre d'affichage (1, 2, 3...) |
 | `date` | string | ✅ | Date de publication (format YYYY-MM-DD) |
+
+### Ce que la carte affiche
+
+`category` et `date` composent la ligne de métadonnées de la carte : la
+catégorie en vert, puis la date reformatée en français (`2026-03-15` devient
+`15 mars 2026`). Une date absente ou invalide est simplement omise, la carte
+reste valide.
+
+Le `type` détermine le gabarit :
+
+| Type | Gabarit | Emplacement des métadonnées | Appel à l'action |
+|------|---------|------------------------------|------------------|
+| `video`, `podcast` | Carte à filet vert, comme sur l'accueil | En pied, sous un filet | Bouton pleine largeur |
+| `editorial` | Carte de lecture | En tête, sous la vignette | Lien fléché |
+
+Sans `youtubeId`, la carte affiche un pictogramme de repli propre à son type
+plutôt qu'une vignette. La miniature YouTube bascule automatiquement de
+`maxresdefault` vers `hqdefault` quand la première n'existe pas.
 
 ---
 

@@ -4079,3 +4079,242 @@ button:focus-visible,
     flex-direction: column;
     gap: 16px;
 }
+
+/* ========================================
+   CARTES DE CONTENU MÉDIA
+   Deux gabarits sur la même API : les vidéos et podcasts reprennent la
+   signature de la carte d'accueil (filet révélé au survol, élévation de
+   8 px), les éditoriaux adoptent une lecture de type liste d'articles.
+   ======================================== */
+
+.media-card {
+    border-radius: var(--radius-md);
+    transition: var(--transition-card);
+    position: relative;
+}
+
+/* La carte entière est cliquable : le lien s'étend en surface, tout en
+   restant le seul élément focusable et annoncé. */
+.media-card .media-cta::after,
+.media-card .media-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.media-card :is(a, button):focus-visible {
+    outline: 2px solid var(--brand-green);
+    outline-offset: 3px;
+}
+
+.media-thumbnail {
+    position: relative;
+}
+
+/* Badge de type posé sur la vignette, pour libérer le bloc de texte */
+.media-badge--overlay {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    margin: 0;
+    z-index: 2;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Ligne de métadonnées : catégorie, puis date de publication */
+.media-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-faint);
+    margin: 0 0 var(--space-2xs);
+}
+
+.media-meta-cat {
+    color: var(--brand-green);
+    font-weight: 600;
+}
+
+.media-desc {
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+/* ---------- Vidéos et podcasts : signature de l'accueil ---------- */
+.media-card--signature {
+    background: var(--surface-raised);
+}
+
+.media-card--signature::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 3;
+    background: var(--brand-green);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.media-card--signature:hover::before {
+    transform: scaleX(1);
+}
+
+.media-card--signature:hover {
+    transform: translateY(-8px);
+    border-color: var(--brand-green);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.media-card--signature h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: var(--space-2xs);
+}
+
+/* Métadonnées en pied, détachées par un filet */
+.media-meta--footer {
+    margin: 0 0 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.media-card--signature .media-cta {
+    border-radius: var(--radius-sm);
+}
+
+/* ---------- Éditoriaux : lecture de type liste d'articles ---------- */
+.media-card--editorial {
+    background: var(--surface-raised);
+}
+
+.media-card--editorial:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-accent-soft);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+.media-card--editorial h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: var(--space-2xs);
+}
+
+.media-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    margin-top: auto;
+    padding-bottom: 2px;
+    color: var(--brand-green);
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.media-link:hover {
+    border-bottom-color: var(--brand-green);
+}
+
+.media-link-arrow {
+    transition: transform 0.3s var(--ease-out);
+}
+
+.media-card--editorial:hover .media-link-arrow {
+    transform: translateX(4px);
+}
+
+/* ----------------------------------------
+   Cartes de ressources (page Agents IA)
+   Alignées sur la même signature : élévation et filet au survol, rayons et
+   transitions repris des tokens partagés.
+   ---------------------------------------- */
+.resource-card {
+    background: var(--surface-raised);
+    transition: var(--transition-card);
+    position: relative;
+    overflow: hidden;
+}
+
+.resource-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--brand-green);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.resource-card:hover::before {
+    transform: scaleX(1);
+}
+
+.resource-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-accent-soft);
+    box-shadow: var(--shadow-card-hover);
+}
+
+/* Le titre porte la carte : il doit primer sur le badge de type. */
+.resource-card h4 {
+    font-size: 1.08em;
+    line-height: 1.35;
+}
+
+.resource-card > p {
+    color: #9a9a9a;
+}
+
+.resource-preview {
+    border-radius: var(--radius-sm);
+}
+
+/* L'aperçu tronqué signale la suite sans devenir illisible. */
+.checklist-item.muted {
+    color: var(--text-faint);
+    font-style: italic;
+}
+
+.resource-expand-btn {
+    border-radius: var(--radius-sm);
+    transition: var(--transition-control);
+}
+
+.resource-expand-btn:focus-visible {
+    outline: 2px solid var(--brand-green);
+    outline-offset: 2px;
+}
+
+/* Repli sans vignette : une teinte par type, pour que les cartes sans
+   image restent distinguables les unes des autres. */
+.video-placeholder--podcast {
+    background: linear-gradient(135deg, #2a1420 0%, #0a0a0a 100%);
+}
+
+.video-placeholder--podcast svg {
+    color: #ff6b6b;
+}
+
+.video-placeholder--editorial {
+    background: linear-gradient(135deg, #0f2a28 0%, #0a0a0a 100%);
+}
+
+.video-placeholder--editorial svg {
+    color: #4ecdc4;
+}

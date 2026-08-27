@@ -793,57 +793,122 @@
         });
     }
 
+    // Most entries link to a channel or a podcast host rather than to a single
+    // video, so no thumbnail can be derived: they fall back to an icon. Giving
+    // each type its own icon keeps those cards distinguishable at a glance.
+    var MEDIA_ICONS = {
+        podcast: 'M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11z',
+        editorial: 'M6 2h9l5 5v15H6zm8 1.5V8h4.5zM8 12h8v1.6H8zm0 3.2h8v1.6H8zm0-6.4h4v1.6H8z',
+        video: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5h3V9h4v3h3l-5 5z'
+    };
+
+    // Media type descriptors: badge wording, card variant and CTA label
+    var MEDIA_TYPES = {
+        podcast:   { badgeClass: 'podcast',   badgeText: 'Podcast',   variant: 'signature', cta: 'Écouter' },
+        editorial: { badgeClass: 'editorial', badgeText: 'Éditorial', variant: 'editorial', cta: 'Lire' },
+        video:     { badgeClass: '',          badgeText: 'Vidéo',     variant: 'signature', cta: 'Regarder' }
+    };
+
+    // Matches youtube.com and youtu.be plus their subdomains, and nothing that
+    // merely contains those strings (youtube.com.example.org).
+    function isYouTubeUrl(url) {
+        try {
+            var host = new URL(url, window.location.href).hostname.toLowerCase();
+            return host === 'youtu.be' || host === 'youtube.com' ||
+                   host.slice(-12) === '.youtube.com' || host.slice(-9) === '.youtu.be';
+        } catch (e) {
+            return false;
+        }
+    }
+
+    // "2026-03-15" -> "15 mars 2026". Returns '' if the date is missing or invalid.
+    function formatMediaDate(value) {
+        if (!value) return '';
+        var d = new Date(value);
+        if (isNaN(d.getTime())) return '';
+        try {
+            return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+        } catch (e) {
+            return value;
+        }
+    }
+
+    // Category and publication date, both optional
+    function buildMediaMeta(item, extraClass) {
+        var parts = [];
+        if (item.category) {
+            parts.push('<span class="media-meta-cat">' + escapeHtml(item.category) + '</span>');
+        }
+        var date = formatMediaDate(item.date);
+        if (date) {
+            parts.push('<time datetime="' + escapeHtml(item.date) + '">' + escapeHtml(date) + '</time>');
+        }
+        if (!parts.length) return '';
+        return '<p class="media-meta' + (extraClass ? ' ' + extraClass : '') + '">' +
+               parts.join('<span aria-hidden="true">·</span>') + '</p>';
+    }
+
     // Create individual media card element
     function createMediaCard(item, index) {
-        var card = document.createElement('div');
-        card.className = 'media-card';
+        var type = MEDIA_TYPES[item.type] || MEDIA_TYPES.video;
+        var card = document.createElement('article');
+        card.className = 'media-card media-card--' + type.variant;
 
-        // Determine badge color based on type
-        var badgeClass = '';
-        var badgeText = '';
-        switch(item.type) {
-            case 'podcast':
-                badgeClass = 'podcast';
-                badgeText = 'Podcast';
-                break;
-            case 'editorial':
-                badgeClass = 'editorial';
-                badgeText = 'Editorial';
-                break;
-            case 'video':
-            default:
-                badgeText = 'Vidéo';
-                break;
-        }
-
-        // Get YouTube thumbnail if available
+        // Get YouTube thumbnail if available. maxresdefault is missing on many
+        // videos, so fall back to hqdefault, which YouTube always generates.
         var thumbnail = '';
         if (item.youtubeId) {
-            thumbnail = 'https://img.youtube.com/vi/' + item.youtubeId + '/maxresdefault.jpg';
+            thumbnail = 'https://img.youtube.com/vi/' + escapeHtml(item.youtubeId) + '/maxresdefault.jpg';
         }
 
         // Determine CTA: external link or modal
         var isExternal = !item.youtubeId && !item.podcastUrl && item.externalUrl;
+        // Only name YouTube when the link actually goes there; other hosts keep
+        // the wording of their type.
+        var ctaLabel = (isExternal && isYouTubeUrl(item.externalUrl)) ? 'Voir sur YouTube' : type.cta;
+        // Editorials read like articles: an arrowed link rather than a button.
+        var ctaClass = type.variant === 'editorial' ? 'media-link' : 'media-cta';
+        var ctaInner = escapeHtml(ctaLabel) +
+                       (ctaClass === 'media-link' ? '<span class="media-link-arrow" aria-hidden="true">→</span>' : '');
         var ctaHtml = isExternal
-            ? '<a href="' + escapeHtml(item.externalUrl) + '" target="_blank" rel="noopener noreferrer" class="media-cta">Voir sur YouTube</a>'
-            : '<a href="#" class="media-cta" data-media="' + index + '" data-type="' + item.type + '">Regarder</a>';
+            ? '<a href="' + escapeHtml(item.externalUrl) + '" target="_blank" rel="noopener noreferrer" class="' + ctaClass + '">' + ctaInner + '</a>'
+            : '<a href="#" class="' + ctaClass + '" data-media="' + index + '" data-type="' + escapeHtml(item.type) + '">' + ctaInner + '</a>';
+
+        // The title is announced by the heading, so the thumbnail is decorative.
+        var thumbInner = thumbnail
+            ? '<img src="' + thumbnail + '" alt="" loading="lazy" decoding="async" width="480" height="270" />'
+            : '<div class="video-placeholder video-placeholder--' + (MEDIA_ICONS[item.type] ? item.type : 'video') + '">' +
+              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="' +
+              (MEDIA_ICONS[item.type] || MEDIA_ICONS.video) + '"/></svg></div>';
 
         var html = '<div class="media-thumbnail">' +
-                   (thumbnail ? '<img src="' + thumbnail + '" alt="' + escapeHtml(item.title) + '" />' :
-                    '<div class="video-placeholder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5h3V9h4v3h3l-5 5z"/></svg></div>') +
+                   thumbInner +
+                   '<span class="media-badge' + (type.badgeClass ? ' ' + type.badgeClass : '') + ' media-badge--overlay">' +
+                   type.badgeText + '</span>' +
                    '</div>' +
                    '<div class="media-content">' +
-                   '<div class="media-badge' + (badgeClass ? ' ' + badgeClass : '') + '">' + badgeText + '</div>' +
+                   // Editorial leads with its metadata; media cards close with it.
+                   (type.variant === 'editorial' ? buildMediaMeta(item) : '') +
                    '<h3>' + escapeHtml(item.title) + '</h3>' +
-                   '<p>' + escapeHtml(item.description) + '</p>' +
+                   '<p class="media-desc">' + escapeHtml(item.description) + '</p>' +
+                   (type.variant === 'editorial' ? '' : buildMediaMeta(item, 'media-meta--footer')) +
                    ctaHtml +
                    '</div>';
 
         card.innerHTML = html;
 
+        // maxresdefault is missing on many videos; hqdefault always exists.
+        var img = card.querySelector('.media-thumbnail img');
+        if (img) {
+            img.addEventListener('error', function onThumbError() {
+                img.removeEventListener('error', onThumbError);
+                img.src = img.src.replace('maxresdefault', 'hqdefault');
+            });
+        }
+
         // Add click handler for modal CTA (not external links)
         if (!isExternal) {
-            var cta = card.querySelector('.media-cta');
+            var cta = card.querySelector('.media-cta, .media-link');
             if (cta) {
                 cta.addEventListener('click', function(e) {
                     e.preventDefault();
