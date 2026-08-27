@@ -4318,3 +4318,11 @@ button:focus-visible,
 .video-placeholder--editorial svg {
     color: #4ecdc4;
 }
+
+/* Les règles d'alignement de .tip-table et .data-table portent sur un
+   sélecteur d'élément, plus spécifique que l'utilitaire seul : il faut donc
+   le remonter pour qu'un alignement explicite sur une cellule s'applique. */
+.tip-table .u-center,
+.data-table .u-center {
+    text-align: center;
+}
