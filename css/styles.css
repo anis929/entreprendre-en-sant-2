@@ -3468,3 +3468,324 @@ footer {
         max-width: 100%;
     }
 }
+
+/* ========================================
+   SYSTÈME PARTAGÉ
+   Tokens et composants extraits de la page d'accueil, qui fait référence.
+   Cette couche est purement additive : elle ne redéfinit aucune règle dont
+   la page d'accueil dépend. Elle sert à aligner les autres pages sur elle.
+   ======================================== */
+
+:root {
+    /* Couleurs de marque — valeurs effectivement rendues par l'accueil */
+    --brand-green: #00ff88;
+    --brand-green-hover: #00cc6e;
+    --brand-green-deep: #004d2e;
+    --brand-ink: #000;
+
+    /* Surfaces */
+    --surface-page: #000;
+    --surface-raised: linear-gradient(135deg, #0d0d0d 0%, #000 100%);
+    --surface-sunken: #0a0a0a;
+    --surface-accent: linear-gradient(135deg, var(--brand-green-deep) 0%, #001a0f 100%);
+
+    /* Bordures */
+    --border-subtle: #1a1a1a;
+    --border-strong: var(--brand-green);
+    --border-accent-soft: rgba(0, 255, 136, 0.2);
+
+    /* Texte — échelle de gris de l'accueil */
+    --text-primary: #fff;
+    --text-body: #ccc;
+    --text-muted: #bbb;
+    --text-quiet: #999;
+    --text-faint: #888;
+
+    /* Teintes d'accent translucides */
+    --accent-wash: rgba(0, 255, 136, 0.05);
+    --accent-wash-strong: rgba(0, 255, 136, 0.08);
+    --accent-glow: rgba(0, 255, 136, 0.15);
+    --accent-glow-strong: rgba(0, 255, 136, 0.3);
+
+    /* Rythme vertical — pas de 5px hérités de l'accueil */
+    --space-2xs: 10px;
+    --space-xs: 15px;
+    --space-sm: 20px;
+    --space-md: 30px;
+    --space-lg: 40px;
+    --space-xl: 60px;
+    --space-2xl: 80px;
+
+    /* Rayons */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-pill: 999px;
+
+    /* Ombres */
+    --shadow-card-hover: 0 20px 40px var(--accent-glow);
+    --shadow-button-hover: 0 10px 30px var(--accent-glow-strong);
+
+    /* Transitions */
+    --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-card: all 0.4s var(--ease-out);
+    --transition-control: all 0.3s ease;
+
+    /* Typographie */
+    --font-h1: 3.5em;
+    --font-h2: 3em;
+    --font-h3: 1.8em;
+    --font-lead: 1.2em;
+    --font-body: 1.05em;
+    --tracking-tight: -1px;
+    --tracking-tighter: -2px;
+}
+
+/* ----------------------------------------
+   Surface de carte partagée
+   Reprend la carte de l'accueil : même fond, même bordure, même rayon,
+   même élévation au survol, même courbe de transition.
+   ---------------------------------------- */
+.surface-card {
+    background: var(--surface-raised);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    transition: var(--transition-card);
+    position: relative;
+    overflow: hidden;
+}
+
+.surface-card--interactive {
+    cursor: pointer;
+}
+
+.surface-card--interactive:hover {
+    transform: translateY(-8px);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.surface-card--interactive:focus-visible {
+    outline: 2px solid var(--brand-green);
+    outline-offset: 3px;
+}
+
+/* Filet d'accent supérieur, révélé au survol — signature de l'accueil */
+.surface-card--railed::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--brand-green);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.surface-card--railed:hover::before {
+    transform: scaleX(1);
+}
+
+/* ----------------------------------------
+   Grille partagée — mêmes seuils que .sections-grid de l'accueil
+   ---------------------------------------- */
+.grid-auto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-md);
+}
+
+.grid-auto--compact {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-sm);
+}
+
+/* ----------------------------------------
+   Étiquette de surtitre — équivalent de .section-number de l'accueil
+   ---------------------------------------- */
+.eyebrow {
+    display: block;
+    font-size: 1em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--brand-green);
+    margin-bottom: var(--space-xs);
+}
+
+/* ----------------------------------------
+   Utilitaires de remplacement des styles inline
+   ---------------------------------------- */
+.u-accent { color: var(--brand-green); }
+.u-body { color: var(--text-body); }
+.u-muted { color: var(--text-muted); }
+.u-quiet { color: var(--text-quiet); }
+
+.u-center { text-align: center; }
+.u-lead { font-size: var(--font-lead); line-height: 1.8; }
+.u-small { font-size: 0.9em; }
+
+.u-stack-sm > * + * { margin-top: var(--space-sm); }
+.u-stack-md > * + * { margin-top: var(--space-md); }
+
+.u-scroll-x {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: var(--space-lg) 0;
+}
+
+/* ----------------------------------------
+   Tableau partagé — remplace les tableaux stylés en inline
+   ---------------------------------------- */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface-sunken);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.data-table thead tr {
+    background: var(--accent-wash-strong);
+    border-bottom: 2px solid var(--brand-green);
+}
+
+.data-table th {
+    padding: var(--space-sm);
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-right: 1px solid var(--border-subtle);
+}
+
+.data-table th:first-child {
+    color: var(--brand-green);
+}
+
+.data-table td {
+    padding: var(--space-xs) var(--space-sm);
+    color: var(--text-muted);
+    border-right: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+}
+
+.data-table th:last-child,
+.data-table td:last-child {
+    border-right: none;
+}
+
+.data-table tbody tr {
+    transition: background 0.3s ease;
+}
+
+.data-table tbody tr:hover {
+    background: var(--accent-wash);
+}
+
+/* ----------------------------------------
+   Accessibilité — focus visible homogène sur tout le site
+   ---------------------------------------- */
+a:focus-visible,
+button:focus-visible,
+[data-page]:focus-visible,
+[data-action]:focus-visible {
+    outline: 2px solid var(--brand-green);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ----------------------------------------
+   Marges utilitaires — reprennent le rythme vertical de l'accueil
+   ---------------------------------------- */
+.u-mt-sm { margin-top: var(--space-sm); }
+.u-mt-md { margin-top: var(--space-md); }
+.u-mt-lg { margin-top: var(--space-lg); }
+.u-mt-2xl { margin-top: var(--space-2xl); }
+
+/* Rangée de boutons centrée, telle qu'utilisée en fin de bloc de contenu */
+.cta-row {
+    text-align: center;
+    margin-top: var(--space-md);
+}
+
+/* ----------------------------------------
+   En-tête de partie — aligné sur .hero-section de l'accueil
+   (l'accueil n'utilise pas .part-hero : cette règle ne l'atteint pas)
+   ---------------------------------------- */
+.part-hero {
+    padding: var(--space-2xl) 0;
+    background: linear-gradient(180deg, #000 0%, var(--surface-sunken) 100%);
+}
+
+.part-hero::before {
+    background: radial-gradient(circle at 50% 50%, var(--accent-wash) 0%, transparent 70%);
+}
+
+.part-hero h2 {
+    font-size: var(--font-h1);
+    letter-spacing: var(--tracking-tighter);
+    margin-bottom: var(--space-xs);
+    background: linear-gradient(135deg, #fff 0%, var(--brand-green) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: 1;
+}
+
+.part-hero .subtitle-large {
+    font-size: 1.3em;
+    color: var(--text-quiet);
+    font-weight: 600;
+    margin-bottom: var(--space-lg);
+    position: relative;
+    z-index: 1;
+}
+
+.part-hero .description {
+    font-size: var(--font-lead);
+    color: var(--text-body);
+    max-width: 900px;
+    margin: 0 auto var(--space-md);
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+}
+
+/* ----------------------------------------
+   Carte de contenu — même padding et même filet que la carte de l'accueil
+   ---------------------------------------- */
+.content-card {
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    transition: var(--transition-card);
+}
+
+.content-card:hover {
+    border-color: var(--border-accent-soft);
+}
+
+.content-card h3 {
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-md);
+}
+
+/* L'emoji d'en-tête est décoratif : il doit rester opaque et ne pas hériter
+   du dégradé appliqué au texte du titre. */
+.part-hero-icon {
+    -webkit-text-fill-color: initial;
+    background: none;
+    margin-right: 0.25em;
+}
