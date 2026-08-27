@@ -305,7 +305,7 @@ body {
 
 .search-hint {
     padding: 16px 20px;
-    color: #444;
+    color: var(--text-faint);
     font-size: 0.82em;
     text-align: center;
     border-top: 1px solid #111;
@@ -912,89 +912,6 @@ body {
     color: #e0e0e0;
     font-size: 1.05em;
     line-height: 1.7;
-}
-
-/* Tip-box with light background — force dark readable text */
-.tip-box[style*="background: #fff3e0"],
-.tip-box[style*="background: #e8f5e9"],
-.tip-box[style*="background: #ffebee"],
-.tip-box[style*="background: #e3f2fd"],
-.tip-box[style*="background: #f3e5f5"],
-.tip-box[style*="background: #fff8e1"],
-.tip-box[style*="color: #333"] {
-    color: #333 !important;
-}
-
-.tip-box[style*="background: #fff3e0"] h4,
-.tip-box[style*="background: #e8f5e9"] h4,
-.tip-box[style*="background: #ffebee"] h4,
-.tip-box[style*="background: #e3f2fd"] h4,
-.tip-box[style*="background: #f3e5f5"] h4,
-.tip-box[style*="background: #fff8e1"] h4,
-.tip-box[style*="color: #333"] h4 {
-    color: #1a1a1a !important;
-}
-
-.tip-box[style*="background: #fff3e0"] p,
-.tip-box[style*="background: #fff3e0"] ul,
-.tip-box[style*="background: #fff3e0"] ol,
-.tip-box[style*="background: #fff3e0"] li,
-.tip-box[style*="background: #fff3e0"] strong,
-.tip-box[style*="background: #e8f5e9"] p,
-.tip-box[style*="background: #e8f5e9"] ul,
-.tip-box[style*="background: #e8f5e9"] ol,
-.tip-box[style*="background: #e8f5e9"] li,
-.tip-box[style*="background: #e8f5e9"] strong,
-.tip-box[style*="background: #ffebee"] p,
-.tip-box[style*="background: #ffebee"] ul,
-.tip-box[style*="background: #ffebee"] ol,
-.tip-box[style*="background: #ffebee"] li,
-.tip-box[style*="background: #ffebee"] strong,
-.tip-box[style*="background: #e3f2fd"] p,
-.tip-box[style*="background: #e3f2fd"] ul,
-.tip-box[style*="background: #e3f2fd"] ol,
-.tip-box[style*="background: #e3f2fd"] li,
-.tip-box[style*="background: #e3f2fd"] strong,
-.tip-box[style*="background: #f3e5f5"] p,
-.tip-box[style*="background: #f3e5f5"] ul,
-.tip-box[style*="background: #f3e5f5"] ol,
-.tip-box[style*="background: #f3e5f5"] li,
-.tip-box[style*="background: #f3e5f5"] strong,
-.tip-box[style*="background: #fff8e1"] p,
-.tip-box[style*="background: #fff8e1"] ul,
-.tip-box[style*="background: #fff8e1"] ol,
-.tip-box[style*="background: #fff8e1"] li,
-.tip-box[style*="background: #fff8e1"] strong,
-.tip-box[style*="color: #333"] p,
-.tip-box[style*="color: #333"] ul,
-.tip-box[style*="color: #333"] ol,
-.tip-box[style*="color: #333"] li,
-.tip-box[style*="color: #333"] strong {
-    color: #333 !important;
-}
-
-/* Tables in light background tip-box */
-.tip-box[style*="color: #333"] table th,
-.tip-box[style*="color: #333"] table td {
-    color: #333 !important;
-    background: white !important;
-}
-
-.tip-box[style*="color: #333"] table tr[style*="background"] {
-    background: #f0f0f0 !important;
-}
-
-.tip-box[style*="color: #333"] table strong {
-    color: #333 !important;
-}
-
-/* Background boxes inside light background tip-box */
-.tip-box[style*="color: #333"] div[style*="background: white"] {
-    color: #333 !important;
-}
-
-.tip-box[style*="color: #333"] div[style*="background: white"] strong {
-    color: #333 !important;
 }
 
 /* ========================================
@@ -1951,14 +1868,14 @@ footer {
 }
 
 .pricing-features li.not-included {
-    color: #444;
+    color: #777;
 }
 
 .pricing-features li.not-included::before {
     content: '\2717';
     position: absolute;
     left: 0;
-    color: #444;
+    color: #777;
     font-weight: 700;
     font-size: 1.1em;
 }
@@ -2851,7 +2768,7 @@ footer {
 .agent-stat-label {
     display: block;
     font-size: 0.85em;
-    color: #666;
+    color: var(--text-faint);
     margin-top: 8px;
 }
 
@@ -2879,7 +2796,7 @@ footer {
 
 .agent-quick-nav-label {
     font-size: 0.82em;
-    color: #555;
+    color: var(--text-faint);
     white-space: nowrap;
     margin-right: 5px;
 }
@@ -2975,7 +2892,7 @@ footer {
     border: 1px solid #252525;
     border-radius: 12px;
     font-size: 0.78em;
-    color: #777;
+    color: var(--text-faint);
     background: #080808;
 }
 
@@ -3011,7 +2928,7 @@ footer {
     border-radius: 6px;
     padding: 6px 14px;
     font-size: 0.8em;
-    color: #777;
+    color: var(--text-faint);
     cursor: pointer;
     transition: all 0.2s ease;
     font-family: inherit;
@@ -3098,7 +3015,7 @@ footer {
 
 .workflow-path-subtitle {
     font-size: 0.88em;
-    color: #555;
+    color: var(--text-faint);
     margin-bottom: 22px;
 }
 
@@ -3139,7 +3056,7 @@ footer {
 
 .workflow-step-desc {
     font-size: 0.72em;
-    color: #555;
+    color: var(--text-faint);
 }
 
 .workflow-arrow {
@@ -3270,7 +3187,7 @@ footer {
 
 .resource-agent-tag {
     font-size: 1em;
-    color: #444;
+    color: var(--text-faint);
 }
 
 .resource-card h4 {
@@ -3283,7 +3200,7 @@ footer {
 
 .resource-card > p {
     font-size: 0.87em;
-    color: #666;
+    color: var(--text-faint);
     margin-bottom: 14px;
     line-height: 1.5;
     flex-grow: 1;
@@ -3321,7 +3238,7 @@ footer {
     border-radius: 6px;
     padding: 9px 16px;
     font-size: 0.84em;
-    color: #777;
+    color: var(--text-faint);
     cursor: pointer;
     transition: all 0.2s ease;
     font-family: inherit;
@@ -3358,7 +3275,7 @@ footer {
 }
 
 .resource-checklist-full p {
-    color: #777;
+    color: var(--text-faint);
     font-size: 0.92em;
     line-height: 1.5;
     margin: 3px 0;
@@ -3423,7 +3340,7 @@ footer {
 .testimonial-author span {
     display: block;
     font-size: 0.8em;
-    color: #555;
+    color: var(--text-faint);
 }
 
 /* ========================================
@@ -3529,6 +3446,9 @@ footer {
     --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
     --transition-card: all 0.4s var(--ease-out);
     --transition-control: all 0.3s ease;
+
+    /* Accent d'information, distinct du vert d'action */
+    --accent-info: #00aaff;
 
     /* Typographie */
     --font-h1: 3.5em;
@@ -3954,4 +3874,208 @@ button:focus-visible,
 /* Carte de contenu mise en avant */
 .content-card--featured {
     border: 2px solid var(--brand-green);
+}
+
+/* ----------------------------------------
+   Encadrés sémantiques
+   Reprennent la forme de .tip-box (fond sombre, filet latéral, même rayon)
+   en n'en changeant que la teinte d'accent. Remplacent les encadrés à fond
+   clair, qui rompaient avec le thème sombre du site et dépendaient de
+   sélecteurs [style*="…"] fragiles.
+   ---------------------------------------- */
+.tip-box--warn {
+    background: linear-gradient(135deg, #3d2c00 0%, #1a1300 100%);
+    border-left-color: #ffa726;
+}
+
+.tip-box--warn > h4 { color: #ffb74d; }
+
+.tip-box--ok {
+    background: linear-gradient(135deg, #04381f 0%, #001a0f 100%);
+    border-left-color: #4caf50;
+}
+
+.tip-box--ok > h4 { color: #81c784; }
+
+.tip-box--danger {
+    background: linear-gradient(135deg, #3d1216 0%, #1a0709 100%);
+    border-left-color: #ef5350;
+}
+
+.tip-box--danger > h4 { color: #e57373; }
+
+/* ----------------------------------------
+   Tableau de contenu
+   Utilisé dans les encadrés et les cartes des pages parties. Reprend la
+   palette sombre du site : les anciens tableaux mélangeaient des bordures
+   claires (#ddd) et sombres (#333) selon la page.
+   ---------------------------------------- */
+.tip-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--space-xs);
+    font-size: 0.95em;
+}
+
+.tip-table th,
+.tip-table td {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.6;
+}
+
+.tip-table thead th,
+.tip-table tr.row-head th,
+.tip-table tr.row-head td {
+    background: var(--accent-wash-strong);
+    color: var(--brand-green);
+    font-weight: 600;
+}
+
+.tip-table tbody tr:nth-child(even),
+.tip-table tr.row-alt {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.tip-table tbody tr {
+    transition: background 0.3s ease;
+}
+
+.tip-table tbody tr:hover {
+    background: var(--accent-wash);
+}
+
+/* Cellules porteuses d'un jugement : favorable, vigilance, défavorable */
+.c-ok { color: var(--brand-green); }
+.c-warn { color: #ffb74d; }
+.c-bad { color: #ef5350; }
+
+/* Utilitaires complémentaires */
+.u-white { color: var(--text-primary); }
+.u-mt-2xs { margin-top: var(--space-2xs); }
+.u-mt-0 { margin-top: 0; }
+
+/* ----------------------------------------
+   Variantes de carte de contenu
+   ---------------------------------------- */
+
+/* Carte de synthèse en fin de partie. Remplace un dégradé violet
+   (#667eea → #764ba2) hors charte par le vert de marque. */
+.content-card--spotlight {
+    background: linear-gradient(135deg, var(--brand-green-deep) 0%, #001a0f 100%);
+    border: 1px solid var(--brand-green);
+    color: var(--text-primary);
+}
+
+.content-card--spotlight::before {
+    background: var(--brand-green);
+}
+
+/* Encadré d'exemple chiffré : une teinte froide distincte du vert d'action,
+   pour signaler une illustration et non une consigne. */
+.content-card--info {
+    border-left: 4px solid var(--accent-info);
+    background: rgba(0, 170, 255, 0.08);
+    margin-top: var(--space-xs);
+}
+
+.content-card--info > h4 {
+    color: var(--accent-info);
+}
+
+.c-info { color: var(--accent-info); }
+
+/* ----------------------------------------
+   Compléments des pages parties
+   ---------------------------------------- */
+
+/* Titre souligné d'un filet d'accent */
+.h-rule {
+    color: var(--brand-green);
+    border-bottom: 2px solid var(--brand-green);
+    padding-bottom: var(--space-2xs);
+    margin-bottom: var(--space-md);
+}
+
+/* Même titre à l'intérieur d'une carte de synthèse, où l'accent est le fond */
+.h-rule--light {
+    color: var(--text-primary);
+    border-bottom-color: rgba(255, 255, 255, 0.4);
+    padding-bottom: var(--space-xs);
+}
+
+/* Ligne d'information à filet latéral */
+.note-line--accent {
+    border-left: 3px solid var(--brand-green);
+    background: var(--accent-wash-strong);
+    padding: 12px;
+    margin-top: var(--space-2xs);
+}
+
+/* Liste aérée en cours de démonstration */
+.flow-list {
+    margin: var(--space-2xs) 0;
+    padding-left: var(--space-sm);
+    line-height: 1.8;
+}
+
+/* Pastille d'appel à l'action en fin de section */
+.pill-cta {
+    display: inline-block;
+    background: var(--brand-green);
+    color: var(--brand-green-deep);
+    padding: 12px var(--space-md);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition-control);
+}
+
+.pill-cta:hover {
+    background: var(--brand-green-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-button-hover);
+}
+
+.u-mt-12 { margin-top: 12px; }
+.u-mb-md { margin-bottom: var(--space-md); }
+
+/* Encadrés d'exemple à teinte d'avertissement ou d'alerte,
+   sur le même gabarit que .content-card--info */
+.content-card--warn {
+    border-left: 4px solid #ffa726;
+    background: rgba(255, 167, 38, 0.08);
+    margin-top: var(--space-xs);
+}
+
+.content-card--warn > h4 { color: #ffb74d; }
+
+.content-card--danger {
+    border-left: 4px solid #ef5350;
+    background: rgba(239, 83, 80, 0.08);
+    margin-top: var(--space-xs);
+}
+
+.content-card--danger > h4 { color: #e57373; }
+
+/* Carte de contenu à fond plein, sans teinte verte */
+.content-card--sunken {
+    background: #111;
+    border: 1px solid var(--border-subtle);
+}
+
+/* Derniers utilitaires typographiques */
+.u-bold { font-weight: 600; }
+
+.u-lead-sm {
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.u-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
